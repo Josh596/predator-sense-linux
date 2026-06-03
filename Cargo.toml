@@ -1,0 +1,8 @@
+[package]
+name = "predatorsense"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+hidapi = "2.6.6"
+thiserror = "2.0.18"
