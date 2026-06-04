@@ -44,17 +44,19 @@ pub mod battery {
 }
 
 pub mod performance {
+    use ratatui::widgets::ListState;
+
     use crate::commands::power::PerfMode;
 
     #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
     pub struct PerformancePage {
         // I am using a struct in case I need to add extra things, if i don't need anything else, i should change to just the enum PerfMode
         pub perfomance_mode: PerfMode,
+        pub mode_list_state: ListState,
     }
 }
 
 #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-
 enum RunningState {
     Done,
     #[default]
@@ -62,7 +64,7 @@ enum RunningState {
 }
 
 #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-enum Pages {
+pub enum ActivePage {
     Battery,
     Lighting,
     #[default]
@@ -70,10 +72,10 @@ enum Pages {
 }
 
 #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-struct ApplicationState {
-    active_page: Pages,
-    running_state: RunningState,
-    performance_page: performance::PerformancePage,
-    battery_page: battery::BatteryPage,
-    lighting_page: lighting::LightingPage,
+pub struct ApplicationState {
+    pub active_page: ActivePage,
+    pub running_state: RunningState,
+    pub performance_page: performance::PerformancePage,
+    pub battery_page: battery::BatteryPage,
+    pub lighting_page: lighting::LightingPage,
 }

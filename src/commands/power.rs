@@ -1,7 +1,8 @@
 use crate::error::Result;
 use crate::hid::HidDevice;
+use strum_macros::EnumIter;
 
-#[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Default, Eq, PartialEq, Clone, Copy, EnumIter)]
 pub enum PerfMode {
     Turbo,
     Perfomance,
@@ -21,6 +22,17 @@ impl PerfMode {
             PerfMode::Quiet => 0x03,
             PerfMode::Eco => 0x04,
             PerfMode::EcoPlus => 0x05,
+        }
+    }
+
+    pub fn to_str(&self) -> &'static str {
+        match self {
+            PerfMode::Eco => "Eco",
+            PerfMode::Turbo => "Turbo",
+            PerfMode::Normal => "Normal",
+            PerfMode::Quiet => "Quiet",
+            PerfMode::Perfomance => "Performance",
+            PerfMode::EcoPlus => "Eco Plus",
         }
     }
 }

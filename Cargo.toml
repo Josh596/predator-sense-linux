@@ -5,4 +5,7 @@ edition = "2024"
 
 [dependencies]
 hidapi = "2.6.6"
+ratatui = "0.30.0"
+strum = "0.28.0"
+strum_macros = "0.28"
 thiserror = "2.0.18"
