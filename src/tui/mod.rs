@@ -1,5 +1,5 @@
-mod app;
-mod components;
-mod events;
-mod utils;
-mod view;
+pub mod app;
+pub mod components;
+pub mod events;
+pub mod utils;
+pub mod view;
