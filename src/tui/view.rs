@@ -10,6 +10,7 @@ use strum::VariantNames;
 
 use crate::tui::app::{ApplicationState, Page, RunningState};
 use crate::tui::components::pages::PageUI;
+use crate::tui::components::pages::battery::BatterPageUI;
 use crate::tui::components::pages::performance::PerfomancePageUI;
 use crate::tui::utils::Action;
 
@@ -47,7 +48,9 @@ impl App {
         // A function to get the shortcuts as str; so i can then loop over them and call block.title_bottom
 
         match self.state.active_page {
-            Page::Battery => {}
+            Page::Battery => {
+                BatterPageUI.render(&mut self.state, frame, content);
+            }
             Page::Lighting => {}
             Page::Performance => {
                 PerfomancePageUI.render(&mut self.state, frame, content);
@@ -83,7 +86,7 @@ impl App {
     fn actions(&self) -> Vec<Action> {
         let mut all_actions = vec![Action::new("q", "Quit")];
         let active_page_actions = match self.state.active_page {
-            Page::Battery => PerfomancePageUI.actions(),
+            Page::Battery => BatterPageUI.actions(),
             Page::Lighting => PerfomancePageUI.actions(),
             Page::Performance => PerfomancePageUI.actions(),
         };
@@ -95,7 +98,8 @@ impl App {
     fn add_shortcuts_to_block_title<'a>(&'a self, mut block: Block<'a>) -> Block<'a> {
         for action in self.actions() {
             let title = Line::from(vec![
-                Span::styled(action.key, Style::new().blue()),
+                Span::styled(format!("[{}]", action.key), Style::new().blue()),
+                Span::raw(" "),
                 Span::raw(action.action),
             ])
             .left_aligned();
@@ -111,16 +115,29 @@ impl App {
         }
     }
 
+    fn handle_page_change(&mut self, index: usize) {
+        if let Some(page) = Page::from_repr(index) {
+            self.state.active_page = page;
+        }
+    }
+
     pub fn handle_key(&mut self, key: &KeyEvent) {
         match key.code {
             KeyCode::Char('q') => self.state.running_state = RunningState::Done,
+            KeyCode::Char(c) if c.is_ascii_digit() => {
+                if let Some(target) = c.to_digit(10) {
+                    self.handle_page_change(target as usize);
+                }
+            }
             _ => {}
         }
     }
 
     pub fn handle_key_event_for_active_page(&mut self, key: &KeyEvent) {
         match self.state.active_page {
-            Page::Battery => {}
+            Page::Battery => {
+                BatterPageUI.handle_event(&mut self.state, key);
+            }
             Page::Lighting => {}
             Page::Performance => PerfomancePageUI.handle_event(&mut self.state, key),
         }

@@ -28,6 +28,8 @@ mod lighting {
 }
 
 pub mod battery {
+    use strum_macros::{EnumCount, EnumIter, FromRepr};
+
     use crate::commands::battery::ChargingLimit;
 
     #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
@@ -36,7 +38,7 @@ pub mod battery {
         pub active_input: BatteryPageInput,
     }
 
-    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
+    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy, EnumCount, FromRepr)]
     pub enum BatteryPageInput {
         #[default]
         EnableCharging,
@@ -51,7 +53,7 @@ pub mod performance {
 
     use crate::commands::power::PerfMode;
 
-    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
+    #[derive(Debug, Eq, PartialEq, Clone, Copy)]
     pub struct PerformanceState {
         // I am using a struct in case I need to add extra things, if i don't need anything else, i should change to just the enum PerfMode
         pub perfomance_mode: PerfMode,
@@ -68,6 +70,20 @@ pub mod performance {
             }
         }
     }
+
+    impl Default for PerformanceState {
+        fn default() -> Self {
+            let mut state = ListState::default();
+
+            // 2. Set the initial selected item to index 0
+            state.select(Some(0));
+
+            Self {
+                perfomance_mode: PerfMode::default(),
+                mode_list_state: state,
+            }
+        }
+    }
 }
 
 #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
@@ -77,8 +93,7 @@ pub enum RunningState {
     Running,
 }
 
-// ask; is it too much to add an EnumIter here? is it overkill?
-#[derive(Debug, Default, Eq, PartialEq, Clone, Copy, Display, EnumIter, FromRepr, VariantNames)]
+#[derive(Debug, Default, Eq, PartialEq, Clone, Copy, Display, FromRepr, VariantNames)]
 pub enum Page {
     #[default]
     Performance,

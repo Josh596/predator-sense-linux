@@ -4,9 +4,9 @@ use crate::hid::HidDevice;
 
 #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
 pub struct ChargingLimit {
-    enabled: bool,
-    upper: u8,
-    lower: u8,
+    pub enabled: bool,
+    pub upper: u8,
+    pub lower: u8,
 }
 
 impl ChargingLimit {

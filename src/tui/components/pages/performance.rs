@@ -1,9 +1,9 @@
 use ratatui::{
     Frame,
     crossterm::event::{KeyCode, KeyEvent},
-    layout::{Constraint, Layout},
+    layout::{Constraint, Layout, Spacing},
     prelude::Rect,
-    style::{Color, Style},
+    style::{Color, Style, Stylize},
     text::{Line, Span},
     widgets::{List, ListItem},
 };
@@ -17,23 +17,24 @@ use crate::{
 pub struct PerfomancePageUI;
 
 impl PageUI for PerfomancePageUI {
-    fn actions(&self) -> impl IntoIterator<Item = Action> {
-        vec![Action::new("↑↓", "Move")]
+    fn actions(&self) -> Vec<Action> {
+        vec![Action::new("↑↓", "Move"), Action::new("Enter", "Select")]
     }
 
     fn render(&self, model: &mut ApplicationState, frame: &mut Frame, rect: Rect) {
         // All centered
-        let [top, bottom] =
-            Layout::vertical([Constraint::Length(10), Constraint::Fill(1)]).areas(rect);
+        let [top, bottom] = Layout::vertical([Constraint::Length(1), Constraint::Fill(1)])
+            .spacing(Spacing::Space(1))
+            .areas(rect);
 
         // Title
 
-        let title = Line::from("Performance Profiles");
+        let title = Line::from(" Performance Profiles ").bold().centered();
 
         let items: Vec<ListItem> = PerfMode::iter()
             .map(|mode| {
                 let checkbox = if mode == model.performance_state.perfomance_mode {
-                    Span::styled("[x]", Style::default().fg(Color::Green))
+                    Span::styled("[x]", Style::default().fg(Color::Green).bold())
                 } else {
                     Span::raw("[ ]") // Added a space here so the brackets align perfectly!
                 };
