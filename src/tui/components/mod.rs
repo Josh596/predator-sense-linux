@@ -1,1 +1,1 @@
-pub mod pages;
+pub mod inputs;

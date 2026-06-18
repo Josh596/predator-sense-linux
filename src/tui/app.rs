@@ -1,111 +1,23 @@
-use strum_macros::{Display, EnumIter, FromRepr, VariantArray, VariantNames};
+use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent};
 
-mod lighting {
-    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-    pub struct LightingState {
-        pub active_pane: LightingPagePane,
-        pub active_input: LightingPageInput,
-    }
+use ratatui::DefaultTerminal;
 
-    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-    pub enum LightingPageInput {
-        #[default]
-        Target,
-        Zone,
-        Effect,
-        Color,
-        Speed,
-        Direction,
-        Timeout, // this uses a different hid device. i wonder how i'll handle this.
-    }
+use crate::tui::event::EventHandler;
+use crate::tui::state::{ApplicationState, RunningState};
 
-    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-    pub enum LightingPagePane {
-        #[default]
-        Left,
-        Right,
-    }
+use crate::tui::view::View;
+
+#[derive(Default)]
+pub struct App {
+    state: ApplicationState,
 }
 
-pub mod battery {
-    use strum_macros::{EnumCount, EnumIter, FromRepr};
-
-    use crate::commands::battery::ChargingLimit;
-
-    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-    pub struct BatteryState {
-        pub battery_charging: ChargingLimit,
-        pub active_input: BatteryPageInput,
-    }
-
-    #[derive(Debug, Default, Eq, PartialEq, Clone, Copy, EnumCount, FromRepr)]
-    pub enum BatteryPageInput {
-        #[default]
-        EnableCharging,
-        MaxLimit,
-        MinLimit,
-    }
-}
-
-pub mod performance {
-    use ratatui::widgets::ListState;
-    use strum::IntoEnumIterator;
-
-    use crate::commands::power::PerfMode;
-
-    #[derive(Debug, Eq, PartialEq, Clone, Copy)]
-    pub struct PerformanceState {
-        // I am using a struct in case I need to add extra things, if i don't need anything else, i should change to just the enum PerfMode
-        pub perfomance_mode: PerfMode,
-        pub mode_list_state: ListState,
-    }
-
-    impl PerformanceState {
-        pub fn set_performance_mode(&mut self) {
-            if let Some(i) = self.mode_list_state.selected() {
-                let mode = PerfMode::iter().nth(i);
-
-                // TODO: HANDLE EXCEPTIONS
-                self.perfomance_mode = mode.unwrap();
-            }
+impl App {
+    pub fn run(mut self, terminal: &mut DefaultTerminal, view: &View) {
+        while !(self.state.running_state == RunningState::Done) {
+            terminal.draw(|frame| view.render(frame, &self.state));
+            let current_event = event::read().expect("Could not read event");
+            EventHandler::default().handle_event(current_event, &mut self.state);
         }
     }
-
-    impl Default for PerformanceState {
-        fn default() -> Self {
-            let mut state = ListState::default();
-
-            // 2. Set the initial selected item to index 0
-            state.select(Some(0));
-
-            Self {
-                perfomance_mode: PerfMode::default(),
-                mode_list_state: state,
-            }
-        }
-    }
-}
-
-#[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-pub enum RunningState {
-    Done,
-    #[default]
-    Running,
-}
-
-#[derive(Debug, Default, Eq, PartialEq, Clone, Copy, Display, FromRepr, VariantNames)]
-pub enum Page {
-    #[default]
-    Performance,
-    Battery,
-    Lighting,
-}
-
-#[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
-pub struct ApplicationState {
-    pub active_page: Page,
-    pub running_state: RunningState,
-    pub performance_state: performance::PerformanceState,
-    pub battery_state: battery::BatteryState,
-    pub lighting_state: lighting::LightingState,
 }

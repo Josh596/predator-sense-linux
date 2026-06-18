@@ -1,4 +1,4 @@
-use crate::tui::view::App;
+use crate::tui::{app::App, view::View};
 
 mod hid;
 
@@ -9,5 +9,5 @@ mod commands;
 mod tui;
 fn main() {
     // Here we jsut call the App run
-    ratatui::run(|terminal| App::default().run(terminal))
+    ratatui::run(|terminal| App::default().run(terminal, &View::default()));
 }

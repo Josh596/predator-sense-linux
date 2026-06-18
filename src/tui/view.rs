@@ -1,145 +1,162 @@
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent};
-
 use ratatui::layout::{Constraint, Layout, Rect};
-use ratatui::style::Style;
+use ratatui::style::Stylize;
 use ratatui::text::{Line, Span};
 
-use ratatui::widgets::{Block, Borders, Tabs};
-use ratatui::{DefaultTerminal, Frame};
-use strum::VariantNames;
+use ratatui::Frame;
+use ratatui::widgets::{Block, Borders, Padding};
+use strum::{EnumCount, IntoEnumIterator};
 
-use crate::tui::app::{ApplicationState, Page, RunningState};
-use crate::tui::components::pages::PageUI;
-use crate::tui::components::pages::battery::BatterPageUI;
-use crate::tui::components::pages::performance::PerfomancePageUI;
+use crate::tui::state::{ApplicationState, Page};
+use crate::tui::style::{BG_COLOR, BORDER_STYLE, TEXT_STYLE, TEXT_STYLE_ACTIVE, TEXT_STYLE_DIM};
 use crate::tui::utils::Action;
+use crate::tui::view::battery::BatteryPage;
+use crate::tui::view::page::PageView;
 
+pub mod battery;
+
+pub mod page;
 #[derive(Default)]
-pub struct App {
-    state: ApplicationState,
-}
+pub struct View;
 
-impl App {
-    pub fn run(mut self, terminal: &mut DefaultTerminal) {
-        while !(self.state.running_state == RunningState::Done) {
-            terminal.draw(|frame| self.render_frame(frame));
-            let current_event = event::read().expect("Could not read event");
-            self.handle_events(current_event);
-        }
-    }
+impl View {
+    pub fn render(&self, frame: &mut Frame, state: &ApplicationState) {
+        let mut block = Block::bordered().border_style(BORDER_STYLE).bg(BG_COLOR);
 
-    fn render_frame(&mut self, frame: &mut Frame) {
-        let mut block = Block::default().borders(Borders::all());
-        block = self.add_shortcuts_to_block_title(block);
-
-        // Get the inner area of the block;
         let inner_area = block.inner(frame.area());
-
-        // Break it into 2 using vertical Layout;
-        let [header, content] =
-            Layout::vertical([Constraint::Length(2), Constraint::Fill(1)]).areas(inner_area);
+        // Break Layout into 3; header, content and footer
+        let layout: [Rect; 4] = Layout::vertical([
+            Constraint::Length(2),
+            Constraint::Length(2),
+            Constraint::Fill(1),
+            Constraint::Length(2),
+        ])
+        .areas(inner_area);
 
         frame.render_widget(block, frame.area());
-
-        self.render_top_menu(frame, header);
-        // A block widget as the main widget;
-        // Then break the inner using Layouts; into header and content;
-        // The block should have titles for each actions; so Global actions and then Active Page Actions; which should be rendered at the bottom; how do i do this dynamically?
-        // A function to get the shortcuts as str; so i can then loop over them and call block.title_bottom
-
-        match self.state.active_page {
-            Page::Battery => {
-                BatterPageUI.render(&mut self.state, frame, content);
-            }
-            Page::Lighting => {}
-            Page::Performance => {
-                PerfomancePageUI.render(&mut self.state, frame, content);
-            }
-        }
+        self.render_title_block(frame, layout[0], state);
+        self.render_header(frame, layout[1], state);
+        self.render_page(frame, layout[2], state);
+        self.render_footer(frame, layout[3], state);
 
         return;
     }
 
-    fn render_top_menu(&self, frame: &mut Frame, rect: Rect) {
-        //
-        // A block with a bottom border;
-        let block = Block::new().borders(Borders::BOTTOM);
+    fn render_title_block(&self, frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+        // Just bottom border
+        let block = Block::bordered()
+            .borders(Borders::BOTTOM)
+            .padding(Padding::horizontal(2));
 
-        // change this to map; use [1] title
-        let titles: Vec<String> = Page::VARIANTS
-            .iter()
-            .enumerate()
-            .map(|(index, title)| format!("[{index}] {title}"))
-            .collect();
+        let inner_area = block.inner(rect);
 
-        // Get index of active page
-        let active_page_index = self.state.active_page as usize;
+        // two layout constrainttl left and right
+        let layout: [Rect; 2] =
+            Layout::horizontal([Constraint::Fill(1), Constraint::Fill(1)]).areas(inner_area);
 
-        let tabs = Tabs::new(titles)
-            .block(block)
-            .highlight_style(Style::new().blue().bold())
-            .select(active_page_index);
+        let left_content = Line::from(vec![
+            Span::from("◢▼◣ LinuxPredator  ".to_uppercase()).style(TEXT_STYLE_ACTIVE),
+        ])
+        .left_aligned()
+        .bold();
 
-        frame.render_widget(tabs, rect);
+        let right_content = Line::from(vec![
+            Span::from(format!("{}· {}", "Helios 300", "PH315-54")).style(TEXT_STYLE),
+        ])
+        .right_aligned()
+        .bold();
+
+        frame.render_widget(block, rect);
+        frame.render_widget(left_content, layout[0]);
+        frame.render_widget(right_content, layout[1]);
     }
 
-    fn actions(&self) -> Vec<Action> {
-        let mut all_actions = vec![Action::new("q", "Quit")];
-        let active_page_actions = match self.state.active_page {
-            Page::Battery => BatterPageUI.actions(),
-            Page::Lighting => PerfomancePageUI.actions(),
-            Page::Performance => PerfomancePageUI.actions(),
-        };
+    fn render_footer(&self, frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+        let block = Block::bordered()
+            .borders(Borders::TOP)
+            .padding(Padding::horizontal(2));
 
-        all_actions.extend(active_page_actions);
+        let inner_area = block.inner(rect);
+
+        let content = self.get_actions_text(state);
+
+        frame.render_widget(block, rect);
+        frame.render_widget(content, inner_area);
+    }
+
+    fn render_header(&self, frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+        let block = Block::bordered()
+            .borders(Borders::BOTTOM)
+            .padding(Padding::horizontal(2));
+
+        let inner_area = block.inner(rect);
+
+        let mut header_spans: Vec<Span> = Vec::new();
+
+        for (i, page) in Page::iter().enumerate() {
+            if i > 0 {
+                header_spans.push(Span::styled(" | ", TEXT_STYLE_DIM));
+            }
+
+            let page_id_text = format!("[{}] ", page as usize + 1);
+            header_spans.push(Span::styled(page_id_text, TEXT_STYLE_ACTIVE));
+
+            let page_name = page.to_string().to_uppercase();
+            let page_style = if page == state.active_page {
+                TEXT_STYLE_ACTIVE
+            } else {
+                TEXT_STYLE_DIM
+            };
+
+            header_spans.push(Span::styled(page_name, page_style));
+        }
+
+        // 5. Wrap all the spans into a single Line and align the whole thing
+        let header = Line::from(header_spans).left_aligned();
+
+        // Asssemble the text
+        frame.render_widget(block, rect);
+        frame.render_widget(header, inner_area);
+        // frame.render_widget(content, inner_area);
+    }
+
+    fn actions(&self, state: &ApplicationState) -> Vec<Action> {
+        // let page_actions =
+        let mut all_actions = vec![
+            Action::new("q", "Quit"),
+            Action::new(format!("{}-{}", 1, Page::COUNT), "Switch Page"),
+        ];
+
+        all_actions.extend(self.get_active_page_view(state).actions(state));
 
         return all_actions;
     }
-    fn add_shortcuts_to_block_title<'a>(&'a self, mut block: Block<'a>) -> Block<'a> {
-        for action in self.actions() {
-            let title = Line::from(vec![
-                Span::styled(format!("[{}]", action.key), Style::new().blue()),
-                Span::raw(" "),
-                Span::raw(action.action),
-            ])
-            .left_aligned();
 
-            block = block.title_bottom(title);
-        }
-        return block;
-    }
-    fn handle_events(&mut self, event: Event) {
-        if let Some(key) = &event.as_key_press_event() {
-            self.handle_key(key);
-            self.handle_key_event_for_active_page(key);
-        }
-    }
+    fn get_actions_text<'a>(&self, state: &ApplicationState) -> Line<'a> {
+        let mut lines = Vec::new();
 
-    fn handle_page_change(&mut self, index: usize) {
-        if let Some(page) = Page::from_repr(index) {
-            self.state.active_page = page;
+        for action in self.actions(state) {
+            let key = Span::from(format!("[{}]", action.key)).style(TEXT_STYLE_ACTIVE);
+            let action_text = Span::from(action.action).style(TEXT_STYLE_DIM);
+
+            let line =
+                Line::from(vec![key, Span::raw(" "), action_text, Span::raw("  ")]).left_aligned();
+            lines.push(line);
         }
+
+        return lines.into_iter().fold(Line::default(), |mut acc, line| {
+            acc.extend(line);
+            acc
+        });
     }
 
-    pub fn handle_key(&mut self, key: &KeyEvent) {
-        match key.code {
-            KeyCode::Char('q') => self.state.running_state = RunningState::Done,
-            KeyCode::Char(c) if c.is_ascii_digit() => {
-                if let Some(target) = c.to_digit(10) {
-                    self.handle_page_change(target as usize);
-                }
-            }
-            _ => {}
+    fn get_active_page_view(&self, state: &ApplicationState) -> Box<dyn PageView> {
+        match state.active_page {
+            Page::Battery => Box::new(BatteryPage::default()),
+            _ => Box::new(BatteryPage::default()),
         }
     }
 
-    pub fn handle_key_event_for_active_page(&mut self, key: &KeyEvent) {
-        match self.state.active_page {
-            Page::Battery => {
-                BatterPageUI.handle_event(&mut self.state, key);
-            }
-            Page::Lighting => {}
-            Page::Performance => PerfomancePageUI.handle_event(&mut self.state, key),
-        }
+    fn render_page(&self, frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+        self.get_active_page_view(state).render(frame, rect, state);
     }
 }

@@ -1,30 +1,40 @@
+use strum_macros::{Display, EnumIter, VariantNames};
+
 use crate::error::Result;
 use crate::hid::HidDevice;
 
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Default)]
 pub struct Speed(u8);
 
 impl Speed {
     pub fn new(value: u8) -> Self {
-        Speed(value.min(9))
+        Speed(value.min(Speed::max() as u8))
+    }
+    pub fn max() -> usize {
+        return 9;
     }
     pub fn value(&self) -> u8 {
         self.0
     }
 }
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Default)]
 pub struct Rgb {
     pub r: u8,
     pub g: u8,
     pub b: u8,
 }
 
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Default, Display, EnumIter)]
 pub enum Zone {
+    #[default]
     All,
+    #[strum(to_string = "Z1")]
     One,
+    #[strum(to_string = "Z2")]
     Two,
+    #[strum(to_string = "Z3")]
     Three,
+    #[strum(to_string = "Z4")]
     Four,
 }
 impl Zone {
@@ -39,8 +49,9 @@ impl Zone {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Default, EnumIter, Display)]
 pub enum Direction {
+    #[default]
     None,
     Right,
     Left,
@@ -56,9 +67,10 @@ impl Direction {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Default)]
 pub enum Effect {
     Off,
+    #[default]
     Static,
     Breathing,
     Neon,
@@ -89,8 +101,9 @@ impl Effect {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, EnumIter, VariantNames, Default, Display)]
 pub enum Target {
+    #[default]
     Keyboard,
     BackLogo,
     PowerProfileButton,
@@ -106,7 +119,7 @@ impl Target {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone, Copy)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy, Default)]
 pub struct LightingCommand {
     pub target: Target,
     pub effect: Effect,
