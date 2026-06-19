@@ -1,8 +1,8 @@
 use crate::error::Result;
 use crate::hid::HidDevice;
-use strum_macros::EnumIter;
+use strum_macros::{EnumIter, FromRepr, VariantNames};
 
-#[derive(Debug, Default, Eq, PartialEq, Clone, Copy, EnumIter)]
+#[derive(Debug, Default, Eq, PartialEq, Clone, Copy, EnumIter, VariantNames, FromRepr)]
 pub enum PerfMode {
     Turbo,
     Perfomance,

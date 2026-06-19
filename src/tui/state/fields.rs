@@ -1,3 +1,5 @@
+use ratatui::widgets::ListState;
+
 pub trait Field {
     fn increment(&mut self) {}
     fn decrement(&mut self) {}
@@ -52,5 +54,30 @@ impl Default for BooleanField {
 impl Field for BooleanField {
     fn toggle(&mut self) {
         self.value = !self.value;
+    }
+}
+
+pub struct ListField {
+    pub options: Vec<String>,
+    pub state: ListState,
+}
+
+impl Default for ListField {
+    fn default() -> Self {
+        let mut state = ListState::default();
+        state.select(Some(0));
+        Self {
+            options: vec![],
+            state,
+        }
+    }
+}
+impl Field for ListField {
+    fn increment(&mut self) {
+        self.state.select_next();
+    }
+
+    fn decrement(&mut self) {
+        self.state.select_previous();
     }
 }

@@ -116,9 +116,9 @@ impl BatteryPage {
 }
 
 impl PageView for BatteryPage {
-    fn render(&self, frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+    fn render(&self, frame: &mut Frame, rect: Rect, state: &mut ApplicationState) {
         // A block widget; add paddintg around with 2 spaces,
-        let block = Block::default().padding(Padding::uniform(2));
+        let block = Block::default();
         let inner_area = block.inner(rect);
 
         let layout: [Rect; 3] =

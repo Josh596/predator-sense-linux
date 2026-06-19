@@ -3,7 +3,7 @@ use strum::IntoEnumIterator;
 
 use crate::tui::{
     event::PageEventHandler,
-    state::{ApplicationState, battery::BatteryPageInput},
+    state::{ApplicationState, battery::BatteryPageInput, fields::Field},
 };
 #[derive(Default)]
 pub struct PerformancePageEventHandler;
@@ -19,28 +19,13 @@ impl PageEventHandler for PerformancePageEventHandler {
         let active_input = state.battery_page_state.active_input as usize;
         match key.code {
             KeyCode::Up => {
-                let new_input = active_input.saturating_sub(1);
-                state.battery_page_state.active_input =
-                    BatteryPageInput::from_repr(new_input).expect("Invalid input index");
+                state.perf_page_state.mode_input.decrement();
             }
 
             KeyCode::Down => {
-                let new_input = active_input
-                    .saturating_add(1)
-                    .min(BatteryPageInput::iter().count() - 1);
-                state.battery_page_state.active_input =
-                    BatteryPageInput::from_repr(new_input).expect("Invalid input index");
+                state.perf_page_state.mode_input.increment();
             }
 
-            KeyCode::Left => {
-                state.battery_page_state.get_active_input_mut().decrement();
-            }
-            KeyCode::Right => {
-                state.battery_page_state.get_active_input_mut().increment();
-            }
-            KeyCode::Char(' ') => {
-                state.battery_page_state.get_active_input_mut().toggle();
-            }
             _ => {}
         }
     }

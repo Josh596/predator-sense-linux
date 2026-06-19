@@ -1,4 +1,4 @@
-use ratatui::layout::{Constraint, Layout, Rect};
+use ratatui::layout::{Constraint, Layout, Margin, Rect};
 use ratatui::style::Stylize;
 use ratatui::text::{Line, Span};
 
@@ -13,13 +13,14 @@ use crate::tui::view::battery::BatteryPage;
 use crate::tui::view::page::PageView;
 
 pub mod battery;
+pub mod performance;
 
 pub mod page;
 #[derive(Default)]
 pub struct View;
 
 impl View {
-    pub fn render(&self, frame: &mut Frame, state: &ApplicationState) {
+    pub fn render(&self, frame: &mut Frame, state: &mut ApplicationState) {
         let mut block = Block::bordered().border_style(BORDER_STYLE).bg(BG_COLOR);
 
         let inner_area = block.inner(frame.area());
@@ -32,10 +33,12 @@ impl View {
         ])
         .areas(inner_area);
 
+        let page_area = layout[2].inner(Margin::new(2, 2));
+
         frame.render_widget(block, frame.area());
         self.render_title_block(frame, layout[0], state);
         self.render_header(frame, layout[1], state);
-        self.render_page(frame, layout[2], state);
+        self.render_page(frame, page_area, state);
         self.render_footer(frame, layout[3], state);
 
         return;
@@ -152,11 +155,12 @@ impl View {
     fn get_active_page_view(&self, state: &ApplicationState) -> Box<dyn PageView> {
         match state.active_page {
             Page::Battery => Box::new(BatteryPage::default()),
+            Page::Performance => Box::new(performance::PerformancePage::default()),
             _ => Box::new(BatteryPage::default()),
         }
     }
 
-    fn render_page(&self, frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+    fn render_page(&self, frame: &mut Frame, rect: Rect, state: &mut ApplicationState) {
         self.get_active_page_view(state).render(frame, rect, state);
     }
 }
