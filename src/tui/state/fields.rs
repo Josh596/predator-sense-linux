@@ -82,12 +82,27 @@ impl Field for ListField {
     }
 }
 
-pub struct OptionField {
-    pub options: Vec<String>,
+pub struct OptionField<T> {
+    pub options: Vec<T>,
     pub selected_option_index: usize,
 }
 
-impl Field for OptionField {
+impl<T> OptionField<T> {
+    pub fn new(options: Vec<T>) -> Self {
+        Self {
+            options,
+            selected_option_index: 0,
+        }
+    }
+}
+
+impl<T: Copy> OptionField<T> {
+    pub fn value(&self) -> T {
+        self.options[self.selected_option_index]
+    }
+}
+
+impl<T> Field for OptionField<T> {
     fn increment(&mut self) {
         self.selected_option_index = (self.selected_option_index + 1).min(self.options.len() - 1);
     }

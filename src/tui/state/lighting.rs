@@ -1,6 +1,6 @@
 use ratatui::style::Color;
-use strum::{EnumCount, VariantNames};
-use strum_macros::{EnumCount, EnumIter, FromRepr, VariantNames};
+use strum::IntoEnumIterator;
+use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 
 use crate::tui::state::fields::{ColorField, Field, OptionField, SliderField};
 
@@ -15,28 +15,185 @@ pub enum LightingPageInput {
     Color,
 }
 
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames)]
-pub enum LightingMode {
-    #[default]
-    Static,
-    Dynamic,
+pub struct KeyboardState {
+    pub effect: OptionField<LightingEffect>,
+    pub direction: OptionField<EffectDirection>,
+    pub speed: SliderField,
+    pub brightness: SliderField,
+    pub color: ColorField,
 }
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames)]
+
+impl Default for KeyboardState {
+    fn default() -> Self {
+        Self {
+            effect: OptionField::new(LightingEffect::iter().collect()),
+            direction: OptionField::new(EffectDirection::iter().collect()),
+            speed: SliderField {
+                value: 1,
+                min: 1,
+                max: 9,
+                step: 2,
+                unit: "",
+                ranges: vec![],
+            },
+            brightness: SliderField {
+                value: 100,
+                min: 0,
+                max: 100,
+                step: 1,
+                unit: "%",
+                ranges: vec![],
+            },
+            color: ColorField {
+                color: Color::Rgb(255, 0, 0),
+                popup_open: false,
+            },
+        }
+    }
+}
+
+impl KeyboardState {
+    fn field_mut(&mut self, input: LightingPageInput) -> Option<&mut dyn Field> {
+        Some(match input {
+            LightingPageInput::Effect => &mut self.effect,
+            LightingPageInput::EffectDirection => &mut self.direction,
+            LightingPageInput::Speed => &mut self.speed,
+            LightingPageInput::Brightness => &mut self.brightness,
+            LightingPageInput::Color => &mut self.color,
+            _ => return None,
+        })
+    }
+
+    fn visible_inputs(&self) -> Vec<LightingPageInput> {
+        let mut inputs = vec![LightingPageInput::Effect];
+        if self.effect.value() != LightingEffect::Static {
+            inputs.push(LightingPageInput::Speed);
+            inputs.push(LightingPageInput::EffectDirection);
+        }
+        inputs.push(LightingPageInput::Brightness);
+        inputs.push(LightingPageInput::Color);
+        inputs
+    }
+}
+
+pub struct LogoState {
+    pub effect: OptionField<LightingEffect>,
+    pub speed: SliderField,
+    pub brightness: SliderField,
+    pub color: ColorField,
+}
+
+impl Default for LogoState {
+    fn default() -> Self {
+        Self {
+            effect: OptionField::new(vec![
+                LightingEffect::Static,
+                LightingEffect::Breathing,
+                LightingEffect::Neon,
+            ]),
+            speed: SliderField {
+                value: 1,
+                min: 1,
+                max: 9,
+                step: 2,
+                unit: "",
+                ranges: vec![],
+            },
+            brightness: SliderField {
+                value: 100,
+                min: 0,
+                max: 100,
+                step: 1,
+                unit: "%",
+                ranges: vec![],
+            },
+            color: ColorField {
+                color: Color::Rgb(255, 0, 0),
+                popup_open: false,
+            },
+        }
+    }
+}
+impl LogoState {
+    fn field_mut(&mut self, input: LightingPageInput) -> Option<&mut dyn Field> {
+        Some(match input {
+            LightingPageInput::Effect => &mut self.effect,
+            LightingPageInput::Speed => &mut self.speed,
+            LightingPageInput::Brightness => &mut self.brightness,
+            LightingPageInput::Color => &mut self.color,
+            _ => return None,
+        })
+    }
+
+    fn visible_inputs(&self) -> Vec<LightingPageInput> {
+        let mut inputs = vec![LightingPageInput::Effect];
+        if self.effect.value() != LightingEffect::Static {
+            inputs.push(LightingPageInput::Speed);
+        }
+        inputs.push(LightingPageInput::Brightness);
+        inputs.push(LightingPageInput::Color);
+        inputs
+    }
+}
+
+pub struct TurboButtonState {
+    pub brightness: SliderField,
+    pub color: ColorField,
+}
+
+impl Default for TurboButtonState {
+    fn default() -> Self {
+        Self {
+            brightness: SliderField {
+                value: 100,
+                min: 0,
+                max: 100,
+                step: 1,
+                unit: "%",
+                ranges: vec![],
+            },
+            color: ColorField {
+                color: Color::Rgb(255, 0, 0),
+                popup_open: false,
+            },
+        }
+    }
+}
+impl TurboButtonState {
+    fn field_mut(&mut self, input: LightingPageInput) -> Option<&mut dyn Field> {
+        Some(match input {
+            LightingPageInput::Brightness => &mut self.brightness,
+            LightingPageInput::Color => &mut self.color,
+            _ => return None,
+        })
+    }
+
+    fn visible_inputs(&self) -> Vec<LightingPageInput> {
+        vec![LightingPageInput::Brightness, LightingPageInput::Color]
+    }
+}
+
+#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display)]
 pub enum Target {
     #[default]
     Keyboard,
     Logo,
+    #[strum(serialize = "Turbo Button")]
     TurboButton,
 }
 
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames)]
+#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display)]
 pub enum EffectDirection {
     #[default]
+    #[strum(serialize = "Left to Right")]
     LeftToRight,
+    #[strum(serialize = "Right to Left")]
     RightToLeft,
 }
 
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames)]
+#[derive(
+    Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display,
+)]
 pub enum LightingEffect {
     #[default]
     Static,
@@ -48,40 +205,40 @@ pub enum LightingEffect {
 }
 pub struct LightingPageState {
     pub active_input: LightingPageInput,
-    pub effect_input: OptionField,
-    pub brightness_input: SliderField,
-    pub speed_input: SliderField,
-    pub effect_direction_input: OptionField,
-    pub color_input: ColorField,
-    pub target_input: OptionField,
+    pub target_input: OptionField<Target>,
+    pub keyboard: KeyboardState,
+    pub logo: LogoState,
+    pub turbo_button: TurboButtonState,
 }
 
 impl LightingPageState {
+    pub fn selected_target(&self) -> Target {
+        self.target_input.value()
+    }
     pub fn get_active_input_mut(&mut self) -> &mut dyn Field {
-        match self.active_input {
-            LightingPageInput::Effect => &mut self.effect_input,
-            LightingPageInput::Brightness => &mut self.brightness_input,
-            LightingPageInput::Speed => &mut self.speed_input,
-            LightingPageInput::EffectDirection => &mut self.effect_direction_input,
-            LightingPageInput::Color => &mut self.color_input,
-            LightingPageInput::Target => &mut self.target_input,
+        if self.active_input == LightingPageInput::Target {
+            return &mut self.target_input;
         }
+
+        let field = match self.selected_target() {
+            Target::Keyboard => self.keyboard.field_mut(self.active_input),
+
+            Target::Logo => self.logo.field_mut(self.active_input),
+
+            Target::TurboButton => self.turbo_button.field_mut(self.active_input),
+        };
+
+        field.expect("field is not valid for the selected target")
     }
 
     pub fn visible_inputs(&self) -> Vec<LightingPageInput> {
         let mut inputs = vec![LightingPageInput::Target];
 
-        if self.target_input.selected_option_index == Target::Keyboard as usize {
-            inputs.push(LightingPageInput::Effect);
-        }
-
-        if self.effect_input.selected_option_index != LightingEffect::Static as usize {
-            inputs.push(LightingPageInput::Speed);
-            inputs.push(LightingPageInput::EffectDirection);
-        }
-
-        inputs.push(LightingPageInput::Brightness);
-        inputs.push(LightingPageInput::Color);
+        inputs.extend(match self.selected_target() {
+            Target::Keyboard => self.keyboard.visible_inputs(),
+            Target::Logo => self.logo.visible_inputs(),
+            Target::TurboButton => self.turbo_button.visible_inputs(),
+        });
 
         inputs
     }
@@ -111,47 +268,10 @@ impl Default for LightingPageState {
     fn default() -> Self {
         Self {
             active_input: LightingPageInput::default(),
-            effect_input: OptionField {
-                options: LightingEffect::VARIANTS
-                    .iter()
-                    .map(|variant| String::from(*variant))
-                    .collect(),
-                selected_option_index: LightingEffect::default() as usize,
-            },
-            brightness_input: SliderField {
-                value: 100,
-                min: 0,
-                max: 100,
-                step: 1,
-                unit: "%",
-                ranges: vec![],
-            },
-            speed_input: SliderField {
-                value: 1,
-                min: 1,
-                max: 9,
-                step: 2,
-                unit: "",
-                ranges: vec![],
-            },
-            effect_direction_input: OptionField {
-                options: EffectDirection::VARIANTS
-                    .iter()
-                    .map(|variant| String::from(*variant))
-                    .collect(),
-                selected_option_index: EffectDirection::default() as usize,
-            },
-            color_input: ColorField {
-                color: Color::Rgb(255, 0, 0),
-                popup_open: false,
-            },
-            target_input: OptionField {
-                options: Target::VARIANTS
-                    .iter()
-                    .map(|variant| String::from(*variant))
-                    .collect(),
-                selected_option_index: Target::default() as usize,
-            },
+            keyboard: KeyboardState::default(),
+            logo: LogoState::default(),
+            turbo_button: TurboButtonState::default(),
+            target_input: OptionField::new(Target::iter().collect()),
         }
     }
 }

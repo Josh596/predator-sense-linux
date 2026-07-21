@@ -96,7 +96,7 @@ impl WidgetInput for ListField {
     }
 }
 
-impl OptionField {
+impl<T> OptionField<T> {
     fn render_option(&self, text: String, is_selected: bool) -> Span<'static> {
         let content = format!("[{}{}]", if is_selected { "▣ " } else { "" }, text);
         let mut span = Span::from(content);
@@ -110,12 +110,12 @@ impl OptionField {
         span
     }
 }
-impl Input for OptionField {
+impl<T: std::fmt::Display> Input for OptionField<T> {
     fn render(&self) -> Line<'static> {
         let mut spans = Vec::new();
         for (index, option) in self.options.iter().enumerate() {
             let is_selected = index == self.selected_option_index;
-            let span = self.render_option(option.clone(), is_selected);
+            let span = self.render_option(option.to_string(), is_selected);
             spans.push(span);
             spans.push(Span::raw("  ")); // Add spacing between options
         }
