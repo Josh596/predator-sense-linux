@@ -13,6 +13,7 @@ use crate::tui::view::battery::BatteryPage;
 use crate::tui::view::page::PageView;
 
 pub mod battery;
+pub mod lighting;
 pub mod performance;
 
 pub mod page;
@@ -21,7 +22,7 @@ pub struct View;
 
 impl View {
     pub fn render(&self, frame: &mut Frame, state: &mut ApplicationState) {
-        let mut block = Block::bordered().border_style(BORDER_STYLE).bg(BG_COLOR);
+        let block = Block::bordered().border_style(BORDER_STYLE).bg(BG_COLOR);
 
         let inner_area = block.inner(frame.area());
         // Break Layout into 3; header, content and footer
@@ -33,7 +34,7 @@ impl View {
         ])
         .areas(inner_area);
 
-        let page_area = layout[2].inner(Margin::new(2, 2));
+        let page_area = layout[2].inner(Margin::new(2, 1));
 
         frame.render_widget(block, frame.area());
         self.render_title_block(frame, layout[0], state);
@@ -44,7 +45,7 @@ impl View {
         return;
     }
 
-    fn render_title_block(&self, frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+    fn render_title_block(&self, frame: &mut Frame, rect: Rect, _state: &ApplicationState) {
         // Just bottom border
         let block = Block::bordered()
             .borders(Borders::BOTTOM)
@@ -156,6 +157,7 @@ impl View {
         match state.active_page {
             Page::Battery => Box::new(BatteryPage::default()),
             Page::Performance => Box::new(performance::PerformancePage::default()),
+            Page::Lighting => Box::new(lighting::LightingPage::default()),
             _ => Box::new(BatteryPage::default()),
         }
     }

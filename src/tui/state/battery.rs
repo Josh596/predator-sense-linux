@@ -1,11 +1,9 @@
-use strum_macros::{EnumIter, FromRepr};
+use strum::EnumCount;
+use strum_macros::{EnumCount, EnumIter, FromRepr};
 
-use crate::tui::{
-    components::inputs::Input,
-    state::fields::{BooleanField, Field, NumericField},
-};
+use crate::tui::state::fields::{BooleanField, Field, NumericField};
 
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy)]
+#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount)]
 pub enum BatteryPageInput {
     #[default]
     EnableChargingLimit,
@@ -13,6 +11,19 @@ pub enum BatteryPageInput {
     LowerChargingLimit,
 }
 
+impl BatteryPageInput {
+    /// Move the cursor to the previous input, clamping at the first.                                                                                                                                                                                          
+    pub fn prev(self) -> Self {
+        let index = (self as usize).saturating_sub(1);
+        Self::from_repr(index).unwrap_or(self)
+    }
+
+    /// Move the cursor to the next input, clamping at the last.                                                                                                                                                                                               
+    pub fn next(self) -> Self {
+        let index = (self as usize + 1).min(BatteryPageInput::COUNT - 1);
+        Self::from_repr(index).unwrap_or(self)
+    }
+}
 pub struct BatteryPageState {
     pub active_input: BatteryPageInput,
     pub enable_charging_limit: BooleanField,

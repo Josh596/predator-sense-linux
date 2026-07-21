@@ -1,22 +1,22 @@
 use ratatui::crossterm::event::{
-    Event::{self, Key},
+    Event::{self},
     KeyCode, KeyEvent,
 };
-use strum::IntoEnumIterator;
 
 use crate::tui::state::{
     ApplicationState,
-    Page::{self, Battery},
+    Page::{self},
     RunningState,
-    battery::BatteryPageInput,
 };
 pub mod battery;
+pub mod lighting;
 pub mod performance;
 
 #[derive(Default)]
 pub struct EventHandler {
     battery_page_event_handler: battery::BatteryPageEventHandler,
     performance_page_event_handler: performance::PerformancePageEventHandler,
+    lighting_page_event_handler: lighting::LightingPageEventHandler,
 }
 
 impl EventHandler {
@@ -38,6 +38,7 @@ impl EventHandler {
         match state.active_page {
             Page::Battery => &self.battery_page_event_handler,
             Page::Performance => &self.performance_page_event_handler,
+            Page::Lighting => &self.lighting_page_event_handler,
             _ => &self.battery_page_event_handler, // Default to BatteryPageEventHandler for now
         }
     }

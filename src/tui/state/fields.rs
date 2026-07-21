@@ -1,4 +1,4 @@
-use ratatui::widgets::ListState;
+use ratatui::{style::Color, widgets::ListState};
 
 pub trait Field {
     fn increment(&mut self) {}
@@ -79,5 +79,55 @@ impl Field for ListField {
 
     fn decrement(&mut self) {
         self.state.select_previous();
+    }
+}
+
+pub struct OptionField {
+    pub options: Vec<String>,
+    pub selected_option_index: usize,
+}
+
+impl Field for OptionField {
+    fn increment(&mut self) {
+        self.selected_option_index = (self.selected_option_index + 1).min(self.options.len() - 1);
+    }
+
+    fn decrement(&mut self) {
+        self.selected_option_index = self.selected_option_index.saturating_sub(1);
+    }
+}
+
+pub struct ColorRange {
+    pub start: usize,
+    pub end: usize,
+    pub color: Color,
+}
+
+pub struct SliderField {
+    pub value: usize,
+    pub min: usize,
+    pub max: usize,
+    pub step: usize,
+    pub unit: &'static str,
+    pub ranges: Vec<ColorRange>,
+}
+
+impl Field for SliderField {
+    fn increment(&mut self) {
+        self.value = (self.value + self.step).min(self.max);
+    }
+    fn decrement(&mut self) {
+        self.value = self.value.saturating_sub(self.step).max(self.min);
+    }
+}
+
+pub struct ColorField {
+    pub color: Color,
+    pub popup_open: bool,
+}
+
+impl Field for ColorField {
+    fn toggle(&mut self) {
+        self.popup_open = !self.popup_open;
     }
 }

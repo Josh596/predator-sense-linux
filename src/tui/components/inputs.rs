@@ -1,16 +1,15 @@
-use std::default;
 
 use ratatui::{
     Frame,
-    layout::Rect,
-    style::{Style, Stylize},
+    layout::{Constraint, Layout, Rect},
+    style::{Color, Style, Stylize},
     text::{Line, Span},
-    widgets::{HighlightSpacing, List, ListItem, ListState},
+    widgets::{HighlightSpacing, LineGauge, List, ListItem},
 };
 
 use crate::tui::{
-    state::fields::{BooleanField, ListField, NumericField},
-    style::{ACCENT_COLOR, TEXT_STYLE_ACTIVE, TEXT_STYLE_DIM},
+    state::fields::{BooleanField, ColorField, ListField, NumericField, OptionField, SliderField},
+    style::{ACCENT_COLOR, TEXT_DIM_COLOR, TEXT_STYLE_ACTIVE, TEXT_STYLE_DIM},
 };
 
 pub trait Input {
@@ -19,6 +18,11 @@ pub trait Input {
 
 pub trait WidgetInput {
     fn render(&mut self, frame: &mut Frame, rect: Rect);
+}
+
+pub enum InputType<'a> {
+    Widget(&'a mut dyn WidgetInput),
+    Line(&'a dyn Input),
 }
 impl Input for BooleanField {
     fn render(&self) -> Line<'static> {
@@ -89,5 +93,77 @@ impl WidgetInput for ListField {
             .highlight_spacing(HighlightSpacing::Always);
 
         frame.render_stateful_widget(list_widget, rect, &mut self.state);
+    }
+}
+
+impl OptionField {
+    fn render_option(&self, text: String, is_selected: bool) -> Span<'static> {
+        let content = format!("[{}{}]", if is_selected { "▣ " } else { "" }, text);
+        let mut span = Span::from(content);
+
+        if is_selected {
+            span = span.fg(ACCENT_COLOR);
+        } else {
+            span = span.fg(TEXT_DIM_COLOR);
+        }
+
+        span
+    }
+}
+impl Input for OptionField {
+    fn render(&self) -> Line<'static> {
+        let mut spans = Vec::new();
+        for (index, option) in self.options.iter().enumerate() {
+            let is_selected = index == self.selected_option_index;
+            let span = self.render_option(option.clone(), is_selected);
+            spans.push(span);
+            spans.push(Span::raw("  ")); // Add spacing between options
+        }
+        //
+
+        Line::from(spans)
+    }
+}
+
+impl SliderField {
+    pub fn color_for(&self, value: usize) -> Option<Color> {
+        for range in &self.ranges {
+            if value >= range.start && value <= range.end {
+                return Some(range.color);
+            }
+        }
+        None
+    }
+}
+
+impl WidgetInput for SliderField {
+    fn render(&mut self, frame: &mut Frame, rect: Rect) {
+        let ratio = self.value as f64 / self.max as f64;
+        let layout: [Rect; 2] =
+            Layout::horizontal([Constraint::Length(20), Constraint::Length(5)]).areas(rect);
+
+        let color = self.color_for(self.value).unwrap_or(ACCENT_COLOR);
+        let line_gauge = LineGauge::default()
+            .ratio(ratio)
+            .unfilled_style(TEXT_DIM_COLOR)
+            .filled_symbol("█")
+            .unfilled_symbol("░")
+            .label("")
+            .filled_style(color)
+            .bold();
+
+        let text = format!(" {}{}", self.value, self.unit);
+        let text_span = Span::from(text).style(TEXT_STYLE_DIM);
+
+        frame.render_widget(line_gauge, layout[0]);
+        frame.render_widget(text_span, layout[1]);
+    }
+}
+
+impl Input for ColorField {
+    fn render(&self) -> Line<'static> {
+        // let block_span = Span::from(").fg(self.color);
+        let line = Line::from("██").fg(self.color);
+        line
     }
 }

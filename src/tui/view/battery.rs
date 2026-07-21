@@ -3,12 +3,12 @@ use ratatui::{
     layout::{Constraint, Layout, Rect},
     style::Stylize,
     text::{Line, Span},
-    widgets::{Block, LineGauge, Padding},
+    widgets::{Block, LineGauge},
 };
 
 use crate::tui::{
     components::inputs::Input,
-    state::{ApplicationState, battery::BatteryPageInput, fields::NumericField},
+    state::{ApplicationState, battery::BatteryPageInput},
     style::{DANGER_COLOR, GAUGE_STYLE, OK_COLOR, TEXT_DIM_COLOR, TEXT_STYLE_DIM, WARNING_COLOR},
     utils::{Action, cursor},
     view::page::PageView,
@@ -20,7 +20,7 @@ const LINE_TITLE_MAX_LENGTH: u16 = 20;
 pub struct BatteryPage;
 
 impl BatteryPage {
-    fn render_battery_info(frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+    fn render_battery_info(frame: &mut Frame, rect: Rect, _state: &ApplicationState) {
         let upper_text_layout: [Rect; 3] = Layout::horizontal([
             Constraint::Length(LINE_TITLE_MAX_LENGTH),
             Constraint::Length(10),

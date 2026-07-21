@@ -3,6 +3,7 @@ use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 pub mod fields;
 
 pub mod battery;
+pub mod lighting;
 pub mod performance;
 #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
 pub enum RunningState {
@@ -28,6 +29,7 @@ pub struct ApplicationState {
     pub active_page: Page,
     pub battery_page_state: battery::BatteryPageState,
     pub perf_page_state: performance::PerformancePageState,
+    pub lighting_page_state: lighting::LightingPageState,
 }
 
 impl ApplicationState {}

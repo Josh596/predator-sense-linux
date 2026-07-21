@@ -1,13 +1,11 @@
 use ratatui::{
     Frame,
-    layout::{Constraint, Layout, Margin, Rect},
-    style::Stylize,
-    text::Span,
+    layout::{Constraint, Layout, Rect},
     widgets::{Block, Borders, Padding},
 };
 
 use crate::tui::{
-    components::inputs::WidgetInput, state::ApplicationState, style::ACCENT_COLOR, utils::Action,
+    components::inputs::WidgetInput, state::ApplicationState, utils::Action,
     view::page::PageView,
 };
 
@@ -27,7 +25,7 @@ impl PerformancePage {
         state.perf_page_state.mode_input.render(frame, inner_area);
     }
 
-    fn render_active_profiler(frame: &mut Frame, rect: Rect, state: &ApplicationState) {
+    fn render_active_profiler(frame: &mut Frame, rect: Rect, _state: &ApplicationState) {
         let block = Block::default()
             .title("ACTIVE PROFILE")
             .borders(Borders::ALL);
@@ -46,7 +44,7 @@ impl PageView for PerformancePage {
         PerformancePage::render_active_profiler(frame, layout[1], state);
     }
 
-    fn actions(&self, state: &ApplicationState) -> Vec<Action> {
+    fn actions(&self, _state: &ApplicationState) -> Vec<Action> {
         vec![Action::new("↑↓", "Move")]
     }
 }

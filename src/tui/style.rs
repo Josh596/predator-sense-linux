@@ -1,4 +1,3 @@
-use std::str::FromStr;
 
 use ratatui::style::{Color, Style};
 
