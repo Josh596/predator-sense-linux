@@ -23,7 +23,14 @@ impl EventHandler {
     pub fn handle_event(&self, event: Event, state: &mut ApplicationState) {
         match event {
             Event::Key(key) => {
+                if self.get_active_page_event_handler(state).modal_open(state) {
+                    self.get_active_page_event_handler(state)
+                        .handle_modal_event(key, state);
+
+                    return;
+                }
                 self.handle_key(key, state);
+
                 self.get_active_page_event_handler(state)
                     .handle_page_event(key, state);
             }
@@ -66,4 +73,8 @@ impl EventHandler {
 
 trait PageEventHandler {
     fn handle_page_event(&self, key: KeyEvent, state: &mut ApplicationState);
+    fn modal_open(&self, state: &ApplicationState) -> bool {
+        false
+    }
+    fn handle_modal_event(&self, key: KeyEvent, state: &mut ApplicationState) {}
 }

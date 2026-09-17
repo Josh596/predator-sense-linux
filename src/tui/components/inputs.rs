@@ -1,9 +1,8 @@
-
 use ratatui::{
     Frame,
     layout::{Constraint, Layout, Rect},
     style::{Color, Style, Stylize},
-    text::{Line, Span},
+    text::{Line, Span, ToSpan},
     widgets::{HighlightSpacing, LineGauge, List, ListItem},
 };
 
@@ -13,7 +12,7 @@ use crate::tui::{
 };
 
 pub trait Input {
-    fn render(&self) -> Line<'static>;
+    fn render(&self) -> Line<'_>;
 }
 
 pub trait WidgetInput {
@@ -96,9 +95,13 @@ impl WidgetInput for ListField {
     }
 }
 
-impl<T> OptionField<T> {
-    fn render_option(&self, text: String, is_selected: bool) -> Span<'static> {
-        let content = format!("[{}{}]", if is_selected { "▣ " } else { "" }, text);
+pub trait RenderOption {
+    fn render_option(&self, is_selected: bool) -> Span<'static>;
+}
+
+impl<T: std::fmt::Display> RenderOption for T {
+    fn render_option(&self, is_selected: bool) -> Span<'static> {
+        let content = format!("[{}{}]", if is_selected { "▣ " } else { "" }, self);
         let mut span = Span::from(content);
 
         if is_selected {
@@ -110,12 +113,13 @@ impl<T> OptionField<T> {
         span
     }
 }
-impl<T: std::fmt::Display> Input for OptionField<T> {
+
+impl<T: RenderOption> Input for OptionField<T> {
     fn render(&self) -> Line<'static> {
         let mut spans = Vec::new();
         for (index, option) in self.options.iter().enumerate() {
             let is_selected = index == self.selected_option_index;
-            let span = self.render_option(option.to_string(), is_selected);
+            let span = option.render_option(is_selected);
             spans.push(span);
             spans.push(Span::raw("  ")); // Add spacing between options
         }

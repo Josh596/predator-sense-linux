@@ -2,7 +2,10 @@ use ratatui::style::Color;
 use strum::IntoEnumIterator;
 use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 
-use crate::tui::state::fields::{ColorField, Field, OptionField, SliderField};
+use crate::tui::state::{
+    color_picker::ColorPickerState,
+    fields::{ColorField, Field, OptionField, SliderField},
+};
 
 #[derive(Default, PartialEq, Eq, Clone, Copy, EnumCount, EnumIter, FromRepr, Hash)]
 pub enum LightingPageInput {
@@ -46,7 +49,6 @@ impl Default for KeyboardState {
             },
             color: ColorField {
                 color: Color::Rgb(255, 0, 0),
-                popup_open: false,
             },
         }
     }
@@ -66,10 +68,32 @@ impl KeyboardState {
 
     fn visible_inputs(&self) -> Vec<LightingPageInput> {
         let mut inputs = vec![LightingPageInput::Effect];
-        if self.effect.value() != LightingEffect::Static {
-            inputs.push(LightingPageInput::Speed);
-            inputs.push(LightingPageInput::EffectDirection);
+        match self.effect.value().capabilities() {
+            LightingEffectConfig {
+                has_speed: true,
+                has_direction: true,
+            } => {
+                inputs.push(LightingPageInput::Speed);
+                inputs.push(LightingPageInput::EffectDirection);
+            }
+            LightingEffectConfig {
+                has_speed: true,
+                has_direction: false,
+            } => {
+                inputs.push(LightingPageInput::Speed);
+            }
+            LightingEffectConfig {
+                has_speed: false,
+                has_direction: true,
+            } => {
+                inputs.push(LightingPageInput::EffectDirection);
+            }
+            LightingEffectConfig {
+                has_speed: false,
+                has_direction: false,
+            } => {}
         }
+
         inputs.push(LightingPageInput::Brightness);
         inputs.push(LightingPageInput::Color);
         inputs
@@ -109,7 +133,6 @@ impl Default for LogoState {
             },
             color: ColorField {
                 color: Color::Rgb(255, 0, 0),
-                popup_open: false,
             },
         }
     }
@@ -154,7 +177,6 @@ impl Default for TurboButtonState {
             },
             color: ColorField {
                 color: Color::Rgb(255, 0, 0),
-                popup_open: false,
             },
         }
     }
@@ -173,7 +195,9 @@ impl TurboButtonState {
     }
 }
 
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display)]
+#[derive(
+    Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display,
+)]
 pub enum Target {
     #[default]
     Keyboard,
@@ -182,13 +206,20 @@ pub enum Target {
     TurboButton,
 }
 
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display)]
+#[derive(
+    Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display,
+)]
 pub enum EffectDirection {
     #[default]
     #[strum(serialize = "Left to Right")]
     LeftToRight,
     #[strum(serialize = "Right to Left")]
     RightToLeft,
+}
+
+struct LightingEffectConfig {
+    pub has_speed: bool,
+    pub has_direction: bool,
 }
 
 #[derive(
@@ -200,8 +231,50 @@ pub enum LightingEffect {
     Breathing,
     Neon,
     Wave,
-    Shifting,
     Zoom,
+    Snake,
+    Disco,
+    Ripple,
+}
+
+impl LightingEffect {
+    pub fn capabilities(&self) -> LightingEffectConfig {
+        match self {
+            LightingEffect::Static => LightingEffectConfig {
+                has_speed: false,
+                has_direction: false,
+            },
+            LightingEffect::Breathing => LightingEffectConfig {
+                has_speed: true,
+                has_direction: false,
+            },
+            LightingEffect::Neon => LightingEffectConfig {
+                has_speed: true,
+                has_direction: false,
+            },
+            LightingEffect::Wave => LightingEffectConfig {
+                has_speed: true,
+                has_direction: true,
+            },
+
+            LightingEffect::Zoom => LightingEffectConfig {
+                has_speed: true,
+                has_direction: false,
+            },
+            LightingEffect::Disco => LightingEffectConfig {
+                has_speed: true,
+                has_direction: false,
+            },
+            LightingEffect::Snake => LightingEffectConfig {
+                has_speed: true,
+                has_direction: false,
+            },
+            LightingEffect::Ripple => LightingEffectConfig {
+                has_speed: true,
+                has_direction: true,
+            },
+        }
+    }
 }
 pub struct LightingPageState {
     pub active_input: LightingPageInput,
@@ -209,6 +282,7 @@ pub struct LightingPageState {
     pub keyboard: KeyboardState,
     pub logo: LogoState,
     pub turbo_button: TurboButtonState,
+    pub color_picker: Option<ColorPickerState>,
 }
 
 impl LightingPageState {
@@ -229,6 +303,14 @@ impl LightingPageState {
         };
 
         field.expect("field is not valid for the selected target")
+    }
+
+    pub fn active_color_field_mut(&mut self) -> &mut ColorField {
+        match self.selected_target() {
+            Target::Keyboard => &mut self.keyboard.color,
+            Target::Logo => &mut self.logo.color,
+            Target::TurboButton => &mut self.turbo_button.color,
+        }
     }
 
     pub fn visible_inputs(&self) -> Vec<LightingPageInput> {
@@ -272,6 +354,7 @@ impl Default for LightingPageState {
             logo: LogoState::default(),
             turbo_button: TurboButtonState::default(),
             target_input: OptionField::new(Target::iter().collect()),
+            color_picker: None,
         }
     }
 }

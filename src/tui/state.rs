@@ -3,6 +3,7 @@ use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 pub mod fields;
 
 pub mod battery;
+pub mod color_picker;
 pub mod lighting;
 pub mod performance;
 #[derive(Debug, Default, Eq, PartialEq, Clone, Copy)]
@@ -17,7 +18,7 @@ pub enum RunningState {
 )]
 pub enum Page {
     #[default]
-    Dashboard,
+    // Dashboard,
     Performance,
     Battery,
     Lighting,

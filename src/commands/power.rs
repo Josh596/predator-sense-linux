@@ -35,17 +35,17 @@ impl PerfMode {
             PerfMode::EcoPlus => "Eco Plus",
         }
     }
-}
 
-pub fn set_mode(device: &HidDevice, mode: &PerfMode) -> Result<()> {
-    let mut buf = [0u8; 65];
-    buf[0] = 0xa0; // Report ID
-    buf[1] = 0x00;
-    buf[2] = 0xa0;
-    buf[3] = 0x01;
-    buf[4] = 0x00;
-    buf[5] = 0x01;
-    buf[6] = mode.value();
+    pub fn apply(&self, device: &HidDevice) -> Result<()> {
+        let mut buf = [0u8; 65];
+        buf[0] = 0xa0; // Report ID
+        buf[1] = 0x00;
+        buf[2] = 0xa0;
+        buf[3] = 0x01;
+        buf[4] = 0x00;
+        buf[5] = 0x01;
+        buf[6] = self.value();
 
-    device.set_feature(&buf)
+        device.set_feature(&buf)
+    }
 }

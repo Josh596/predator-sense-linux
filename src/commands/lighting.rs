@@ -36,6 +36,7 @@ pub enum Zone {
     Three,
     #[strum(to_string = "Z4")]
     Four,
+    None,
 }
 impl Zone {
     fn value(&self) -> u8 {
@@ -45,6 +46,7 @@ impl Zone {
             Zone::Two => 0x02,
             Zone::Three => 0x04,
             Zone::Four => 0x08, // bitmask, NOT sequential
+            Zone::None => 0x00,
         }
     }
 }

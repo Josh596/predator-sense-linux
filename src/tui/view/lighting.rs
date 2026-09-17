@@ -5,7 +5,7 @@ use ratatui::{
     text::Span,
 };
 
-use crate::tui::state::lighting::Target;
+use crate::tui::{components::color_picker::ColorPickerPopup, state::lighting::Target};
 use crate::tui::{
     components::inputs::InputType,
     state::{
@@ -86,61 +86,6 @@ impl LightingPage {
             self.render_input(frame, layout[index], label, is_active, input_type);
         }
     }
-    // fn render_effect_input(&self, frame: &mut Frame, rect: Rect, state: &mut ApplicationState) {
-    //     self.render_input(
-    //         frame,
-    //         rect,
-    //         "Effect",
-    //         state.lighting_page_state.active_input == LightingPageInput::Effect,
-    //         InputType::Line(&mut state.lighting_page_state.effect_input),
-    //     );
-    // }
-
-    // fn render_effect_direction_input(
-    //     &self,
-    //     frame: &mut Frame,
-    //     rect: Rect,
-    //     state: &mut ApplicationState,
-    // ) {
-    //     self.render_input(
-    //         frame,
-    //         rect,
-    //         "Direction",
-    //         state.lighting_page_state.active_input == LightingPageInput::EffectDirection,
-    //         InputType::Line(&mut state.lighting_page_state.effect_direction_input),
-    //     );
-    // }
-    // fn render_brightness_input(&self, frame: &mut Frame, rect: Rect, state: &mut ApplicationState) {
-    //     //
-    //     self.render_input(
-    //         frame,
-    //         rect,
-    //         "Brightness",
-    //         state.lighting_page_state.active_input == LightingPageInput::Brightness,
-    //         InputType::Widget(&mut state.lighting_page_state.brightness_input),
-    //     );
-    // }
-
-    // fn render_speed_input(&self, frame: &mut Frame, rect: Rect, state: &mut ApplicationState) {
-    //     //
-    //     self.render_input(
-    //         frame,
-    //         rect,
-    //         "Speed",
-    //         state.lighting_page_state.active_input == LightingPageInput::Speed,
-    //         InputType::Widget(&mut state.lighting_page_state.speed_input),
-    //     );
-    // }
-
-    // fn render_color_input(&self, frame: &mut Frame, rect: Rect, state: &mut ApplicationState) {
-    //     self.render_input(
-    //         frame,
-    //         rect,
-    //         "Color",
-    //         state.lighting_page_state.active_input == LightingPageInput::Color,
-    //         InputType::Line(&mut state.lighting_page_state.color_input),
-    //     );
-    // }
 
     fn render_input(
         &self,
@@ -169,12 +114,30 @@ impl LightingPage {
             InputType::Widget(widget) => widget.render(frame, layout[1]),
         }
     }
+
+    fn render_color_picker(&self, frame: &mut Frame, area: Rect, state: &mut ApplicationState) {
+        if state.lighting_page_state.active_input != LightingPageInput::Color
+            && state.lighting_page_state.color_picker.is_none()
+        {
+            return;
+        }
+
+        ColorPickerPopup.render(
+            frame,
+            area,
+            state.lighting_page_state.color_picker.as_mut().unwrap(),
+        );
+    }
 }
 
 impl PageView for LightingPage {
     fn render(&self, frame: &mut Frame, rect: Rect, state: &mut ApplicationState) {
         let layout: [Rect; 1] = Layout::vertical([Constraint::Fill(1)]).areas(rect);
         self.render_page(frame, layout[0], state);
+
+        if state.lighting_page_state.color_picker.is_some() {
+            self.render_color_picker(frame, layout[0], state);
+        }
     }
 
     fn actions(&self, state: &ApplicationState) -> Vec<Action> {

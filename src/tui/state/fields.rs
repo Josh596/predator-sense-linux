@@ -138,11 +138,6 @@ impl Field for SliderField {
 
 pub struct ColorField {
     pub color: Color,
-    pub popup_open: bool,
 }
 
-impl Field for ColorField {
-    fn toggle(&mut self) {
-        self.popup_open = !self.popup_open;
-    }
-}
+impl Field for ColorField {}

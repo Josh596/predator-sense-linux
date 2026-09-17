@@ -5,8 +5,7 @@ use ratatui::{
 };
 
 use crate::tui::{
-    components::inputs::WidgetInput, state::ApplicationState, utils::Action,
-    view::page::PageView,
+    components::inputs::WidgetInput, state::ApplicationState, utils::Action, view::page::PageView,
 };
 
 #[derive(Default)]
@@ -21,7 +20,7 @@ impl PerformancePage {
 
         let inner_area = block.inner(rect);
 
-        frame.render_widget(block, rect);
+        // frame.render_widget(block, rect);
         state.perf_page_state.mode_input.render(frame, inner_area);
     }
 
@@ -41,7 +40,7 @@ impl PageView for PerformancePage {
             .areas(rect);
 
         PerformancePage::render_mode_input(frame, layout[0], state);
-        PerformancePage::render_active_profiler(frame, layout[1], state);
+        // PerformancePage::render_active_profiler(frame, layout[1], state);
     }
 
     fn actions(&self, _state: &ApplicationState) -> Vec<Action> {

@@ -1,11 +1,12 @@
 use crate::tui::{app::App, view::View};
 
+mod config;
 mod hid;
 
 mod error;
 
 mod commands;
-
+mod services;
 mod tui;
 fn main() {
     // Here we jsut call the App run
