@@ -24,6 +24,7 @@ impl BatteryPageInput {
         Self::from_repr(index).unwrap_or(self)
     }
 }
+
 pub struct BatteryPageState {
     pub active_input: BatteryPageInput,
     pub enable_charging_limit: BooleanField,

@@ -32,25 +32,25 @@ impl ChargingLimit {
             lower,
         })
     }
-}
 
-pub fn set_limit(device: &HidDevice, limit: ChargingLimit) -> Result<()> {
-    let mut buf = [0u8; 65];
-    buf[0] = 0xa0;
-    buf[1] = 0x00;
-    buf[2] = 0xa0;
-    buf[3] = 0x03;
-    buf[4] = 0x0b;
-    buf[5] = 0x01;
-    buf[6] = 0x03;
+    pub fn apply(&self, device: &HidDevice) -> Result<()> {
+        let mut buf = [0u8; 65];
+        buf[0] = 0xa0;
+        buf[1] = 0x00;
+        buf[2] = 0xa0;
+        buf[3] = 0x03;
+        buf[4] = 0x0b;
+        buf[5] = 0x01;
+        buf[6] = 0x03;
 
-    if !limit.enabled {
-        buf[7] = 0x00;
-    } else {
-        buf[7] = 0x01;
-        buf[8] = limit.upper;
-        buf[9] = limit.lower;
+        if !self.enabled {
+            buf[7] = 0x00;
+        } else {
+            buf[7] = 0x01;
+            buf[8] = self.upper;
+            buf[9] = self.lower;
+        }
+
+        device.set_feature(&buf)
     }
-
-    device.set_feature(&buf)
 }

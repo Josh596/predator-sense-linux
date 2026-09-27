@@ -132,19 +132,23 @@ pub struct LightingCommand {
     pub zone: Zone,
 }
 
-pub fn apply(device: &HidDevice, cmd: &LightingCommand) -> Result<()> {
-    let buf = [
-        0xa4, // report ID
-        cmd.target.value(),
-        cmd.effect.value(),
-        cmd.brightness.min(100), // 0–100
-        cmd.speed.value(),
-        cmd.direction.value(),
-        cmd.color.r,
-        cmd.color.g,
-        cmd.color.b,
-        cmd.zone.value(),
-        0x00,
-    ];
-    device.set_feature(&buf)
+impl LightingCommand {
+    pub fn apply(&self, device: &HidDevice) -> Result<()> {
+        log::info!("Setting feature in lighting");
+        let buf = [
+            0xa4, // report ID
+            self.target.value(),
+            self.effect.value(),
+            self.brightness.min(100), // 0–100
+            self.speed.value(),
+            self.direction.value(),
+            self.color.r,
+            self.color.g,
+            self.color.b,
+            self.zone.value(),
+            0x00,
+        ];
+        log::info!("Setting device feature after initialzing buf");
+        device.set_feature(&buf)
+    }
 }

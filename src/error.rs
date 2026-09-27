@@ -13,6 +13,9 @@ pub enum Error {
 
     #[error(transparent)]
     Hid(#[from] hidapi::HidError),
+
+    #[error("{role} device unavailable: {reason}")]
+    Unavailable { role: &'static str, reason: String },
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

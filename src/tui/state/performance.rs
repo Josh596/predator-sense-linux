@@ -1,8 +1,8 @@
 use ratatui::widgets::ListState;
-use strum::{IntoEnumIterator, VariantNames};
+use strum::VariantNames;
 
-use crate::{commands::power::PerfMode, tui::state::fields::ListField};
-
+use crate::tui::state::fields::ListField;
+use predatorsense::commands::power::PerfMode;
 pub struct PerformancePageState {
     pub mode_input: ListField,
 }

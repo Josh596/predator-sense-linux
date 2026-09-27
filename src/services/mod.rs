@@ -1,15 +1,17 @@
 use ratatui::style::Color;
 
-use crate::{
+use crate::tui::state::{
+    ApplicationState,
+    lighting::{EffectDirection, LightingEffect, Target as TargetState},
+};
+use predatorsense::{
     commands::{
         battery::ChargingLimit,
         lighting::{Direction, Effect, LightingCommand, Rgb, Speed, Target, Zone},
         power::PerfMode,
     },
-    tui::state::{
-        ApplicationState,
-        lighting::{EffectDirection, LightingEffect, Target as TargetState},
-    },
+    config::Config,
+    error::Error,
 };
 
 fn get_effect_from_state(effect: &LightingEffect) -> Effect {
@@ -112,17 +114,26 @@ impl Applied {
     }
 }
 
-fn execute(
-    old_state: Option<&ApplicationState>,
-    new_state: &ApplicationState,
-) -> Result<(), String> {
-    let old_applied = old_state.map(|s| Applied::desired(s));
-    let new_applied = Applied::desired(new_state);
-
+pub fn execute(old_state: Applied, new_state: Applied, config: &Config) -> Result<(), Error> {
     // compare the two and execute the necessary commands
-    if old_applied != Some(new_applied.clone()) {
-        // execute the commands
-        // new_applied.perf.apply(device);
+    if old_state == new_state {
+        return Ok(());
+    }
+
+    // Check perf
+    if old_state.perf != new_state.perf {
+        new_state.perf.apply(config.system()?);
+    }
+
+    if old_state.battery != new_state.battery {
+        new_state.battery.apply(config.system()?);
+    }
+
+    if old_state.lighting != new_state.lighting {
+        for command in new_state.lighting {
+            log::info!("Applying lighting command");
+            command.apply(config.rgb().unwrap());
+        }
     }
 
     Ok(())

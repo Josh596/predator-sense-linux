@@ -1,12 +1,16 @@
+use predatorsense::config::Config;
 use ratatui::crossterm::event::{
     Event::{self},
     KeyCode, KeyEvent,
 };
 
-use crate::tui::state::{
-    ApplicationState,
-    Page::{self},
-    RunningState,
+use crate::{
+    services::{self, Applied},
+    tui::state::{
+        ApplicationState,
+        Page::{self},
+        RunningState,
+    },
 };
 pub mod battery;
 pub mod lighting;
@@ -20,7 +24,9 @@ pub struct EventHandler {
 }
 
 impl EventHandler {
-    pub fn handle_event(&self, event: Event, state: &mut ApplicationState) {
+    pub fn handle_event(&self, event: Event, state: &mut ApplicationState, config: &Config) {
+        let old_simple_state = Applied::desired(state);
+
         match event {
             Event::Key(key) => {
                 if self.get_active_page_event_handler(state).modal_open(state) {
@@ -37,6 +43,10 @@ impl EventHandler {
             // After handling key events, delegate to the active page's event handler
             _ => {}
         }
+        let new_simple_state = Applied::desired(state);
+
+        // TODO: HANDLE THE ERROR
+        services::execute(old_simple_state, new_simple_state, config);
 
         return;
     }
