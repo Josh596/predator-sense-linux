@@ -16,6 +16,7 @@ use predatorsense::{
 
 fn get_effect_from_state(effect: &LightingEffect) -> Effect {
     match effect {
+        LightingEffect::Off => Effect::Off,
         LightingEffect::Static => Effect::Static,
         LightingEffect::Breathing => Effect::Breathing,
         LightingEffect::Neon => Effect::Neon,
@@ -113,6 +114,8 @@ impl Applied {
         }
     }
 }
+
+// i need a function that gets feature report from the hid devices, returns an Applied and then to convert that into an ApplicationState object.
 
 pub fn execute(old_state: Applied, new_state: Applied, config: &Config) -> Result<(), Error> {
     // compare the two and execute the necessary commands

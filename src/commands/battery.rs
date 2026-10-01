@@ -53,4 +53,8 @@ impl ChargingLimit {
 
         device.set_feature(&buf)
     }
+
+    pub fn get_current_from_system(device: &HidDevice) {
+        let mut data = [0; 8];
+    }
 }

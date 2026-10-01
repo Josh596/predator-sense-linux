@@ -2465,3 +2465,1393 @@
 2026-09-28T00:36:10.882872008+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
 2026-09-28T00:36:10.886961875+01:00 - hidapi error: Failed to open a device with path '/dev/hidraw2': Permission denied
 2026-09-28T00:36:10.889232957+01:00 - hidapi error: Failed to open a device with path '/dev/hidraw1': Permission denied
+2026-10-01T12:33:22.517269223+01:00 - Logging init
+2026-10-01T12:33:22.519129729+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:33:22.519149492+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:33:22.519155078+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:33:22.519159458+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:33:22.519163434+01:00 - HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:22.519167577+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519171618+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519175652+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519179681+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519183763+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519187847+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519191933+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519195947+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:33:22.519200090+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45108 }
+2026-10-01T12:33:22.519204163+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45108 }
+2026-10-01T12:33:22.519208275+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:33:22.519212281+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:33:22.519216514+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:33:22.519220474+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:33:49.030968241+01:00 - Applying lighting command
+2026-10-01T12:33:49.031087338+01:00 - Setting feature in lighting
+2026-10-01T12:33:49.031094252+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:49.031099787+01:00 - Set feature called
+2026-10-01T12:33:49.031338072+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:49.818682749+01:00 - Applying lighting command
+2026-10-01T12:33:49.818795581+01:00 - Setting feature in lighting
+2026-10-01T12:33:49.818808193+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:49.818818037+01:00 - Set feature called
+2026-10-01T12:33:49.818839160+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:50.246784410+01:00 - Applying lighting command
+2026-10-01T12:33:50.246874528+01:00 - Setting feature in lighting
+2026-10-01T12:33:50.246886823+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:50.246896098+01:00 - Set feature called
+2026-10-01T12:33:50.246911909+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:50.516718520+01:00 - Applying lighting command
+2026-10-01T12:33:50.516808358+01:00 - Setting feature in lighting
+2026-10-01T12:33:50.516820853+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:50.516830209+01:00 - Set feature called
+2026-10-01T12:33:50.516848775+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.016672733+01:00 - Applying lighting command
+2026-10-01T12:33:51.016735297+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.016762554+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.016772019+01:00 - Set feature called
+2026-10-01T12:33:51.016788095+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.047687544+01:00 - Applying lighting command
+2026-10-01T12:33:51.047727930+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.047738501+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.047746640+01:00 - Set feature called
+2026-10-01T12:33:51.047759977+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.084011124+01:00 - Applying lighting command
+2026-10-01T12:33:51.084046997+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.084057107+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.084065250+01:00 - Set feature called
+2026-10-01T12:33:51.084078718+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.120541985+01:00 - Applying lighting command
+2026-10-01T12:33:51.120578403+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.120588920+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.120597141+01:00 - Set feature called
+2026-10-01T12:33:51.120610418+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.150342794+01:00 - Applying lighting command
+2026-10-01T12:33:51.150379244+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.150389552+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.150398023+01:00 - Set feature called
+2026-10-01T12:33:51.150411453+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.180474748+01:00 - Applying lighting command
+2026-10-01T12:33:51.180515833+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.180526179+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.180534038+01:00 - Set feature called
+2026-10-01T12:33:51.180547617+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.210441613+01:00 - Applying lighting command
+2026-10-01T12:33:51.210479193+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.210489528+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.210497577+01:00 - Set feature called
+2026-10-01T12:33:51.210511010+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.240800109+01:00 - Applying lighting command
+2026-10-01T12:33:51.240835698+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.240846041+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.240854159+01:00 - Set feature called
+2026-10-01T12:33:51.240867290+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.270446219+01:00 - Applying lighting command
+2026-10-01T12:33:51.270492407+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.270502928+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.270511074+01:00 - Set feature called
+2026-10-01T12:33:51.270524086+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.300172966+01:00 - Applying lighting command
+2026-10-01T12:33:51.300211044+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.300221974+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.300229937+01:00 - Set feature called
+2026-10-01T12:33:51.300242934+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.331817781+01:00 - Applying lighting command
+2026-10-01T12:33:51.331854058+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.331864510+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.331872543+01:00 - Set feature called
+2026-10-01T12:33:51.331885612+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.364187058+01:00 - Applying lighting command
+2026-10-01T12:33:51.364222595+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.364233037+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.364241179+01:00 - Set feature called
+2026-10-01T12:33:51.364254413+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.397016985+01:00 - Applying lighting command
+2026-10-01T12:33:51.397053377+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.397064290+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.397072501+01:00 - Set feature called
+2026-10-01T12:33:51.397085572+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.431944902+01:00 - Applying lighting command
+2026-10-01T12:33:51.431984434+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.431995027+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.432003085+01:00 - Set feature called
+2026-10-01T12:33:51.432016760+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.464324998+01:00 - Applying lighting command
+2026-10-01T12:33:51.464361629+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.464372095+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.464380478+01:00 - Set feature called
+2026-10-01T12:33:51.464395233+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.497230574+01:00 - Applying lighting command
+2026-10-01T12:33:51.497266754+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.497277692+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.497291465+01:00 - Set feature called
+2026-10-01T12:33:51.497307042+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.532112144+01:00 - Applying lighting command
+2026-10-01T12:33:51.532147561+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.532158354+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.532166257+01:00 - Set feature called
+2026-10-01T12:33:51.532183302+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.568800079+01:00 - Applying lighting command
+2026-10-01T12:33:51.568835595+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.568846294+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.568854591+01:00 - Set feature called
+2026-10-01T12:33:51.568867679+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:51.753467565+01:00 - Applying lighting command
+2026-10-01T12:33:51.753517841+01:00 - Setting feature in lighting
+2026-10-01T12:33:51.753528061+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:51.753536047+01:00 - Set feature called
+2026-10-01T12:33:51.753550168+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.253636634+01:00 - Applying lighting command
+2026-10-01T12:33:52.253709499+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.253720156+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.253742325+01:00 - Set feature called
+2026-10-01T12:33:52.253759745+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.285483221+01:00 - Applying lighting command
+2026-10-01T12:33:52.285534725+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.285545348+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.285553418+01:00 - Set feature called
+2026-10-01T12:33:52.285566823+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.315355622+01:00 - Applying lighting command
+2026-10-01T12:33:52.315391174+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.315401376+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.315409322+01:00 - Set feature called
+2026-10-01T12:33:52.315422296+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.347603201+01:00 - Applying lighting command
+2026-10-01T12:33:52.347640173+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.347650602+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.347658921+01:00 - Set feature called
+2026-10-01T12:33:52.347672243+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.381015522+01:00 - Applying lighting command
+2026-10-01T12:33:52.381045681+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.381051137+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.381055090+01:00 - Set feature called
+2026-10-01T12:33:52.381062713+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.414431293+01:00 - Applying lighting command
+2026-10-01T12:33:52.414465293+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.414470348+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.414474295+01:00 - Set feature called
+2026-10-01T12:33:52.414482500+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.447797635+01:00 - Applying lighting command
+2026-10-01T12:33:52.447834320+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.447845098+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.447853365+01:00 - Set feature called
+2026-10-01T12:33:52.447866523+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.482235053+01:00 - Applying lighting command
+2026-10-01T12:33:52.482272240+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.482283162+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.482297504+01:00 - Set feature called
+2026-10-01T12:33:52.482312090+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.514883562+01:00 - Applying lighting command
+2026-10-01T12:33:52.514918837+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.514929437+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.514937697+01:00 - Set feature called
+2026-10-01T12:33:52.514950728+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.548063055+01:00 - Applying lighting command
+2026-10-01T12:33:52.548098198+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.548108412+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.548116492+01:00 - Set feature called
+2026-10-01T12:33:52.548129393+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.582021062+01:00 - Applying lighting command
+2026-10-01T12:33:52.582067557+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.582078621+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.582086788+01:00 - Set feature called
+2026-10-01T12:33:52.582100175+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.614796628+01:00 - Applying lighting command
+2026-10-01T12:33:52.614831473+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.614841745+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.614849896+01:00 - Set feature called
+2026-10-01T12:33:52.614863177+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.648186156+01:00 - Applying lighting command
+2026-10-01T12:33:52.648222356+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.648232817+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.648241002+01:00 - Set feature called
+2026-10-01T12:33:52.648254337+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.680557872+01:00 - Applying lighting command
+2026-10-01T12:33:52.680593652+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.680604017+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.680612326+01:00 - Set feature called
+2026-10-01T12:33:52.680625390+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:52.714473651+01:00 - Applying lighting command
+2026-10-01T12:33:52.714508882+01:00 - Setting feature in lighting
+2026-10-01T12:33:52.714519526+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:52.714527559+01:00 - Set feature called
+2026-10-01T12:33:52.714540682+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.013708589+01:00 - Applying lighting command
+2026-10-01T12:33:53.013760047+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.013770753+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.013779256+01:00 - Set feature called
+2026-10-01T12:33:53.013793553+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.514065152+01:00 - Applying lighting command
+2026-10-01T12:33:53.514175208+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.514186941+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.514195677+01:00 - Set feature called
+2026-10-01T12:33:53.514215424+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.550556743+01:00 - Applying lighting command
+2026-10-01T12:33:53.550596733+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.550607265+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.550615232+01:00 - Set feature called
+2026-10-01T12:33:53.550628224+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.580101805+01:00 - Applying lighting command
+2026-10-01T12:33:53.580137928+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.580148500+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.580156771+01:00 - Set feature called
+2026-10-01T12:33:53.580169848+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.610332004+01:00 - Applying lighting command
+2026-10-01T12:33:53.610368816+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.610379252+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.610387412+01:00 - Set feature called
+2026-10-01T12:33:53.610400638+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.640771177+01:00 - Applying lighting command
+2026-10-01T12:33:53.640805945+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.640816390+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.640824475+01:00 - Set feature called
+2026-10-01T12:33:53.640837656+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.671043789+01:00 - Applying lighting command
+2026-10-01T12:33:53.671080246+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.671090448+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.671098415+01:00 - Set feature called
+2026-10-01T12:33:53.671111784+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.701788844+01:00 - Applying lighting command
+2026-10-01T12:33:53.701825175+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.701835674+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.701843698+01:00 - Set feature called
+2026-10-01T12:33:53.701856846+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.740486113+01:00 - Applying lighting command
+2026-10-01T12:33:53.740522467+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.740532750+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.740540965+01:00 - Set feature called
+2026-10-01T12:33:53.740554080+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.770340399+01:00 - Applying lighting command
+2026-10-01T12:33:53.770385060+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.770395598+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.770403690+01:00 - Set feature called
+2026-10-01T12:33:53.770416964+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:53.801429768+01:00 - Applying lighting command
+2026-10-01T12:33:53.801465319+01:00 - Setting feature in lighting
+2026-10-01T12:33:53.801475832+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:53.801483946+01:00 - Set feature called
+2026-10-01T12:33:53.801496977+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.017106259+01:00 - Applying lighting command
+2026-10-01T12:33:55.017222750+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.017234615+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.017243573+01:00 - Set feature called
+2026-10-01T12:33:55.017263650+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.516501603+01:00 - Applying lighting command
+2026-10-01T12:33:55.516557871+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.516568617+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.516576900+01:00 - Set feature called
+2026-10-01T12:33:55.516591681+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.552281477+01:00 - Applying lighting command
+2026-10-01T12:33:55.552325622+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.552336172+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.552344255+01:00 - Set feature called
+2026-10-01T12:33:55.552357741+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.588956200+01:00 - Applying lighting command
+2026-10-01T12:33:55.588992401+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.589002908+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.589024497+01:00 - Set feature called
+2026-10-01T12:33:55.589038469+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.619727169+01:00 - Applying lighting command
+2026-10-01T12:33:55.619763187+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.619773745+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.619781913+01:00 - Set feature called
+2026-10-01T12:33:55.619795065+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.650266797+01:00 - Applying lighting command
+2026-10-01T12:33:55.650311635+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.650322387+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.650330178+01:00 - Set feature called
+2026-10-01T12:33:55.650343466+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.684283134+01:00 - Applying lighting command
+2026-10-01T12:33:55.684324173+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.684334896+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.684342930+01:00 - Set feature called
+2026-10-01T12:33:55.684356153+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.718109379+01:00 - Applying lighting command
+2026-10-01T12:33:55.718144773+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.718155178+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.718163255+01:00 - Set feature called
+2026-10-01T12:33:55.718176244+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.747633020+01:00 - Applying lighting command
+2026-10-01T12:33:55.747668671+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.747679276+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.747687392+01:00 - Set feature called
+2026-10-01T12:33:55.747700499+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.780818020+01:00 - Applying lighting command
+2026-10-01T12:33:55.780854361+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.780864921+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.780872974+01:00 - Set feature called
+2026-10-01T12:33:55.780886079+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.810572865+01:00 - Applying lighting command
+2026-10-01T12:33:55.810608392+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.810618587+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.810626491+01:00 - Set feature called
+2026-10-01T12:33:55.810639820+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.840142323+01:00 - Applying lighting command
+2026-10-01T12:33:55.840178149+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.840188352+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.840196322+01:00 - Set feature called
+2026-10-01T12:33:55.840209567+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.870907722+01:00 - Applying lighting command
+2026-10-01T12:33:55.870945603+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.870955976+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.870963945+01:00 - Set feature called
+2026-10-01T12:33:55.870977458+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.900637083+01:00 - Applying lighting command
+2026-10-01T12:33:55.900689417+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.900701438+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.900709735+01:00 - Set feature called
+2026-10-01T12:33:55.900723106+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.930712383+01:00 - Applying lighting command
+2026-10-01T12:33:55.930749076+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.930759441+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.930767553+01:00 - Set feature called
+2026-10-01T12:33:55.930780744+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:55.967351659+01:00 - Applying lighting command
+2026-10-01T12:33:55.967387542+01:00 - Setting feature in lighting
+2026-10-01T12:33:55.967397836+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:55.967405999+01:00 - Set feature called
+2026-10-01T12:33:55.967419154+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.001861593+01:00 - Applying lighting command
+2026-10-01T12:33:56.001897833+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.001908298+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.001916425+01:00 - Set feature called
+2026-10-01T12:33:56.001930+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.034233869+01:00 - Applying lighting command
+2026-10-01T12:33:56.034280234+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.034297735+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.034305907+01:00 - Set feature called
+2026-10-01T12:33:56.034318954+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.067712993+01:00 - Applying lighting command
+2026-10-01T12:33:56.067749170+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.067759240+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.067767494+01:00 - Set feature called
+2026-10-01T12:33:56.067780520+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.102742548+01:00 - Applying lighting command
+2026-10-01T12:33:56.102779690+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.102790044+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.102798285+01:00 - Set feature called
+2026-10-01T12:33:56.102811671+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.134115983+01:00 - Applying lighting command
+2026-10-01T12:33:56.134151652+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.134162229+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.134170069+01:00 - Set feature called
+2026-10-01T12:33:56.134183342+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.167904788+01:00 - Applying lighting command
+2026-10-01T12:33:56.167945068+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.167955553+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.167963615+01:00 - Set feature called
+2026-10-01T12:33:56.167977013+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.202991295+01:00 - Applying lighting command
+2026-10-01T12:33:56.203028388+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.203038595+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.203046577+01:00 - Set feature called
+2026-10-01T12:33:56.203059688+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.234217327+01:00 - Applying lighting command
+2026-10-01T12:33:56.234254611+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.234265178+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.234273344+01:00 - Set feature called
+2026-10-01T12:33:56.234293188+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.267598506+01:00 - Applying lighting command
+2026-10-01T12:33:56.267635249+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.267645536+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.267653794+01:00 - Set feature called
+2026-10-01T12:33:56.267666717+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.301593144+01:00 - Applying lighting command
+2026-10-01T12:33:56.301631078+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.301641803+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.301649880+01:00 - Set feature called
+2026-10-01T12:33:56.301662811+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.334823614+01:00 - Applying lighting command
+2026-10-01T12:33:56.334863473+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.334873765+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.334882097+01:00 - Set feature called
+2026-10-01T12:33:56.334895309+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.368198554+01:00 - Applying lighting command
+2026-10-01T12:33:56.368239539+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.368250067+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.368258287+01:00 - Set feature called
+2026-10-01T12:33:56.368271820+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.398882557+01:00 - Applying lighting command
+2026-10-01T12:33:56.398923316+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.398933985+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.398941983+01:00 - Set feature called
+2026-10-01T12:33:56.398955376+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.428509062+01:00 - Applying lighting command
+2026-10-01T12:33:56.428545969+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.428556496+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.428564690+01:00 - Set feature called
+2026-10-01T12:33:56.428578112+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.458556343+01:00 - Applying lighting command
+2026-10-01T12:33:56.458592402+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.458602688+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.458610678+01:00 - Set feature called
+2026-10-01T12:33:56.458623837+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.488187624+01:00 - Applying lighting command
+2026-10-01T12:33:56.488224292+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.488234427+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.488242622+01:00 - Set feature called
+2026-10-01T12:33:56.488255790+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.523570569+01:00 - Applying lighting command
+2026-10-01T12:33:56.523606628+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.523617275+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.523638012+01:00 - Set feature called
+2026-10-01T12:33:56.523652181+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.553958033+01:00 - Applying lighting command
+2026-10-01T12:33:56.553994001+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.554004428+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.554012423+01:00 - Set feature called
+2026-10-01T12:33:56.554025559+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.586294370+01:00 - Applying lighting command
+2026-10-01T12:33:56.586330362+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.586341044+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.586349193+01:00 - Set feature called
+2026-10-01T12:33:56.586362710+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.620419564+01:00 - Applying lighting command
+2026-10-01T12:33:56.620455929+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.620466245+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.620474428+01:00 - Set feature called
+2026-10-01T12:33:56.620487612+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.652020002+01:00 - Applying lighting command
+2026-10-01T12:33:56.652056321+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.652066781+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.652074851+01:00 - Set feature called
+2026-10-01T12:33:56.652088153+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.688768576+01:00 - Applying lighting command
+2026-10-01T12:33:56.688809418+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.688819813+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.688828068+01:00 - Set feature called
+2026-10-01T12:33:56.688840938+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.720429814+01:00 - Applying lighting command
+2026-10-01T12:33:56.720466105+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.720476286+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.720484162+01:00 - Set feature called
+2026-10-01T12:33:56.720497374+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.751503267+01:00 - Applying lighting command
+2026-10-01T12:33:56.751539004+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.751549400+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.751557827+01:00 - Set feature called
+2026-10-01T12:33:56.751570879+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.788714675+01:00 - Applying lighting command
+2026-10-01T12:33:56.788750793+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.788761395+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.788769457+01:00 - Set feature called
+2026-10-01T12:33:56.788782463+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.819571188+01:00 - Applying lighting command
+2026-10-01T12:33:56.819608827+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.819619162+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.819627314+01:00 - Set feature called
+2026-10-01T12:33:56.819640505+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.851229219+01:00 - Applying lighting command
+2026-10-01T12:33:56.851265626+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.851275923+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.851283944+01:00 - Set feature called
+2026-10-01T12:33:56.851303096+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.889205328+01:00 - Applying lighting command
+2026-10-01T12:33:56.889240612+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.889251247+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.889259574+01:00 - Set feature called
+2026-10-01T12:33:56.889272822+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.919935142+01:00 - Applying lighting command
+2026-10-01T12:33:56.919971016+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.919981046+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.919989215+01:00 - Set feature called
+2026-10-01T12:33:56.920002353+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.952075987+01:00 - Applying lighting command
+2026-10-01T12:33:56.952119746+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.952130143+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.952138416+01:00 - Set feature called
+2026-10-01T12:33:56.952151728+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:56.985091712+01:00 - Applying lighting command
+2026-10-01T12:33:56.985128123+01:00 - Setting feature in lighting
+2026-10-01T12:33:56.985138418+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:56.985146479+01:00 - Set feature called
+2026-10-01T12:33:56.985159433+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:57.021841370+01:00 - Applying lighting command
+2026-10-01T12:33:57.021877309+01:00 - Setting feature in lighting
+2026-10-01T12:33:57.021887904+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:57.021896130+01:00 - Set feature called
+2026-10-01T12:33:57.021909366+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:57.051956256+01:00 - Applying lighting command
+2026-10-01T12:33:57.052002242+01:00 - Setting feature in lighting
+2026-10-01T12:33:57.052012764+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:57.052020785+01:00 - Set feature called
+2026-10-01T12:33:57.052033858+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:58.503119075+01:00 - Applying lighting command
+2026-10-01T12:33:58.503235151+01:00 - Setting feature in lighting
+2026-10-01T12:33:58.503246466+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:58.503255250+01:00 - Set feature called
+2026-10-01T12:33:58.503273105+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.003217512+01:00 - Applying lighting command
+2026-10-01T12:33:59.003303212+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.003315684+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.003324747+01:00 - Set feature called
+2026-10-01T12:33:59.003341700+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.036587252+01:00 - Applying lighting command
+2026-10-01T12:33:59.036626944+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.036637408+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.036645451+01:00 - Set feature called
+2026-10-01T12:33:59.036674893+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.072384344+01:00 - Applying lighting command
+2026-10-01T12:33:59.072420498+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.072430781+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.072438927+01:00 - Set feature called
+2026-10-01T12:33:59.072452283+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.108321916+01:00 - Applying lighting command
+2026-10-01T12:33:59.108359516+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.108369707+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.108378101+01:00 - Set feature called
+2026-10-01T12:33:59.108391052+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.144724889+01:00 - Applying lighting command
+2026-10-01T12:33:59.144760339+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.144770854+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.144779020+01:00 - Set feature called
+2026-10-01T12:33:59.144791971+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.180210024+01:00 - Applying lighting command
+2026-10-01T12:33:59.180245598+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.180256071+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.180264249+01:00 - Set feature called
+2026-10-01T12:33:59.180277526+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.209923930+01:00 - Applying lighting command
+2026-10-01T12:33:59.209961421+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.209971768+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.209979952+01:00 - Set feature called
+2026-10-01T12:33:59.209993327+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.240446146+01:00 - Applying lighting command
+2026-10-01T12:33:59.240481736+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.240492245+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.240500483+01:00 - Set feature called
+2026-10-01T12:33:59.240513776+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.271097801+01:00 - Applying lighting command
+2026-10-01T12:33:59.271133259+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.271143566+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.271151596+01:00 - Set feature called
+2026-10-01T12:33:59.271164690+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.308675517+01:00 - Applying lighting command
+2026-10-01T12:33:59.308711480+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.308721709+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.308729866+01:00 - Set feature called
+2026-10-01T12:33:59.308742811+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.339608174+01:00 - Applying lighting command
+2026-10-01T12:33:59.339643856+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.339654114+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.339662277+01:00 - Set feature called
+2026-10-01T12:33:59.339675467+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.371823678+01:00 - Applying lighting command
+2026-10-01T12:33:59.371859166+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.371881330+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.371890566+01:00 - Set feature called
+2026-10-01T12:33:59.371903860+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.408886073+01:00 - Applying lighting command
+2026-10-01T12:33:59.408922010+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.408932383+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.408940447+01:00 - Set feature called
+2026-10-01T12:33:59.408953552+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.438806974+01:00 - Applying lighting command
+2026-10-01T12:33:59.438842401+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.438852938+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.438861112+01:00 - Set feature called
+2026-10-01T12:33:59.438874295+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.470355138+01:00 - Applying lighting command
+2026-10-01T12:33:59.470390960+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.470401220+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.470409623+01:00 - Set feature called
+2026-10-01T12:33:59.470422875+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.503077661+01:00 - Applying lighting command
+2026-10-01T12:33:59.503113579+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.503124491+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.503133149+01:00 - Set feature called
+2026-10-01T12:33:59.503156824+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.536444760+01:00 - Applying lighting command
+2026-10-01T12:33:59.536479976+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.536490367+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.536498629+01:00 - Set feature called
+2026-10-01T12:33:59.536511844+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.571565144+01:00 - Applying lighting command
+2026-10-01T12:33:59.571600574+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.571610935+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.571618947+01:00 - Set feature called
+2026-10-01T12:33:59.571632424+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.606859450+01:00 - Applying lighting command
+2026-10-01T12:33:59.606894581+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.606905056+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.606913090+01:00 - Set feature called
+2026-10-01T12:33:59.606926184+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.636823007+01:00 - Applying lighting command
+2026-10-01T12:33:59.636861439+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.636871787+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.636879916+01:00 - Set feature called
+2026-10-01T12:33:59.636892925+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.671834105+01:00 - Applying lighting command
+2026-10-01T12:33:59.671870768+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.671881355+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.671889362+01:00 - Set feature called
+2026-10-01T12:33:59.671902705+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.708846769+01:00 - Applying lighting command
+2026-10-01T12:33:59.708882260+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.708892518+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.708900657+01:00 - Set feature called
+2026-10-01T12:33:59.708913947+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.739627860+01:00 - Applying lighting command
+2026-10-01T12:33:59.739663284+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.739674+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.739682213+01:00 - Set feature called
+2026-10-01T12:33:59.739695681+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.771694781+01:00 - Applying lighting command
+2026-10-01T12:33:59.771730975+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.771742807+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.771750859+01:00 - Set feature called
+2026-10-01T12:33:59.771764081+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.808968038+01:00 - Applying lighting command
+2026-10-01T12:33:59.809003909+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.809014272+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.809022444+01:00 - Set feature called
+2026-10-01T12:33:59.809035698+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.839854755+01:00 - Applying lighting command
+2026-10-01T12:33:59.839889992+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.839900603+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.839908712+01:00 - Set feature called
+2026-10-01T12:33:59.839922004+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.871912048+01:00 - Applying lighting command
+2026-10-01T12:33:59.871948721+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.871959025+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.871967119+01:00 - Set feature called
+2026-10-01T12:33:59.871980239+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.908923130+01:00 - Applying lighting command
+2026-10-01T12:33:59.908959403+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.908969754+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.908977994+01:00 - Set feature called
+2026-10-01T12:33:59.908991094+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.939625505+01:00 - Applying lighting command
+2026-10-01T12:33:59.939660910+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.939671581+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.939679874+01:00 - Set feature called
+2026-10-01T12:33:59.939692917+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:33:59.971777931+01:00 - Applying lighting command
+2026-10-01T12:33:59.971813737+01:00 - Setting feature in lighting
+2026-10-01T12:33:59.971823938+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:33:59.971832036+01:00 - Set feature called
+2026-10-01T12:33:59.971845269+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.008983566+01:00 - Applying lighting command
+2026-10-01T12:34:00.009019868+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.009030137+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.009038151+01:00 - Set feature called
+2026-10-01T12:34:00.009061806+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.039612558+01:00 - Applying lighting command
+2026-10-01T12:34:00.039648623+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.039659134+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.039667417+01:00 - Set feature called
+2026-10-01T12:34:00.039680619+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.071776104+01:00 - Applying lighting command
+2026-10-01T12:34:00.071812595+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.071822911+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.071830995+01:00 - Set feature called
+2026-10-01T12:34:00.071844195+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.108662389+01:00 - Applying lighting command
+2026-10-01T12:34:00.108698383+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.108708770+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.108717028+01:00 - Set feature called
+2026-10-01T12:34:00.108730200+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.139832990+01:00 - Applying lighting command
+2026-10-01T12:34:00.139870618+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.139880958+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.139889135+01:00 - Set feature called
+2026-10-01T12:34:00.139902642+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.170757941+01:00 - Applying lighting command
+2026-10-01T12:34:00.170793432+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.170804034+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.170812042+01:00 - Set feature called
+2026-10-01T12:34:00.170825086+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.203987679+01:00 - Applying lighting command
+2026-10-01T12:34:00.204022864+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.204033121+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.204041354+01:00 - Set feature called
+2026-10-01T12:34:00.204054810+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.237266126+01:00 - Applying lighting command
+2026-10-01T12:34:00.237309006+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.237319728+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.237327995+01:00 - Set feature called
+2026-10-01T12:34:00.237341209+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.271837970+01:00 - Applying lighting command
+2026-10-01T12:34:00.271873807+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.271884151+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.271892241+01:00 - Set feature called
+2026-10-01T12:34:00.271905418+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.308902463+01:00 - Applying lighting command
+2026-10-01T12:34:00.308938360+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.308949024+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.308957392+01:00 - Set feature called
+2026-10-01T12:34:00.308970321+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.339733248+01:00 - Applying lighting command
+2026-10-01T12:34:00.339768829+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.339788921+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.339797919+01:00 - Set feature called
+2026-10-01T12:34:00.339811037+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.370919109+01:00 - Applying lighting command
+2026-10-01T12:34:00.370955415+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.370965820+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.370973731+01:00 - Set feature called
+2026-10-01T12:34:00.370986824+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.404237947+01:00 - Applying lighting command
+2026-10-01T12:34:00.404274148+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.404292130+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.404302154+01:00 - Set feature called
+2026-10-01T12:34:00.404315706+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.437512609+01:00 - Applying lighting command
+2026-10-01T12:34:00.437548604+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.437559102+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.437567127+01:00 - Set feature called
+2026-10-01T12:34:00.437580455+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.471843782+01:00 - Applying lighting command
+2026-10-01T12:34:00.471879966+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.471890321+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.471898464+01:00 - Set feature called
+2026-10-01T12:34:00.471911776+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.509019532+01:00 - Applying lighting command
+2026-10-01T12:34:00.509065567+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.509076199+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.509084612+01:00 - Set feature called
+2026-10-01T12:34:00.509098104+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.539632138+01:00 - Applying lighting command
+2026-10-01T12:34:00.539667726+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.539678078+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.539686195+01:00 - Set feature called
+2026-10-01T12:34:00.539699460+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.571008214+01:00 - Applying lighting command
+2026-10-01T12:34:00.571043745+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.571054197+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.571062225+01:00 - Set feature called
+2026-10-01T12:34:00.571075409+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.608737439+01:00 - Applying lighting command
+2026-10-01T12:34:00.608773100+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.608783389+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.608791691+01:00 - Set feature called
+2026-10-01T12:34:00.608804886+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.639103060+01:00 - Applying lighting command
+2026-10-01T12:34:00.639139217+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.639149771+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.639157915+01:00 - Set feature called
+2026-10-01T12:34:00.639171117+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.671795838+01:00 - Applying lighting command
+2026-10-01T12:34:00.671834992+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.671845471+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.671853507+01:00 - Set feature called
+2026-10-01T12:34:00.671866922+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.704941684+01:00 - Applying lighting command
+2026-10-01T12:34:00.704977691+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.704988280+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.704996635+01:00 - Set feature called
+2026-10-01T12:34:00.705009663+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.741700819+01:00 - Applying lighting command
+2026-10-01T12:34:00.741736982+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.741747462+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.741755605+01:00 - Set feature called
+2026-10-01T12:34:00.741768840+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.771932655+01:00 - Applying lighting command
+2026-10-01T12:34:00.771967882+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.771978250+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.771986633+01:00 - Set feature called
+2026-10-01T12:34:00.771999941+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.808819019+01:00 - Applying lighting command
+2026-10-01T12:34:00.808853883+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.808864599+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.808872817+01:00 - Set feature called
+2026-10-01T12:34:00.808885986+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.838792583+01:00 - Applying lighting command
+2026-10-01T12:34:00.838827682+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.838837882+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.838845858+01:00 - Set feature called
+2026-10-01T12:34:00.838859139+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.871847990+01:00 - Applying lighting command
+2026-10-01T12:34:00.871883925+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.871894329+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.871902579+01:00 - Set feature called
+2026-10-01T12:34:00.871915656+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.909119337+01:00 - Applying lighting command
+2026-10-01T12:34:00.909155610+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.909165881+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.909173929+01:00 - Set feature called
+2026-10-01T12:34:00.909186957+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.938675907+01:00 - Applying lighting command
+2026-10-01T12:34:00.938711276+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.938721758+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.938730027+01:00 - Set feature called
+2026-10-01T12:34:00.938743231+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:00.971712302+01:00 - Applying lighting command
+2026-10-01T12:34:00.971747590+01:00 - Setting feature in lighting
+2026-10-01T12:34:00.971758069+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:00.971778424+01:00 - Set feature called
+2026-10-01T12:34:00.971792413+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.008976021+01:00 - Applying lighting command
+2026-10-01T12:34:01.009012222+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.009022491+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.009030614+01:00 - Set feature called
+2026-10-01T12:34:01.009044021+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.039662519+01:00 - Applying lighting command
+2026-10-01T12:34:01.039698084+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.039708460+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.039716571+01:00 - Set feature called
+2026-10-01T12:34:01.039729894+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.071858783+01:00 - Applying lighting command
+2026-10-01T12:34:01.071894174+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.071904665+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.071912761+01:00 - Set feature called
+2026-10-01T12:34:01.071925863+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.108976112+01:00 - Applying lighting command
+2026-10-01T12:34:01.109011895+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.109022273+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.109030247+01:00 - Set feature called
+2026-10-01T12:34:01.109043887+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.139186692+01:00 - Applying lighting command
+2026-10-01T12:34:01.139222193+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.139232701+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.139240955+01:00 - Set feature called
+2026-10-01T12:34:01.139254164+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.171912261+01:00 - Applying lighting command
+2026-10-01T12:34:01.171950983+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.171961544+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.171969799+01:00 - Set feature called
+2026-10-01T12:34:01.171983+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.205007698+01:00 - Applying lighting command
+2026-10-01T12:34:01.205043711+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.205054275+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.205062571+01:00 - Set feature called
+2026-10-01T12:34:01.205075629+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.238222484+01:00 - Applying lighting command
+2026-10-01T12:34:01.238258466+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.238269092+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.238277347+01:00 - Set feature called
+2026-10-01T12:34:01.238296393+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.272073255+01:00 - Applying lighting command
+2026-10-01T12:34:01.272109259+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.272119571+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.272127664+01:00 - Set feature called
+2026-10-01T12:34:01.272140777+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.305217232+01:00 - Applying lighting command
+2026-10-01T12:34:01.305262725+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.305273510+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.305281736+01:00 - Set feature called
+2026-10-01T12:34:01.305303294+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.342127824+01:00 - Applying lighting command
+2026-10-01T12:34:01.342164021+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.342174469+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.342182750+01:00 - Set feature called
+2026-10-01T12:34:01.342196050+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.371865512+01:00 - Applying lighting command
+2026-10-01T12:34:01.371901625+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.371911879+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.371919876+01:00 - Set feature called
+2026-10-01T12:34:01.371933251+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.408793214+01:00 - Applying lighting command
+2026-10-01T12:34:01.408829049+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.408839301+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.408847276+01:00 - Set feature called
+2026-10-01T12:34:01.408860629+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.438531941+01:00 - Applying lighting command
+2026-10-01T12:34:01.438568753+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.438579125+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.438587353+01:00 - Set feature called
+2026-10-01T12:34:01.438600373+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.471821434+01:00 - Applying lighting command
+2026-10-01T12:34:01.471857531+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.471868118+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.471876558+01:00 - Set feature called
+2026-10-01T12:34:01.471889705+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.508964683+01:00 - Applying lighting command
+2026-10-01T12:34:01.509000385+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.509010878+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.509019216+01:00 - Set feature called
+2026-10-01T12:34:01.509032314+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.540046124+01:00 - Applying lighting command
+2026-10-01T12:34:01.540081675+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.540092114+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.540100331+01:00 - Set feature called
+2026-10-01T12:34:01.540113587+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.571653592+01:00 - Applying lighting command
+2026-10-01T12:34:01.571688954+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.571699249+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.571707522+01:00 - Set feature called
+2026-10-01T12:34:01.571720695+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.605310334+01:00 - Applying lighting command
+2026-10-01T12:34:01.605346238+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.605356570+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.605364818+01:00 - Set feature called
+2026-10-01T12:34:01.605378156+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.641754544+01:00 - Applying lighting command
+2026-10-01T12:34:01.641789823+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.641800548+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.641808579+01:00 - Set feature called
+2026-10-01T12:34:01.641821748+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.671985394+01:00 - Applying lighting command
+2026-10-01T12:34:01.672021895+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.672032551+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.672040739+01:00 - Set feature called
+2026-10-01T12:34:01.672054281+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.706179252+01:00 - Applying lighting command
+2026-10-01T12:34:01.706218560+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.706229053+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.706236943+01:00 - Set feature called
+2026-10-01T12:34:01.706250352+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.742525670+01:00 - Applying lighting command
+2026-10-01T12:34:01.742561968+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.742572348+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.742580418+01:00 - Set feature called
+2026-10-01T12:34:01.742593771+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.780350609+01:00 - Applying lighting command
+2026-10-01T12:34:01.780387538+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.780399034+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.780407336+01:00 - Set feature called
+2026-10-01T12:34:01.780420625+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:01.810424767+01:00 - Applying lighting command
+2026-10-01T12:34:01.810468453+01:00 - Setting feature in lighting
+2026-10-01T12:34:01.810479043+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:01.810487377+01:00 - Set feature called
+2026-10-01T12:34:01.810500546+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.013386228+01:00 - Applying lighting command
+2026-10-01T12:34:02.013438727+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.013449357+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.013457619+01:00 - Set feature called
+2026-10-01T12:34:02.013472885+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.513149923+01:00 - Applying lighting command
+2026-10-01T12:34:02.513258549+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.513269535+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.513278554+01:00 - Set feature called
+2026-10-01T12:34:02.513303483+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.542255099+01:00 - Applying lighting command
+2026-10-01T12:34:02.542293819+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.542305656+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.542313980+01:00 - Set feature called
+2026-10-01T12:34:02.542326791+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.572326543+01:00 - Applying lighting command
+2026-10-01T12:34:02.572356769+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.572367087+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.572387015+01:00 - Set feature called
+2026-10-01T12:34:02.572400760+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.605923083+01:00 - Applying lighting command
+2026-10-01T12:34:02.605953288+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.605963631+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.605971674+01:00 - Set feature called
+2026-10-01T12:34:02.605984351+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.640121952+01:00 - Applying lighting command
+2026-10-01T12:34:02.640152499+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.640163007+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.640171094+01:00 - Set feature called
+2026-10-01T12:34:02.640183989+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.672755437+01:00 - Applying lighting command
+2026-10-01T12:34:02.672787747+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.672796813+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.672803812+01:00 - Set feature called
+2026-10-01T12:34:02.672815358+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.706175007+01:00 - Applying lighting command
+2026-10-01T12:34:02.706205180+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.706215602+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.706223661+01:00 - Set feature called
+2026-10-01T12:34:02.706236660+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.741778126+01:00 - Applying lighting command
+2026-10-01T12:34:02.741808811+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.741819171+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.741827301+01:00 - Set feature called
+2026-10-01T12:34:02.741840278+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.772822836+01:00 - Applying lighting command
+2026-10-01T12:34:02.772853487+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.772863963+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.772872140+01:00 - Set feature called
+2026-10-01T12:34:02.772884897+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.806152066+01:00 - Applying lighting command
+2026-10-01T12:34:02.806181923+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.806192498+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.806200695+01:00 - Set feature called
+2026-10-01T12:34:02.806213725+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.841519967+01:00 - Applying lighting command
+2026-10-01T12:34:02.841550038+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.841560492+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.841568467+01:00 - Set feature called
+2026-10-01T12:34:02.841581241+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.872922433+01:00 - Applying lighting command
+2026-10-01T12:34:02.872952308+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.872962776+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.872970739+01:00 - Set feature called
+2026-10-01T12:34:02.872983852+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.906156171+01:00 - Applying lighting command
+2026-10-01T12:34:02.906196390+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.906206707+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.906214917+01:00 - Set feature called
+2026-10-01T12:34:02.906228149+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.941706910+01:00 - Applying lighting command
+2026-10-01T12:34:02.941743452+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.941753451+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.941761562+01:00 - Set feature called
+2026-10-01T12:34:02.941774979+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:02.973042814+01:00 - Applying lighting command
+2026-10-01T12:34:02.973079085+01:00 - Setting feature in lighting
+2026-10-01T12:34:02.973089368+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:02.973097293+01:00 - Set feature called
+2026-10-01T12:34:02.973110464+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.006184448+01:00 - Applying lighting command
+2026-10-01T12:34:03.006220697+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.006231259+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.006239765+01:00 - Set feature called
+2026-10-01T12:34:03.006252905+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.041596299+01:00 - Applying lighting command
+2026-10-01T12:34:03.041632256+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.041642626+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.041650872+01:00 - Set feature called
+2026-10-01T12:34:03.041664062+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.073045216+01:00 - Applying lighting command
+2026-10-01T12:34:03.073081408+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.073091800+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.073100160+01:00 - Set feature called
+2026-10-01T12:34:03.073112926+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.106310177+01:00 - Applying lighting command
+2026-10-01T12:34:03.106346263+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.106356567+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.106364581+01:00 - Set feature called
+2026-10-01T12:34:03.106377884+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.141596948+01:00 - Applying lighting command
+2026-10-01T12:34:03.141633093+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.141643726+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.141651728+01:00 - Set feature called
+2026-10-01T12:34:03.141664743+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.173071040+01:00 - Applying lighting command
+2026-10-01T12:34:03.173108836+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.173119362+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.173127467+01:00 - Set feature called
+2026-10-01T12:34:03.173140625+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.206523576+01:00 - Applying lighting command
+2026-10-01T12:34:03.206559527+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.206570325+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.206578493+01:00 - Set feature called
+2026-10-01T12:34:03.206603157+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.241918483+01:00 - Applying lighting command
+2026-10-01T12:34:03.241953529+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.241964032+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.241972272+01:00 - Set feature called
+2026-10-01T12:34:03.241985391+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.273060655+01:00 - Applying lighting command
+2026-10-01T12:34:03.273096078+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.273106525+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.273114458+01:00 - Set feature called
+2026-10-01T12:34:03.273127776+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.308975170+01:00 - Applying lighting command
+2026-10-01T12:34:03.309010794+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.309021611+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.309029816+01:00 - Set feature called
+2026-10-01T12:34:03.309043150+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.339914833+01:00 - Applying lighting command
+2026-10-01T12:34:03.339949426+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.339959908+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.339968043+01:00 - Set feature called
+2026-10-01T12:34:03.339981384+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.373243669+01:00 - Applying lighting command
+2026-10-01T12:34:03.373278642+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.373296079+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.373304710+01:00 - Set feature called
+2026-10-01T12:34:03.373318189+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.406650019+01:00 - Applying lighting command
+2026-10-01T12:34:03.406686578+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.406697113+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.406705406+01:00 - Set feature called
+2026-10-01T12:34:03.406718767+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.441838901+01:00 - Applying lighting command
+2026-10-01T12:34:03.441874210+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.441885017+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.441893117+01:00 - Set feature called
+2026-10-01T12:34:03.441906502+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.473541491+01:00 - Applying lighting command
+2026-10-01T12:34:03.473576874+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.473587459+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.473595538+01:00 - Set feature called
+2026-10-01T12:34:03.473608772+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.506553440+01:00 - Applying lighting command
+2026-10-01T12:34:03.506589012+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.506599762+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.506608071+01:00 - Set feature called
+2026-10-01T12:34:03.506621294+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.540831043+01:00 - Applying lighting command
+2026-10-01T12:34:03.540875925+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.540897385+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.540906067+01:00 - Set feature called
+2026-10-01T12:34:03.540919388+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.573589396+01:00 - Applying lighting command
+2026-10-01T12:34:03.573624650+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.573635144+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.573643231+01:00 - Set feature called
+2026-10-01T12:34:03.573656578+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.607984488+01:00 - Applying lighting command
+2026-10-01T12:34:03.608020053+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.608030578+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.608038591+01:00 - Set feature called
+2026-10-01T12:34:03.608051869+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.639842336+01:00 - Applying lighting command
+2026-10-01T12:34:03.639863252+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.639868830+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.639873077+01:00 - Set feature called
+2026-10-01T12:34:03.639880105+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.674448552+01:00 - Applying lighting command
+2026-10-01T12:34:03.674487804+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.674498058+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.674505930+01:00 - Set feature called
+2026-10-01T12:34:03.674519397+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.709137562+01:00 - Applying lighting command
+2026-10-01T12:34:03.709174162+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.709184734+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.709192770+01:00 - Set feature called
+2026-10-01T12:34:03.709205783+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.743180445+01:00 - Applying lighting command
+2026-10-01T12:34:03.743215650+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.743226480+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.743234616+01:00 - Set feature called
+2026-10-01T12:34:03.743247811+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.780473215+01:00 - Applying lighting command
+2026-10-01T12:34:03.780508737+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.780519193+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.780527409+01:00 - Set feature called
+2026-10-01T12:34:03.780540575+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.811086527+01:00 - Applying lighting command
+2026-10-01T12:34:03.811122371+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.811132918+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.811140984+01:00 - Set feature called
+2026-10-01T12:34:03.811154076+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.841530449+01:00 - Applying lighting command
+2026-10-01T12:34:03.841565429+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.841575953+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.841584251+01:00 - Set feature called
+2026-10-01T12:34:03.841597596+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.873809017+01:00 - Applying lighting command
+2026-10-01T12:34:03.873846719+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.873857117+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.873865372+01:00 - Set feature called
+2026-10-01T12:34:03.873878562+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.907087319+01:00 - Applying lighting command
+2026-10-01T12:34:03.907123023+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.907133455+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.907141469+01:00 - Set feature called
+2026-10-01T12:34:03.907154549+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.941690298+01:00 - Applying lighting command
+2026-10-01T12:34:03.941725880+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.941736338+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.941744371+01:00 - Set feature called
+2026-10-01T12:34:03.941757631+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:03.973959211+01:00 - Applying lighting command
+2026-10-01T12:34:03.973993982+01:00 - Setting feature in lighting
+2026-10-01T12:34:03.974004361+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:03.974012670+01:00 - Set feature called
+2026-10-01T12:34:03.974025854+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.008974442+01:00 - Applying lighting command
+2026-10-01T12:34:04.009010154+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.009020745+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.009028715+01:00 - Set feature called
+2026-10-01T12:34:04.009041959+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.040723516+01:00 - Applying lighting command
+2026-10-01T12:34:04.040759300+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.040769719+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.040777702+01:00 - Set feature called
+2026-10-01T12:34:04.040790976+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.073894050+01:00 - Applying lighting command
+2026-10-01T12:34:04.073929629+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.073940068+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.073948204+01:00 - Set feature called
+2026-10-01T12:34:04.073961189+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.107341389+01:00 - Applying lighting command
+2026-10-01T12:34:04.107376961+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.107387548+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.107395715+01:00 - Set feature called
+2026-10-01T12:34:04.107408843+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.141598457+01:00 - Applying lighting command
+2026-10-01T12:34:04.141634106+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.141644373+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.141652636+01:00 - Set feature called
+2026-10-01T12:34:04.141665914+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.174104170+01:00 - Applying lighting command
+2026-10-01T12:34:04.174142513+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.174152864+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.174161151+01:00 - Set feature called
+2026-10-01T12:34:04.174188124+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.207785591+01:00 - Applying lighting command
+2026-10-01T12:34:04.207820774+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.207831309+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.207839432+01:00 - Set feature called
+2026-10-01T12:34:04.207852644+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.241251874+01:00 - Applying lighting command
+2026-10-01T12:34:04.241294951+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.241307071+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.241315548+01:00 - Set feature called
+2026-10-01T12:34:04.241328723+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:04.274063215+01:00 - Applying lighting command
+2026-10-01T12:34:04.274098869+01:00 - Setting feature in lighting
+2026-10-01T12:34:04.274109343+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:04.274117526+01:00 - Set feature called
+2026-10-01T12:34:04.274130853+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:34:05.299313070+01:00 - Applying lighting command
+2026-10-01T12:34:05.299420857+01:00 - Setting feature in lighting
+2026-10-01T12:34:05.299434364+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:34:05.299444211+01:00 - Set feature called
+2026-10-01T12:34:05.299462049+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:12.013962196+01:00 - Applying lighting command
+2026-10-01T12:35:12.014057426+01:00 - Setting feature in lighting
+2026-10-01T12:35:12.014070050+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:12.014079689+01:00 - Set feature called
+2026-10-01T12:35:12.014096962+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:12.283809389+01:00 - Applying lighting command
+2026-10-01T12:35:12.283864426+01:00 - Setting feature in lighting
+2026-10-01T12:35:12.283876274+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:12.283885526+01:00 - Set feature called
+2026-10-01T12:35:12.283900936+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:12.440262674+01:00 - Applying lighting command
+2026-10-01T12:35:12.440319723+01:00 - Setting feature in lighting
+2026-10-01T12:35:12.440330511+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:12.440339132+01:00 - Set feature called
+2026-10-01T12:35:12.440352555+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:12.597450666+01:00 - Applying lighting command
+2026-10-01T12:35:12.597507406+01:00 - Setting feature in lighting
+2026-10-01T12:35:12.597519629+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:12.597529867+01:00 - Set feature called
+2026-10-01T12:35:12.597545062+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:12.755611086+01:00 - Applying lighting command
+2026-10-01T12:35:12.755662361+01:00 - Setting feature in lighting
+2026-10-01T12:35:12.755673550+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:12.755683683+01:00 - Set feature called
+2026-10-01T12:35:12.755697980+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:12.913634579+01:00 - Applying lighting command
+2026-10-01T12:35:12.913699389+01:00 - Setting feature in lighting
+2026-10-01T12:35:12.913713656+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:12.913719161+01:00 - Set feature called
+2026-10-01T12:35:12.913729884+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:13.475245791+01:00 - Applying lighting command
+2026-10-01T12:35:13.475321261+01:00 - Setting feature in lighting
+2026-10-01T12:35:13.475332949+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:13.475341278+01:00 - Set feature called
+2026-10-01T12:35:13.475356280+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:13.813236246+01:00 - Applying lighting command
+2026-10-01T12:35:13.813292952+01:00 - Setting feature in lighting
+2026-10-01T12:35:13.813303974+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:13.813312667+01:00 - Set feature called
+2026-10-01T12:35:13.813326900+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:14.038179048+01:00 - Applying lighting command
+2026-10-01T12:35:14.038231650+01:00 - Setting feature in lighting
+2026-10-01T12:35:14.038242553+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:14.038251019+01:00 - Set feature called
+2026-10-01T12:35:14.038265245+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:14.195172828+01:00 - Applying lighting command
+2026-10-01T12:35:14.195220279+01:00 - Setting feature in lighting
+2026-10-01T12:35:14.195231052+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:14.195239340+01:00 - Set feature called
+2026-10-01T12:35:14.195253044+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:14.353224303+01:00 - Applying lighting command
+2026-10-01T12:35:14.353270446+01:00 - Setting feature in lighting
+2026-10-01T12:35:14.353281553+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:14.353296464+01:00 - Set feature called
+2026-10-01T12:35:14.353310313+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:14.533217619+01:00 - Applying lighting command
+2026-10-01T12:35:14.533273317+01:00 - Setting feature in lighting
+2026-10-01T12:35:14.533293867+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:14.533302981+01:00 - Set feature called
+2026-10-01T12:35:14.533316689+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:35:14.735478495+01:00 - Applying lighting command
+2026-10-01T12:35:14.735526595+01:00 - Setting feature in lighting
+2026-10-01T12:35:14.735537303+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:35:14.735545535+01:00 - Set feature called
+2026-10-01T12:35:14.735558885+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:39:50.668726847+01:00 - Logging init
+2026-10-01T12:39:50.669716044+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:39:50.669727648+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:39:50.669732587+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:39:50.669736748+01:00 - HidDeviceInfo { vendor_id: 1739, product_id: 53220 }
+2026-10-01T12:39:50.669740719+01:00 - HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:39:50.669744835+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669748868+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669753101+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669761862+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669766289+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669770890+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669775487+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669780021+01:00 - HidDeviceInfo { vendor_id: 4133, product_id: 5963 }
+2026-10-01T12:39:50.669784418+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45108 }
+2026-10-01T12:39:50.669788882+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45108 }
+2026-10-01T12:39:50.669793252+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:39:50.669797716+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:39:50.669802095+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:39:50.669806352+01:00 - HidDeviceInfo { vendor_id: 1133, product_id: 45930 }
+2026-10-01T12:39:56.239982304+01:00 - Applying lighting command
+2026-10-01T12:39:56.240057487+01:00 - Setting feature in lighting
+2026-10-01T12:39:56.240069108+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:39:56.240077881+01:00 - Set feature called
+2026-10-01T12:39:56.240326480+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:39:56.621678602+01:00 - Applying lighting command
+2026-10-01T12:39:56.621756136+01:00 - Setting feature in lighting
+2026-10-01T12:39:56.621767084+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:39:56.621775686+01:00 - Set feature called
+2026-10-01T12:39:56.621792699+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:42:30.457590131+01:00 - Applying lighting command
+2026-10-01T12:42:30.457701325+01:00 - Setting feature in lighting
+2026-10-01T12:42:30.457714198+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:42:30.457724446+01:00 - Set feature called
+2026-10-01T12:42:30.457743707+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:43:10.936064544+01:00 - Applying lighting command
+2026-10-01T12:43:10.936140744+01:00 - Setting feature in lighting
+2026-10-01T12:43:10.936152216+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:43:10.936161457+01:00 - Set feature called
+2026-10-01T12:43:10.936177980+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T12:43:46.667119361+01:00 - Applying lighting command
+2026-10-01T12:43:46.667197672+01:00 - Setting feature in lighting
+2026-10-01T12:43:46.667209368+01:00 - Setting device feature after initialzing buf
+2026-10-01T12:43:46.667218519+01:00 - Set feature called
+2026-10-01T12:43:46.667234903+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:22:30.223059846+01:00 - Applying lighting command
+2026-10-01T13:22:30.223221783+01:00 - Setting feature in lighting
+2026-10-01T13:22:30.223239770+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:22:30.223253342+01:00 - Set feature called
+2026-10-01T13:22:30.223281132+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:22:30.876013919+01:00 - Applying lighting command
+2026-10-01T13:22:30.876150995+01:00 - Setting feature in lighting
+2026-10-01T13:22:30.876168335+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:22:30.876182358+01:00 - Set feature called
+2026-10-01T13:22:30.876209387+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:22:59.403588847+01:00 - Applying lighting command
+2026-10-01T13:22:59.403704723+01:00 - Setting feature in lighting
+2026-10-01T13:22:59.403735707+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:22:59.403748012+01:00 - Set feature called
+2026-10-01T13:22:59.403769627+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:23:53.895819103+01:00 - Applying lighting command
+2026-10-01T13:23:53.895985936+01:00 - Setting feature in lighting
+2026-10-01T13:23:53.896004216+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:23:53.896017853+01:00 - Set feature called
+2026-10-01T13:23:53.896044401+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:23:56.212603649+01:00 - Applying lighting command
+2026-10-01T13:23:56.212761778+01:00 - Setting feature in lighting
+2026-10-01T13:23:56.212779265+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:23:56.212792590+01:00 - Set feature called
+2026-10-01T13:23:56.212820404+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:23:56.977781035+01:00 - Applying lighting command
+2026-10-01T13:23:56.977919020+01:00 - Setting feature in lighting
+2026-10-01T13:23:56.977936575+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:23:56.977950102+01:00 - Set feature called
+2026-10-01T13:23:56.977977192+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:23:58.484858357+01:00 - Applying lighting command
+2026-10-01T13:23:58.485016915+01:00 - Setting feature in lighting
+2026-10-01T13:23:58.485034249+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:23:58.485048045+01:00 - Set feature called
+2026-10-01T13:23:58.485075182+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:24:02.040352863+01:00 - Applying lighting command
+2026-10-01T13:24:02.040516722+01:00 - Setting feature in lighting
+2026-10-01T13:24:02.040535841+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:24:02.040550754+01:00 - Set feature called
+2026-10-01T13:24:02.040579821+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:24:33.852501217+01:00 - Applying lighting command
+2026-10-01T13:24:33.852652853+01:00 - Setting feature in lighting
+2026-10-01T13:24:33.852668659+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:24:33.852681778+01:00 - Set feature called
+2026-10-01T13:24:33.852708001+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:24:36.733880212+01:00 - Applying lighting command
+2026-10-01T13:24:36.734037672+01:00 - Setting feature in lighting
+2026-10-01T13:24:36.734053784+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:24:36.734065951+01:00 - Set feature called
+2026-10-01T13:24:36.734090775+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:28:41.411236001+01:00 - Applying lighting command
+2026-10-01T13:28:41.411437982+01:00 - Setting feature in lighting
+2026-10-01T13:28:41.411458752+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:28:41.411473538+01:00 - Set feature called
+2026-10-01T13:28:41.411502404+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }
+2026-10-01T13:28:41.636182933+01:00 - Applying lighting command
+2026-10-01T13:28:41.636344705+01:00 - Setting feature in lighting
+2026-10-01T13:28:41.636366126+01:00 - Setting device feature after initialzing buf
+2026-10-01T13:28:41.636381305+01:00 - Set feature called
+2026-10-01T13:28:41.636410588+01:00 - HidDevice { inner: HidDevice { .. }, vid: 3314, pid: 20784 } -> HidDeviceInfo { vendor_id: 3314, product_id: 20784 }

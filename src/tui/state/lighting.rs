@@ -227,6 +227,7 @@ struct LightingEffectConfig {
 )]
 pub enum LightingEffect {
     #[default]
+    Off,
     Static,
     Breathing,
     Neon,
@@ -240,6 +241,10 @@ pub enum LightingEffect {
 impl LightingEffect {
     pub fn capabilities(&self) -> LightingEffectConfig {
         match self {
+            LightingEffect::Off => LightingEffectConfig {
+                has_speed: false,
+                has_direction: false,
+            },
             LightingEffect::Static => LightingEffectConfig {
                 has_speed: false,
                 has_direction: false,
