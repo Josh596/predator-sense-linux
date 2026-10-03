@@ -1,3 +1,4 @@
 /target
 *.cpp
 *.sh
+log/app.log

@@ -32,13 +32,12 @@ impl EventHandler {
                 if self.get_active_page_event_handler(state).modal_open(state) {
                     self.get_active_page_event_handler(state)
                         .handle_modal_event(key, state);
+                } else {
+                    self.handle_key(key, state);
 
-                    return;
+                    self.get_active_page_event_handler(state)
+                        .handle_page_event(key, state);
                 }
-                self.handle_key(key, state);
-
-                self.get_active_page_event_handler(state)
-                    .handle_page_event(key, state);
             }
             // After handling key events, delegate to the active page's event handler
             _ => {}
