@@ -96,6 +96,18 @@ impl<T> OptionField<T> {
     }
 }
 
+impl<T: PartialEq> OptionField<T> {
+    pub fn select_value(&mut self, value: T) -> bool {
+        match self.options.iter().position(|o| o == &value) {
+            Some(i) => {
+                self.selected_option_index = i;
+                true
+            }
+            None => false,
+        }
+    }
+}
+
 impl<T: Copy> OptionField<T> {
     pub fn value(&self) -> T {
         self.options[self.selected_option_index]
@@ -125,6 +137,15 @@ pub struct SliderField {
     pub step: usize,
     pub unit: &'static str,
     pub ranges: Vec<ColorRange>,
+}
+
+impl SliderField {
+    pub fn set_value(&mut self, value: usize) -> bool {
+        let clamped = value.clamp(self.min, self.max);
+        self.value = clamped;
+
+        clamped == value
+    }
 }
 
 impl Field for SliderField {

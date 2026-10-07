@@ -1,5 +1,4 @@
-use strum::EnumCount;
-use strum_macros::{EnumCount, EnumIter, FromRepr};
+use strum::{EnumCount, EnumIter, FromRepr};
 
 use crate::tui::state::fields::{BooleanField, Field, NumericField};
 

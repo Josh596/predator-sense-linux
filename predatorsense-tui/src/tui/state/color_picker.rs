@@ -1,11 +1,7 @@
 use ratatui::style::Color;
-use strum::EnumCount;
-use strum_macros::{EnumCount, FromRepr};
+use strum::{EnumCount, FromRepr};
 
-use crate::tui::state::{
-    color_picker::ColorPickerInput::R,
-    fields::{Field, OptionField, SliderField},
-};
+use crate::tui::state::fields::{Field, OptionField, SliderField};
 
 pub enum ColorChannel {
     Red,
@@ -50,9 +46,9 @@ impl ColorPickerState {
     }
     pub fn sync(&mut self) {
         if let Color::Rgb(r, g, b) = self.preset_input.value().0 {
-            self.r_color.value = r as usize;
-            self.g_color.value = g as usize;
-            self.b_color.value = b as usize;
+            self.r_color.set_value(r as usize);
+            self.b_color.set_value(b as usize);
+            self.g_color.set_value(g as usize);
         }
     }
 
@@ -110,9 +106,9 @@ impl From<Color> for ColorPickerState {
     fn from(color: Color) -> Self {
         let mut state = ColorPickerState::default();
         if let Color::Rgb(r, g, b) = color {
-            state.r_color.value = r as usize;
-            state.g_color.value = g as usize;
-            state.b_color.value = b as usize;
+            state.r_color.set_value(r as usize);
+            state.g_color.set_value(g as usize);
+            state.b_color.set_value(b as usize);
         }
         state
     }

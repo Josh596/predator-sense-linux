@@ -2,7 +2,10 @@ use ratatui::style::Color;
 
 use crate::tui::state::{
     ApplicationState,
-    lighting::{EffectDirection, LightingEffect, Target as TargetState},
+    lighting::{
+        Target as TargetState,
+        effects::{EffectDirection, LightingEffect},
+    },
 };
 use predatorsense::{
     commands::{
@@ -133,10 +136,14 @@ pub fn execute(old_state: Applied, new_state: Applied, config: &Config) -> Resul
     }
 
     if old_state.lighting != new_state.lighting {
+        // apply the commands
         for command in new_state.lighting {
             log::info!("Applying lighting command");
             command.apply(config.rgb().unwrap());
         }
+
+        // save current state to file
+        // LightingProfile::from(new_state.lighting)
     }
 
     Ok(())

@@ -17,7 +17,6 @@ impl HidDevice {
 
         let inner = api.open(vid, pid).map_err(|e| {
             let msg = format!("{e}");
-            log::error!("{msg}");
             if msg.contains("Permission") || msg.contains("permission") {
                 Error::PermissionDenied
             } else {
@@ -29,8 +28,7 @@ impl HidDevice {
     }
 
     pub fn set_feature(&self, buf: &[u8]) -> Result<()> {
-        log::info!("Set feature called");
-        log::info!("{:?} -> {:?}", self, self.inner.get_device_info().unwrap());
+        // log::info!("{:?} -> {:?}", self, self.inner.get_device_info().unwrap());
         self.inner.send_feature_report(buf).unwrap();
 
         Ok(())
