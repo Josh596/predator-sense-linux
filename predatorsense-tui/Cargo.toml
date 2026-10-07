@@ -1,0 +1,19 @@
+[package]
+name = "predatorsense-tui"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+log = "0.4.34"
+log4rs = "1.4.0"
+ratatui = "0.30.0"
+strum = "0.28.0"
+strum_macros = "0.28"
+predatorsense = { path = "../predatorsense" }
+serde = { version = "1.0.229", features = ["derive"] }
+toml = "1.1.6"
+
+
+[[bin]]
+name = "predatorsense"
+path = "src/main.rs"

@@ -1,13 +1,6 @@
-[package]
-name = "predatorsense"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-hidapi = "2.6.6"
-log = "0.4.34"
-log4rs = "1.4.0"
-ratatui = "0.30.0"
-strum = "0.28.0"
-strum_macros = "0.28"
-thiserror = "2.0.18"
+[workspace]
+resolver = "3"
+members = [
+    "predatorsense",
+    "predatorsense-tui",
+]
