@@ -3,7 +3,7 @@ use ratatui::style::Color;
 use crate::tui::state::{
     ApplicationState,
     lighting::{
-        Target as TargetState,
+        LightingPageState,
         effects::{EffectDirection, LightingEffect},
     },
 };
@@ -73,54 +73,62 @@ impl Applied {
             lower: state.battery_page_state.lower_charging_limit.value as u8,
         };
 
-        // so each target and each zone is a different lighting command
-        // so for active target, get the command for it. if the active target is Keyboard, then
-        // it mighht have multiple zones, so we get the command for each zone and add it to the Vec
-        // 1. Get the active target from the state
-        let lighting_command = match state.lighting_page_state.selected_target() {
-            TargetState::Keyboard => LightingCommand {
-                target: Target::Keyboard,
-                effect: get_effect_from_state(&state.lighting_page_state.keyboard.effect.value()),
-                brightness: state.lighting_page_state.keyboard.brightness.value as u8,
-                speed: Speed::new(state.lighting_page_state.keyboard.speed.value as u8),
-                direction: get_direction_from_state(
-                    state.lighting_page_state.keyboard.direction.value(),
-                ),
-                color: get_color_from_state(&state.lighting_page_state.keyboard.color.color),
-                zone: Zone::All,
-            },
-            TargetState::TurboButton => LightingCommand {
-                target: Target::PowerProfileButton,
-                effect: Effect::Off,
-                brightness: state.lighting_page_state.turbo_button.brightness.value as u8,
-                speed: Speed::new(0),
-                direction: Direction::None,
-                color: get_color_from_state(&state.lighting_page_state.turbo_button.color.color),
-                zone: Zone::None,
-            },
-
-            TargetState::Logo => LightingCommand {
-                target: Target::BackLogo,
-                effect: get_effect_from_state(&state.lighting_page_state.logo.effect.value()),
-                brightness: state.lighting_page_state.logo.brightness.value as u8,
-                speed: Speed::new(state.lighting_page_state.logo.speed.value as u8),
-                direction: Direction::None,
-                color: get_color_from_state(&state.lighting_page_state.logo.color.color),
-                zone: Zone::None,
-            },
-        };
-
         Applied {
             perf,
             battery: battery_limit,
-            lighting: vec![lighting_command],
+            lighting: lighting_commands(&state.lighting_page_state),
         }
     }
 }
 
+fn lighting_commands(state: &LightingPageState) -> Vec<LightingCommand> {
+    vec![
+        LightingCommand {
+            target: Target::Keyboard,
+            effect: get_effect_from_state(&state.keyboard.effect.value()),
+            brightness: state.keyboard.brightness.value as u8,
+            speed: Speed::new(state.keyboard.speed.value as u8),
+            direction: get_direction_from_state(state.keyboard.direction.value()),
+            color: get_color_from_state(&state.keyboard.color.color),
+            zone: Zone::All,
+        },
+        LightingCommand {
+            target: Target::BackLogo,
+            effect: get_effect_from_state(&state.logo.effect.value()),
+            brightness: state.logo.brightness.value as u8,
+            speed: Speed::new(state.logo.speed.value as u8),
+            direction: Direction::None,
+            color: get_color_from_state(&state.logo.color.color),
+            zone: Zone::None,
+        },
+        LightingCommand {
+            target: Target::PowerProfileButton,
+            effect: Effect::Off,
+            brightness: state.turbo_button.brightness.value as u8,
+            speed: Speed::new(0),
+            direction: Direction::None,
+            color: get_color_from_state(&state.turbo_button.color.color),
+            zone: Zone::None,
+        },
+    ]
+}
+
 // i need a function that gets feature report from the hid devices, returns an Applied and then to convert that into an ApplicationState object.
 
-pub fn execute(old_state: Applied, new_state: Applied, config: &Config) -> Result<(), Error> {
+pub fn execute(
+    old_state: Option<Applied>,
+    new_state: Applied,
+    config: &Config,
+) -> Result<(), Error> {
+    let Some(old_state) = old_state else {
+        log::info!("No previous state known; asserting everything");
+        new_state.perf.apply(config.system()?)?;
+        new_state.battery.apply(config.system()?)?;
+        for command in &new_state.lighting {
+            command.apply(config.rgb()?)?;
+        }
+        return Ok(());
+    };
     // compare the two and execute the necessary commands
     if old_state == new_state {
         return Ok(());
@@ -135,15 +143,10 @@ pub fn execute(old_state: Applied, new_state: Applied, config: &Config) -> Resul
         new_state.battery.apply(config.system()?);
     }
 
-    if old_state.lighting != new_state.lighting {
-        // apply the commands
-        for command in new_state.lighting {
-            log::info!("Applying lighting command");
-            command.apply(config.rgb().unwrap());
+    for (old_command, new_command) in old_state.lighting.iter().zip(&new_state.lighting) {
+        if old_command != new_command {
+            new_command.apply(config.rgb()?)?;
         }
-
-        // save current state to file
-        // LightingProfile::from(new_state.lighting)
     }
 
     Ok(())

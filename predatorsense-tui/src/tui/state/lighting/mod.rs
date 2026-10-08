@@ -4,7 +4,10 @@ use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 use crate::tui::state::{
     color_picker::ColorPickerState,
     fields::{ColorField, Field, OptionField},
-    lighting::targets::{KeyboardState, LogoState, TurboButtonState},
+    lighting::{
+        profile::LightingProfile,
+        targets::{KeyboardState, LogoState, TurboButtonState},
+    },
 };
 
 pub mod effects;
@@ -105,13 +108,17 @@ impl LightingPageState {
 
 impl Default for LightingPageState {
     fn default() -> Self {
-        Self {
+        let mut state = Self {
             active_input: LightingPageInput::default(),
             keyboard: KeyboardState::default(),
             logo: LogoState::default(),
             turbo_button: TurboButtonState::default(),
             target_input: OptionField::new(Target::iter().collect()),
             color_picker: None,
-        }
+        };
+
+        LightingProfile::default().apply_to(&mut state);
+
+        state
     }
 }

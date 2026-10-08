@@ -44,8 +44,9 @@ impl EventHandler {
         }
         let new_simple_state = Applied::desired(state);
 
-        // TODO: HANDLE THE ERROR
-        services::execute(old_simple_state, new_simple_state, config);
+        if let Err(e) = services::execute(Some(old_simple_state), new_simple_state, config) {
+            log::error!("could not apply state to the hardware: {e}");
+        }
 
         return;
     }

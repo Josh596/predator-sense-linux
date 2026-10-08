@@ -34,7 +34,6 @@ pub fn load(path: &Path) -> Result<LightingProfile, Box<dyn std::error::Error>> 
     let profile: LightingProfile = toml::from_str(&content)?;
 
     Ok(profile)
-    // todo!()
 }
 
 pub fn save(profile: &LightingProfile, path: &Path) -> Result<(), Box<dyn std::error::Error>> {

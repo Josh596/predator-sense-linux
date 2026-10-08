@@ -140,6 +140,16 @@ pub struct SliderField {
 }
 
 impl SliderField {
+    pub fn new(min: usize, max: usize, step: usize, unit: &'static str) -> Self {
+        Self {
+            value: min,
+            min,
+            max,
+            step,
+            unit,
+            ranges: Vec::new(),
+        }
+    }
     pub fn set_value(&mut self, value: usize) -> bool {
         let clamped = value.clamp(self.min, self.max);
         self.value = clamped;

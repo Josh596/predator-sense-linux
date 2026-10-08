@@ -39,5 +39,9 @@ fn main() {
 
     // Here we jsut call the App run
     let app = App::new(profile_path, profile);
+    if let Err(e) = app.restore() {
+        log::error!("could not restore state to the hardware: {e}");
+    }
+
     ratatui::run(|terminal| app.run(terminal, &View::default()));
 }

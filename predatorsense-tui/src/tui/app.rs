@@ -1,13 +1,16 @@
 use std::path::PathBuf;
+use std::time::Duration;
 
+use predatorsense::error::Error;
 use ratatui::crossterm::event::{self};
 
 use ratatui::DefaultTerminal;
 
-use crate::store;
+use crate::services::Applied;
 use crate::tui::event::EventHandler;
 use crate::tui::state::lighting::profile::LightingProfile;
 use crate::tui::state::{ApplicationState, RunningState};
+use crate::{services, store};
 use predatorsense::config::Config;
 
 use crate::tui::view::View;
@@ -22,6 +25,9 @@ pub struct App {
 }
 
 impl App {
+    pub fn restore(&self) -> Result<(), Error> {
+        services::execute(None, Applied::desired(&self.state), &self.config)
+    }
     pub fn new(profile_path: PathBuf, profile: Option<LightingProfile>) -> Self {
         let mut state = ApplicationState::default();
 
@@ -42,13 +48,22 @@ impl App {
     }
 
     pub fn run(mut self, terminal: &mut DefaultTerminal, view: &View) {
-        while !(self.state.running_state == RunningState::Done) {
-            terminal.draw(|frame| view.render(frame, &mut self.state));
-            let current_event = event::read().expect("Could not read event");
-            EventHandler::default().handle_event(current_event, &mut self.state, &self.config);
+        const IDLE: Duration = Duration::from_millis(400);
 
-            self.persist_lighting();
+        while self.state.running_state != RunningState::Done {
+            terminal.draw(|frame| view.render(frame, &mut self.state));
+
+            if event::poll(IDLE).expect("could not poll for events") {
+                let current_event = event::read().expect("Could not read event");
+                EventHandler::default().handle_event(current_event, &mut self.state, &self.config);
+            } else {
+                // No input for IDLE, so persist to disk
+                self.persist_lighting();
+            }
         }
+
+        // Persist on exit
+        self.persist_lighting();
     }
 
     /// Writes the lighting profile only when it differs from what is on disk.

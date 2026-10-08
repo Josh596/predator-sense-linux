@@ -12,6 +12,7 @@ use crate::tui::state::{
     },
 };
 
+const PLACEHOLDER_COLOR: Color = Color::Rgb(255, 255, 255);
 pub struct KeyboardState {
     pub effect: OptionField<LightingEffect>,
     pub direction: OptionField<EffectDirection>,
@@ -25,24 +26,10 @@ impl Default for KeyboardState {
         Self {
             effect: OptionField::new(LightingEffect::iter().collect()),
             direction: OptionField::new(EffectDirection::iter().collect()),
-            speed: SliderField {
-                value: 1,
-                min: 1,
-                max: 9,
-                step: 2,
-                unit: "",
-                ranges: vec![],
-            },
-            brightness: SliderField {
-                value: 100,
-                min: 0,
-                max: 100,
-                step: 1,
-                unit: "%",
-                ranges: vec![],
-            },
+            speed: SliderField::new(0, 9, 1, ""),
+            brightness: SliderField::new(0, 100, 1, "%"),
             color: ColorField {
-                color: Color::Rgb(255, 0, 0),
+                color: PLACEHOLDER_COLOR,
             },
         }
     }
@@ -61,33 +48,15 @@ impl KeyboardState {
     }
 
     pub fn visible_inputs(&self) -> Vec<LightingPageInput> {
-        let mut inputs = vec![LightingPageInput::Effect];
-        match self.effect.value().capabilities() {
-            LightingEffectConfig {
-                has_speed: true,
-                has_direction: true,
-            } => {
-                inputs.push(LightingPageInput::Speed);
-                inputs.push(LightingPageInput::EffectDirection);
-            }
-            LightingEffectConfig {
-                has_speed: true,
-                has_direction: false,
-            } => {
-                inputs.push(LightingPageInput::Speed);
-            }
-            LightingEffectConfig {
-                has_speed: false,
-                has_direction: true,
-            } => {
-                inputs.push(LightingPageInput::EffectDirection);
-            }
-            LightingEffectConfig {
-                has_speed: false,
-                has_direction: false,
-            } => {}
-        }
+        let caps = self.effect.value().capabilities();
 
+        let mut inputs = vec![LightingPageInput::Effect];
+        if caps.has_speed {
+            inputs.push(LightingPageInput::Speed);
+        }
+        if caps.has_direction {
+            inputs.push(LightingPageInput::EffectDirection);
+        }
         inputs.push(LightingPageInput::Brightness);
         inputs.push(LightingPageInput::Color);
         inputs
@@ -110,24 +79,10 @@ impl Default for LogoState {
                 LightingEffect::Breathing,
                 LightingEffect::Neon,
             ]),
-            speed: SliderField {
-                value: 1,
-                min: 1,
-                max: 9,
-                step: 2,
-                unit: "",
-                ranges: vec![],
-            },
-            brightness: SliderField {
-                value: 100,
-                min: 0,
-                max: 100,
-                step: 1,
-                unit: "%",
-                ranges: vec![],
-            },
+            speed: SliderField::new(0, 9, 1, ""),
+            brightness: SliderField::new(0, 100, 1, "%"),
             color: ColorField {
-                color: Color::Rgb(255, 0, 0),
+                color: PLACEHOLDER_COLOR,
             },
         }
     }
@@ -145,7 +100,7 @@ impl LogoState {
 
     pub fn visible_inputs(&self) -> Vec<LightingPageInput> {
         let mut inputs = vec![LightingPageInput::Effect];
-        if self.effect.value() != LightingEffect::Static {
+        if self.effect.value().capabilities().has_speed {
             inputs.push(LightingPageInput::Speed);
         }
         inputs.push(LightingPageInput::Brightness);
@@ -162,16 +117,9 @@ pub struct TurboButtonState {
 impl Default for TurboButtonState {
     fn default() -> Self {
         Self {
-            brightness: SliderField {
-                value: 100,
-                min: 0,
-                max: 100,
-                step: 1,
-                unit: "%",
-                ranges: vec![],
-            },
+            brightness: SliderField::new(0, 100, 1, "%"),
             color: ColorField {
-                color: Color::Rgb(255, 0, 0),
+                color: PLACEHOLDER_COLOR,
             },
         }
     }
