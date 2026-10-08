@@ -2,7 +2,7 @@ use ratatui::{
     Frame,
     layout::{Constraint, Layout, Rect},
     style::{Color, Style, Stylize},
-    text::{Line, Span, ToSpan},
+    text::{Line, Span},
     widgets::{HighlightSpacing, LineGauge, List, ListItem},
 };
 

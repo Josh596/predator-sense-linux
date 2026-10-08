@@ -83,8 +83,8 @@ impl EventHandler {
 
 trait PageEventHandler {
     fn handle_page_event(&self, key: KeyEvent, state: &mut ApplicationState);
-    fn modal_open(&self, state: &ApplicationState) -> bool {
+    fn modal_open(&self, _state: &ApplicationState) -> bool {
         false
     }
-    fn handle_modal_event(&self, key: KeyEvent, state: &mut ApplicationState) {}
+    fn handle_modal_event(&self, _key: KeyEvent, _state: &mut ApplicationState) {}
 }

@@ -1,14 +1,11 @@
 use ratatui::style::Color;
-use serde::{Deserialize, Serialize};
 use strum::IntoEnumIterator;
-use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 
 use crate::tui::state::{
-    color_picker::ColorPickerState,
     fields::{ColorField, Field, OptionField, SliderField},
     lighting::{
         LightingPageInput,
-        effects::{EffectDirection, LightingEffect, LightingEffectConfig},
+        effects::{EffectDirection, LightingEffect},
     },
 };
 
