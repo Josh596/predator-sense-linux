@@ -1,6 +1,7 @@
 use std::path::PathBuf;
 use std::time::Duration;
 
+use predatorsense::commands::battery::ChargingLimit;
 use predatorsense::error::Error;
 use ratatui::crossterm::event::{self};
 
@@ -29,19 +30,25 @@ impl App {
         services::execute(None, Applied::desired(&self.state), &self.config)
     }
     pub fn new(profile_path: PathBuf, profile: Option<LightingProfile>) -> Self {
+        let config = Config::default();
         let mut state = ApplicationState::default();
 
-        // No profile means first run (or an unreadable file); the field
-        // defaults in `*State::default()` are the starting point in that case.
+        // Lighting
         if let Some(profile) = profile {
             profile.apply_to(&mut state.lighting_page_state);
         }
 
         let last_saved = LightingProfile::from(&state.lighting_page_state);
 
+        // Battery
+        match config.system().and_then(ChargingLimit::from_system) {
+            Ok(limit) => state.battery_page_state.load_from(limit),
+            Err(e) => log::warn!("could not read charging limit: {e}; using defaults"),
+        }
+
         Self {
             state,
-            config: Config::default(),
+            config: config,
             profile_path,
             last_saved,
         }

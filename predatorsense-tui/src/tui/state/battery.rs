@@ -1,3 +1,4 @@
+use predatorsense::commands::battery::ChargingLimit;
 use strum::{EnumCount, EnumIter, FromRepr};
 
 use crate::tui::state::fields::{BooleanField, Field, NumericField};
@@ -32,6 +33,11 @@ pub struct BatteryPageState {
 }
 
 impl BatteryPageState {
+    pub fn load_from(&mut self, limit: ChargingLimit) {
+        self.enable_charging_limit.value = limit.enabled;
+        self.upper_charging_limit.value = limit.upper.into();
+        self.lower_charging_limit.value = limit.lower.into();
+    }
     pub fn get_active_input_mut(&mut self) -> &mut dyn Field {
         match self.active_input {
             BatteryPageInput::EnableChargingLimit => &mut self.enable_charging_limit,
@@ -42,6 +48,7 @@ impl BatteryPageState {
 }
 impl Default for BatteryPageState {
     fn default() -> Self {
+        // let charging_limit = ChargingLimit
         Self {
             active_input: BatteryPageInput::EnableChargingLimit,
             enable_charging_limit: BooleanField {

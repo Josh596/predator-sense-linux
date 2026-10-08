@@ -20,43 +20,43 @@ const LINE_TITLE_MAX_LENGTH: u16 = 20;
 pub struct BatteryPage;
 
 impl BatteryPage {
-    fn render_battery_info(frame: &mut Frame, rect: Rect, _state: &ApplicationState) {
-        let upper_text_layout: [Rect; 3] = Layout::horizontal([
-            Constraint::Length(LINE_TITLE_MAX_LENGTH),
-            Constraint::Length(10),
-            Constraint::Length(4),
-        ])
-        .areas(rect);
+    // fn render_battery_info(frame: &mut Frame, rect: Rect, _state: &ApplicationState) {
+    //     let upper_text_layout: [Rect; 3] = Layout::horizontal([
+    //         Constraint::Length(LINE_TITLE_MAX_LENGTH),
+    //         Constraint::Length(10),
+    //         Constraint::Length(4),
+    //     ])
+    //     .areas(rect);
 
-        // Render upper text;
-        let title1 = Span::from("Battery Level").style(TEXT_STYLE_DIM);
+    //     // Render upper text;
+    //     let title1 = Span::from("Battery Level").style(TEXT_STYLE_DIM);
 
-        let battery_level = 0.6;
-        let mut battery_guage = LineGauge::default()
-            .ratio(battery_level)
-            .unfilled_style(GAUGE_STYLE.fg(TEXT_DIM_COLOR))
-            .filled_symbol("█")
-            .unfilled_symbol("░")
-            .label("")
-            .bold();
+    //     let battery_level = 0.6;
+    //     let mut battery_guage = LineGauge::default()
+    //         .ratio(battery_level)
+    //         .unfilled_style(GAUGE_STYLE.fg(TEXT_DIM_COLOR))
+    //         .filled_symbol("█")
+    //         .unfilled_symbol("░")
+    //         .label("")
+    //         .bold();
 
-        // Render the charging info here
-        if battery_level > 0.5 {
-            battery_guage = battery_guage.style(GAUGE_STYLE.fg(OK_COLOR));
-        } else if battery_level > 0.3 {
-            battery_guage = battery_guage.style(GAUGE_STYLE.fg(WARNING_COLOR));
-        } else {
-            battery_guage = battery_guage.style(GAUGE_STYLE.fg(DANGER_COLOR));
-        }
+    //     // Render the charging info here
+    //     if battery_level > 0.5 {
+    //         battery_guage = battery_guage.style(GAUGE_STYLE.fg(OK_COLOR));
+    //     } else if battery_level > 0.3 {
+    //         battery_guage = battery_guage.style(GAUGE_STYLE.fg(WARNING_COLOR));
+    //     } else {
+    //         battery_guage = battery_guage.style(GAUGE_STYLE.fg(DANGER_COLOR));
+    //     }
 
-        let battery_percentage = Line::from(format!("{}%", (battery_level * 100.0) as u8))
-            .style(TEXT_STYLE_DIM)
-            .right_aligned();
+    //     let battery_percentage = Line::from(format!("{}%", (battery_level * 100.0) as u8))
+    //         .style(TEXT_STYLE_DIM)
+    //         .right_aligned();
 
-        frame.render_widget(title1, upper_text_layout[0]);
-        frame.render_widget(battery_guage, upper_text_layout[1]);
-        frame.render_widget(battery_percentage, upper_text_layout[2]);
-    }
+    //     frame.render_widget(title1, upper_text_layout[0]);
+    //     frame.render_widget(battery_guage, upper_text_layout[1]);
+    //     frame.render_widget(battery_percentage, upper_text_layout[2]);
+    // }
 
     fn render_battery_limit_inputs(frame: &mut Frame, rect: Rect, state: &ApplicationState) {
         let layout: [Rect; 3] = Layout::vertical(Constraint::from_lengths([1, 1, 1])).areas(rect);
@@ -121,11 +121,11 @@ impl PageView for BatteryPage {
         let block = Block::default();
         let inner_area = block.inner(rect);
 
-        let layout: [Rect; 3] =
-            Layout::vertical(Constraint::from_lengths([1, 1, 3])).areas(inner_area);
+        // let layout: [Rect; 3] =
+        //     Layout::vertical(Constraint::from_lengths([1, 1, 3])).areas(inner_area);
 
-        BatteryPage::render_battery_info(frame, layout[0], state);
-        BatteryPage::render_battery_limit_inputs(frame, layout[2], state);
+        // BatteryPage::render_battery_info(frame, layout[0], state);
+        BatteryPage::render_battery_limit_inputs(frame, inner_area, state);
     }
 
     fn actions(&self, state: &ApplicationState) -> Vec<Action> {

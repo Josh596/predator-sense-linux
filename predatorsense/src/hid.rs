@@ -29,8 +29,12 @@ impl HidDevice {
 
     pub fn set_feature(&self, buf: &[u8]) -> Result<()> {
         // log::info!("{:?} -> {:?}", self, self.inner.get_device_info().unwrap());
-        self.inner.send_feature_report(buf).unwrap();
+        self.inner.send_feature_report(buf)?;
 
         Ok(())
+    }
+
+    pub fn get_feature_report(&self, mut buf: &mut [u8]) -> Result<usize> {
+        self.inner.get_feature_report(&mut buf).map_err(Error::Hid)
     }
 }
