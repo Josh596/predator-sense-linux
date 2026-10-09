@@ -6,7 +6,7 @@ use crate::tui::state::{
     fields::{ColorField, Field, OptionField},
     lighting::{
         profile::LightingProfile,
-        targets::{KeyboardState, LogoState, TurboButtonState},
+        targets::{KeyboardState, LogoState, ModeButtonState},
     },
 };
 
@@ -21,8 +21,8 @@ pub enum Target {
     #[default]
     Keyboard,
     Logo,
-    #[strum(serialize = "Turbo Button")]
-    TurboButton,
+    #[strum(serialize = "Mode Button")]
+    ModeButton,
 }
 
 #[derive(Default, PartialEq, Eq, Clone, Copy, EnumCount, EnumIter, FromRepr, Hash)]
@@ -41,11 +41,26 @@ pub struct LightingPageState {
     pub target_input: OptionField<Target>,
     pub keyboard: KeyboardState,
     pub logo: LogoState,
-    pub turbo_button: TurboButtonState,
+    pub mode_button: ModeButtonState,
     pub color_picker: Option<ColorPickerState>,
 }
 
 impl LightingPageState {
+    pub fn new(profile: &LightingProfile) -> Self {
+        let mut state = Self {
+            active_input: LightingPageInput::default(),
+            keyboard: KeyboardState::default(),
+            logo: LogoState::default(),
+            mode_button: ModeButtonState::default(),
+            target_input: OptionField::new(Target::iter().collect()),
+            color_picker: None,
+        };
+
+        profile.apply_to(&mut state);
+
+        state
+    }
+
     pub fn selected_target(&self) -> Target {
         self.target_input.value()
     }
@@ -59,7 +74,7 @@ impl LightingPageState {
 
             Target::Logo => self.logo.field_mut(self.active_input),
 
-            Target::TurboButton => self.turbo_button.field_mut(self.active_input),
+            Target::ModeButton => self.mode_button.field_mut(self.active_input),
         };
 
         field.expect("field is not valid for the selected target")
@@ -69,7 +84,7 @@ impl LightingPageState {
         match self.selected_target() {
             Target::Keyboard => &mut self.keyboard.color,
             Target::Logo => &mut self.logo.color,
-            Target::TurboButton => &mut self.turbo_button.color,
+            Target::ModeButton => &mut self.mode_button.color,
         }
     }
 
@@ -79,7 +94,7 @@ impl LightingPageState {
         inputs.extend(match self.selected_target() {
             Target::Keyboard => self.keyboard.visible_inputs(),
             Target::Logo => self.logo.visible_inputs(),
-            Target::TurboButton => self.turbo_button.visible_inputs(),
+            Target::ModeButton => self.mode_button.visible_inputs(),
         });
 
         inputs
@@ -108,17 +123,6 @@ impl LightingPageState {
 
 impl Default for LightingPageState {
     fn default() -> Self {
-        let mut state = Self {
-            active_input: LightingPageInput::default(),
-            keyboard: KeyboardState::default(),
-            logo: LogoState::default(),
-            turbo_button: TurboButtonState::default(),
-            target_input: OptionField::new(Target::iter().collect()),
-            color_picker: None,
-        };
-
-        LightingProfile::default().apply_to(&mut state);
-
-        state
+        Self::new(&LightingProfile::default())
     }
 }

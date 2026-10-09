@@ -82,8 +82,6 @@ impl ChargingLimit {
             buf[8] = self.upper;
             buf[9] = self.lower;
         }
-        log::error!("{} to {}", self.lower, self.upper);
-        log::info!("{:?}", buf);
         device.set_feature(&buf)
     }
 

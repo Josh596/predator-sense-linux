@@ -55,11 +55,13 @@ impl LightingPage {
                     _ => unreachable!(),
                 }
             }
-            Target::TurboButton => {
-                let tb = &mut state.turbo_button;
+            Target::ModeButton => {
+                let mode_button = &mut state.mode_button;
                 match input {
-                    I::Brightness => ("Brightness", InputType::Widget(&mut tb.brightness)),
-                    I::Color => ("Color", InputType::Line(&tb.color)),
+                    I::Effect => ("Effect", InputType::Line(&mode_button.effect)),
+                    I::Speed => ("Speed", InputType::Widget(&mut mode_button.speed)),
+                    I::Brightness => ("Brightness", InputType::Widget(&mut mode_button.brightness)),
+                    I::Color => ("Color", InputType::Line(&mode_button.color)),
                     _ => unreachable!(),
                 }
                 /* Brightness and Color only */

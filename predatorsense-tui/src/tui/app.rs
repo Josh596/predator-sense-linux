@@ -2,6 +2,7 @@ use std::path::PathBuf;
 use std::time::Duration;
 
 use predatorsense::commands::battery::ChargingLimit;
+use predatorsense::commands::performance::PerfMode;
 use predatorsense::error::Error;
 use ratatui::crossterm::event::{self};
 
@@ -9,8 +10,11 @@ use ratatui::DefaultTerminal;
 
 use crate::services::Applied;
 use crate::tui::event::EventHandler;
+use crate::tui::state::battery::BatteryPageState;
+use crate::tui::state::lighting::LightingPageState;
 use crate::tui::state::lighting::profile::LightingProfile;
-use crate::tui::state::{ApplicationState, RunningState};
+use crate::tui::state::performance::PerformancePageState;
+use crate::tui::state::{ApplicationState, Page, RunningState};
 use crate::{services, store};
 use predatorsense::config::Config;
 
@@ -31,24 +35,21 @@ impl App {
     }
     pub fn new(profile_path: PathBuf, profile: Option<LightingProfile>) -> Self {
         let config = Config::default();
-        let mut state = ApplicationState::default();
 
-        // Lighting
-        if let Some(profile) = profile {
-            profile.apply_to(&mut state.lighting_page_state);
-        }
+        let mut lighting_page_state = LightingPageState::new(&profile.unwrap_or_default());
+        let last_saved = LightingProfile::from(&lighting_page_state);
 
-        let last_saved = LightingProfile::from(&state.lighting_page_state);
-
-        // Battery
-        match config.system().and_then(ChargingLimit::from_system) {
-            Ok(limit) => state.battery_page_state.load_from(limit),
-            Err(e) => log::warn!("could not read charging limit: {e}; using defaults"),
-        }
+        let state = ApplicationState {
+            running_state: RunningState::default(),
+            active_page: Page::default(),
+            battery_page_state: load_battery(&config),
+            perf_page_state: load_performance(&config),
+            lighting_page_state,
+        };
 
         Self {
             state,
-            config: config,
+            config,
             profile_path,
             last_saved,
         }
@@ -58,7 +59,9 @@ impl App {
         const IDLE: Duration = Duration::from_millis(400);
 
         while self.state.running_state != RunningState::Done {
-            terminal.draw(|frame| view.render(frame, &mut self.state));
+            terminal
+                .draw(|frame| view.render(frame, &mut self.state))
+                .expect("ratatui could not draw frame");
 
             if event::poll(IDLE).expect("could not poll for events") {
                 let current_event = event::read().expect("Could not read event");
@@ -82,9 +85,34 @@ impl App {
             return;
         }
 
+        log::info!("Persisitng to disk");
+
         match store::save(&profile, &self.profile_path) {
-            Ok(()) => self.last_saved = profile,
+            Ok(()) => {
+                self.last_saved = profile;
+                log::info!("Saved profile to {}", self.profile_path.display())
+            }
             Err(e) => log::error!("could not save lighting profile: {e}"),
+        }
+    }
+}
+
+fn load_battery(config: &Config) -> BatteryPageState {
+    match config.system().and_then(ChargingLimit::from_system) {
+        Ok(limit) => BatteryPageState::new(limit),
+        Err(e) => {
+            log::warn!("could not read charging limit: {e}; using defaults");
+            BatteryPageState::default()
+        }
+    }
+}
+
+fn load_performance(config: &Config) -> PerformancePageState {
+    match config.system().and_then(PerfMode::from_system) {
+        Ok(mode) => PerformancePageState::new(mode),
+        Err(e) => {
+            log::warn!("could not read performance mode: {e}; using default");
+            PerformancePageState::default()
         }
     }
 }

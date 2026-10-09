@@ -106,14 +106,23 @@ impl LogoState {
     }
 }
 
-pub struct TurboButtonState {
+pub struct ModeButtonState {
     pub brightness: SliderField,
+    pub effect: OptionField<LightingEffect>,
+    pub speed: SliderField,
     pub color: ColorField,
 }
 
-impl Default for TurboButtonState {
+impl Default for ModeButtonState {
     fn default() -> Self {
         Self {
+            effect: OptionField::new(vec![
+                LightingEffect::Off,
+                LightingEffect::Static,
+                LightingEffect::Breathing,
+                LightingEffect::Neon,
+            ]),
+            speed: SliderField::new(0, 9, 1, ""),
             brightness: SliderField::new(0, 100, 1, "%"),
             color: ColorField {
                 color: PLACEHOLDER_COLOR,
@@ -121,9 +130,11 @@ impl Default for TurboButtonState {
         }
     }
 }
-impl TurboButtonState {
+impl ModeButtonState {
     pub fn field_mut(&mut self, input: LightingPageInput) -> Option<&mut dyn Field> {
         Some(match input {
+            LightingPageInput::Effect => &mut self.effect,
+            LightingPageInput::Speed => &mut self.speed,
             LightingPageInput::Brightness => &mut self.brightness,
             LightingPageInput::Color => &mut self.color,
             _ => return None,
@@ -131,6 +142,12 @@ impl TurboButtonState {
     }
 
     pub fn visible_inputs(&self) -> Vec<LightingPageInput> {
-        vec![LightingPageInput::Brightness, LightingPageInput::Color]
+        let mut inputs = vec![LightingPageInput::Effect];
+        if self.effect.value().capabilities().has_speed {
+            inputs.push(LightingPageInput::Speed);
+        }
+        inputs.push(LightingPageInput::Brightness);
+        inputs.push(LightingPageInput::Color);
+        inputs
     }
 }

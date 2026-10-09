@@ -11,7 +11,7 @@ use predatorsense::{
     commands::{
         battery::ChargingLimit,
         lighting::{Direction, Effect, LightingCommand, Rgb, Speed, Target, Zone},
-        power::PerfMode,
+        performance::PerfMode,
     },
     config::Config,
     error::Error,
@@ -63,7 +63,7 @@ impl Applied {
         // handle the perf_mode
         // get the selected perf mode from the state
         let perf = match state.perf_page_state.mode_input.state.selected() {
-            Some(index) => PerfMode::from_repr(index).unwrap_or(PerfMode::default()),
+            Some(index) => PerfMode::from_repr(index as u8).unwrap_or(PerfMode::default()),
             None => PerfMode::default(),
         };
 
@@ -102,12 +102,12 @@ fn lighting_commands(state: &LightingPageState) -> Vec<LightingCommand> {
             zone: Zone::None,
         },
         LightingCommand {
-            target: Target::PowerProfileButton,
-            effect: Effect::Off,
-            brightness: state.turbo_button.brightness.value as u8,
-            speed: Speed::new(0),
+            target: Target::PerformanceModeButton,
+            effect: get_effect_from_state(&state.mode_button.effect.value()),
+            brightness: state.mode_button.brightness.value as u8,
+            speed: Speed::new(state.mode_button.speed.value as u8),
             direction: Direction::None,
-            color: get_color_from_state(&state.turbo_button.color.color),
+            color: get_color_from_state(&state.mode_button.color.color),
             zone: Zone::None,
         },
     ]

@@ -16,6 +16,9 @@ pub enum Error {
 
     #[error("{role} device unavailable: {reason}")]
     Unavailable { role: &'static str, reason: String },
+
+    #[error("unknown performance mode byte: {0:#04x}")]
+    UnknownPerfMode(u8),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;

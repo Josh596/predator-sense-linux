@@ -38,7 +38,6 @@ impl Default for KeyboardProfile {
     }
 }
 
-
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(default)]
 struct LogoProfile {
@@ -59,15 +58,14 @@ impl Default for LogoProfile {
     }
 }
 
-
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(default)]
-struct TurboProfile {
+struct ModeButtonProfile {
     brightness: u8,
     color: (u8, u8, u8),
 }
 
-impl Default for TurboProfile {
+impl Default for ModeButtonProfile {
     fn default() -> Self {
         Self {
             brightness: DEFAULT_BRIGHTNESS,
@@ -81,7 +79,7 @@ impl Default for TurboProfile {
 pub struct LightingProfile {
     keyboard: KeyboardProfile,
     logo: LogoProfile,
-    turbo: TurboProfile,
+    mode_button: ModeButtonProfile,
 }
 
 impl LightingProfile {
@@ -130,13 +128,13 @@ impl LightingProfile {
         }
         state.logo.color.color = to_color(self.logo.color);
 
-        // Turbo
+        // Mode
         restore_slider(
-            &mut state.turbo_button.brightness,
-            self.turbo.brightness,
-            "turbo.brightness",
+            &mut state.mode_button.brightness,
+            self.mode_button.brightness,
+            "mode_button.brightness",
         );
-        state.turbo_button.color.color = to_color(self.turbo.color);
+        state.mode_button.color.color = to_color(self.mode_button.color);
     }
 }
 
@@ -156,9 +154,9 @@ impl From<&LightingPageState> for LightingProfile {
                 effect: state.logo.effect.value(),
                 color: rgb_from(state.logo.color.color),
             },
-            turbo: TurboProfile {
-                brightness: state.turbo_button.brightness.value as u8,
-                color: rgb_from(state.turbo_button.color.color),
+            mode_button: ModeButtonProfile {
+                brightness: state.mode_button.brightness.value as u8,
+                color: rgb_from(state.mode_button.color.color),
             },
         }
     }

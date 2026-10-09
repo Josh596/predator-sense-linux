@@ -1,26 +1,27 @@
 use ratatui::widgets::ListState;
-use strum::VariantNames;
+use strum::{IntoEnumIterator, VariantNames};
 
 use crate::tui::state::fields::ListField;
-use predatorsense::commands::power::PerfMode;
+use predatorsense::commands::performance::PerfMode;
 pub struct PerformancePageState {
     pub mode_input: ListField,
 }
 
-impl Default for PerformancePageState {
-    fn default() -> Self {
-        let options: Vec<String> = PerfMode::VARIANTS
-            .iter()
-            .map(|variant| String::from(*variant))
-            .collect();
+impl PerformancePageState {
+    pub fn new(mode: PerfMode) -> Self {
+        let options = PerfMode::VARIANTS.iter().map(|v| v.to_string()).collect();
 
         let mut state = ListState::default();
+        state.select(PerfMode::iter().position(|m| m == mode));
 
-        // Select the first item for now;
-        state.select(Some(0));
+        Self {
+            mode_input: ListField { options, state },
+        }
+    }
+}
 
-        let field = ListField { options, state };
-
-        Self { mode_input: field }
+impl Default for PerformancePageState {
+    fn default() -> Self {
+        Self::new(PerfMode::default())
     }
 }

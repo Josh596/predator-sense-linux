@@ -108,7 +108,7 @@ pub enum Target {
     #[default]
     Keyboard,
     BackLogo,
-    PowerProfileButton,
+    PerformanceModeButton,
 }
 
 impl Target {
@@ -116,7 +116,7 @@ impl Target {
         match self {
             Target::Keyboard => 0x21,
             Target::BackLogo => 0x83,
-            Target::PowerProfileButton => 0x65,
+            Target::PerformanceModeButton => 0x65,
         }
     }
 }
@@ -134,7 +134,6 @@ pub struct LightingCommand {
 
 impl LightingCommand {
     pub fn apply(&self, device: &HidDevice) -> Result<()> {
-        log::info!("Setting feature in lighting");
         let buf = [
             0xa4, // report ID
             self.target.value(),
@@ -148,7 +147,6 @@ impl LightingCommand {
             self.zone.value(),
             0x00,
         ];
-        log::info!("Setting device feature after initialzing buf");
         device.set_feature(&buf)
     }
 }
