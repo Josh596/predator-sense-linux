@@ -41,8 +41,8 @@ impl Config {
     }
     pub fn system(&self) -> Result<&HidDevice, error::Error> {
         self.system.as_ref().ok_or(error::Error::Unavailable {
-            role: "rgb",
-            reason: "Could not find RGB device".to_string(),
+            role: "system",
+            reason: "Could not find system device".to_string(),
         })
     }
 }
