@@ -22,3 +22,25 @@ pub enum Error {
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn not_found_shows_ids_as_four_digit_hex() {
+        let err = Error::NotFound {
+            vid: 0x0cf2,
+            pid: 0x5130,
+        };
+        assert_eq!(err.to_string(), "device 0cf2:5130 not found");
+    }
+
+    #[test]
+    fn unknown_perf_mode_shows_byte_as_hex() {
+        assert_eq!(
+            Error::UnknownPerfMode(0x07).to_string(),
+            "unknown performance mode byte: 0x07"
+        );
+    }
+}

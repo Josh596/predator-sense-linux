@@ -45,3 +45,22 @@ impl PerfMode {
         PerfMode::from_repr(raw).ok_or(Error::UnknownPerfMode(raw))
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn perf_mode_values_match_protocol() {
+        assert_eq!(PerfMode::Turbo as u8, 0x00);
+        assert_eq!(PerfMode::Performance as u8, 0x01);
+        assert_eq!(PerfMode::Normal as u8, 0x02);
+        assert_eq!(PerfMode::Quiet as u8, 0x03);
+        assert_eq!(PerfMode::Eco as u8, 0x04);
+    }
+
+    #[test]
+    fn from_repr_rejects_unknown_byte() {
+        assert_eq!(PerfMode::from_repr(0x05), None);
+    }
+}

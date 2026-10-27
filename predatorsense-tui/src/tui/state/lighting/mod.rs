@@ -15,7 +15,7 @@ pub mod profile;
 pub mod targets;
 
 #[derive(
-    Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display,
+    Debug, Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, VariantNames, Display,
 )]
 pub enum Target {
     #[default]
@@ -25,7 +25,7 @@ pub enum Target {
     ModeButton,
 }
 
-#[derive(Default, PartialEq, Eq, Clone, Copy, EnumCount, EnumIter, FromRepr, Hash)]
+#[derive(Debug, Default, PartialEq, Eq, Clone, Copy, EnumCount, EnumIter, FromRepr, Hash)]
 pub enum LightingPageInput {
     #[default]
     Target,
@@ -124,5 +124,129 @@ impl LightingPageState {
 impl Default for LightingPageState {
     fn default() -> Self {
         Self::new(&LightingProfile::default())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::tui::state::lighting::effects::LightingEffect;
+    use ratatui::style::Color;
+
+    fn state_for(target: Target) -> LightingPageState {
+        let mut state = LightingPageState::default();
+        state.target_input.select_value(target);
+        state
+    }
+
+    // new
+
+    #[test]
+    fn new_applies_profile() {
+        let profile: LightingProfile = toml::from_str("[logo]\nbrightness = 40\n").unwrap();
+        let state = LightingPageState::new(&profile);
+        assert_eq!(state.logo.brightness.value, 40);
+    }
+
+    // selected_target
+
+    #[test]
+    fn selected_target_follows_target_input() {
+        assert_eq!(state_for(Target::Logo).selected_target(), Target::Logo);
+    }
+
+    // get_active_input_mut
+
+    #[test]
+    fn active_input_target_returns_target_field() {
+        let mut state = LightingPageState::default();
+        state.get_active_input_mut().increment();
+        assert_eq!(state.selected_target(), Target::Logo);
+    }
+
+    #[test]
+    fn active_input_uses_selected_targets_field() {
+        let mut state = state_for(Target::Logo);
+        state.active_input = LightingPageInput::Brightness;
+        let keyboard_before = state.keyboard.brightness.value;
+
+        state.get_active_input_mut().decrement();
+
+        assert_eq!(state.logo.brightness.value, 99);
+        assert_eq!(state.keyboard.brightness.value, keyboard_before);
+    }
+
+    // active_color_field_mut
+
+    #[test]
+    fn active_color_field_belongs_to_selected_target() {
+        for target in [Target::Keyboard, Target::Logo, Target::ModeButton] {
+            let mut state = state_for(target);
+            state.active_color_field_mut().color = Color::Rgb(1, 2, 3);
+
+            let colors = [
+                (Target::Keyboard, state.keyboard.color.color),
+                (Target::Logo, state.logo.color.color),
+                (Target::ModeButton, state.mode_button.color.color),
+            ];
+            for (owner, color) in colors {
+                assert_eq!(color == Color::Rgb(1, 2, 3), owner == target, "{target}: {owner}");
+            }
+        }
+    }
+
+    // visible_inputs
+
+    #[test]
+    fn visible_inputs_follow_selected_target() {
+        let mut state = state_for(Target::Logo);
+        state.logo.effect.select_value(LightingEffect::Breathing);
+        let mut expected = vec![LightingPageInput::Target];
+        expected.extend(state.logo.visible_inputs());
+        assert_eq!(state.visible_inputs(), expected);
+    }
+
+    // next_input / prev_input
+
+    #[test]
+    fn next_input_moves_to_next_visible() {
+        let state = LightingPageState::default();
+        assert_eq!(state.next_input(), LightingPageInput::Effect);
+    }
+
+    #[test]
+    fn next_input_stops_at_last_visible() {
+        let mut state = LightingPageState::default();
+        state.active_input = LightingPageInput::Color;
+        assert_eq!(state.next_input(), LightingPageInput::Color);
+    }
+
+    #[test]
+    fn prev_input_moves_to_previous_visible() {
+        let mut state = LightingPageState::default();
+        state.active_input = LightingPageInput::Effect;
+        assert_eq!(state.prev_input(), LightingPageInput::Target);
+    }
+
+    #[test]
+    fn prev_input_stops_at_first_visible() {
+        let state = LightingPageState::default();
+        assert_eq!(state.prev_input(), LightingPageInput::Target);
+    }
+
+    #[test]
+    fn next_input_skips_hidden_speed() {
+        let mut state = LightingPageState::default();
+        state.keyboard.effect.select_value(LightingEffect::Static);
+        state.active_input = LightingPageInput::Effect;
+        assert_eq!(state.next_input(), LightingPageInput::Brightness);
+    }
+
+    #[test]
+    fn next_input_from_hidden_input_restarts_from_first() {
+        let mut state = LightingPageState::default();
+        state.keyboard.effect.select_value(LightingEffect::Static);
+        state.active_input = LightingPageInput::Speed; // not visible for Static
+        assert_eq!(state.next_input(), LightingPageInput::Effect);
     }
 }

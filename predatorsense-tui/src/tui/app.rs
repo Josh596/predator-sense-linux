@@ -116,3 +116,125 @@ fn load_performance(config: &Config) -> PerformancePageState {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use ratatui::style::Color;
+    use std::fs;
+
+    /// A fresh directory under the system temp dir, deleted when dropped.
+    struct TempDir(PathBuf);
+
+    impl TempDir {
+        fn new(name: &str) -> Self {
+            let dir = std::env::temp_dir()
+                .join(format!("predatorsense-app-test-{}-{name}", std::process::id()));
+            let _ = fs::remove_dir_all(&dir);
+            fs::create_dir_all(&dir).unwrap();
+            Self(dir)
+        }
+    }
+
+    impl Drop for TempDir {
+        fn drop(&mut self) {
+            let _ = fs::remove_dir_all(&self.0);
+        }
+    }
+
+    /// Builds an `App` directly, skipping `App::new`, which needs real devices.
+    fn offline_app(profile_path: PathBuf) -> App {
+        let state = ApplicationState::default();
+        let last_saved = LightingProfile::from(&state.lighting_page_state);
+        App {
+            state,
+            config: Config::offline(),
+            profile_path,
+            last_saved,
+        }
+    }
+
+    // persist_lighting
+
+    #[test]
+    fn persist_unchanged_profile_writes_nothing() {
+        let dir = TempDir::new("unchanged");
+        let path = dir.0.join("lighting.toml");
+        let mut app = offline_app(path.clone());
+
+        app.persist_lighting();
+
+        assert!(!path.exists());
+    }
+
+    #[test]
+    fn persist_changed_profile_writes_file() {
+        let dir = TempDir::new("changed");
+        let path = dir.0.join("lighting.toml");
+        let mut app = offline_app(path.clone());
+        app.state.lighting_page_state.keyboard.color.color = Color::Rgb(1, 2, 3);
+
+        app.persist_lighting();
+
+        let expected = LightingProfile::from(&app.state.lighting_page_state);
+        assert_eq!(store::load(&path).unwrap(), expected);
+    }
+
+    #[test]
+    fn persist_changed_profile_updates_last_saved() {
+        let dir = TempDir::new("last-saved");
+        let mut app = offline_app(dir.0.join("lighting.toml"));
+        app.state.lighting_page_state.keyboard.brightness.set_value(40);
+
+        app.persist_lighting();
+
+        assert_eq!(
+            app.last_saved,
+            LightingProfile::from(&app.state.lighting_page_state)
+        );
+    }
+
+    #[test]
+    fn persist_failed_save_keeps_last_saved() {
+        let dir = TempDir::new("failed");
+        // The parent "directory" is a file, so the save must fail.
+        let blocker = dir.0.join("not-a-dir");
+        fs::write(&blocker, "").unwrap();
+        let mut app = offline_app(blocker.join("lighting.toml"));
+        let before = LightingProfile::from(&app.state.lighting_page_state);
+        app.state.lighting_page_state.keyboard.brightness.set_value(40);
+
+        app.persist_lighting();
+
+        assert_eq!(app.last_saved, before);
+    }
+
+    // load_battery / load_performance
+
+    #[test]
+    fn load_battery_offline_uses_defaults() {
+        let state = load_battery(&Config::offline());
+        let default = BatteryPageState::default();
+        assert_eq!(
+            state.enable_charging_limit.value,
+            default.enable_charging_limit.value
+        );
+        assert_eq!(
+            state.upper_charging_limit.value,
+            default.upper_charging_limit.value
+        );
+        assert_eq!(
+            state.lower_charging_limit.value,
+            default.lower_charging_limit.value
+        );
+    }
+
+    #[test]
+    fn load_performance_offline_uses_default_mode() {
+        let state = load_performance(&Config::offline());
+        assert_eq!(
+            state.mode_input.state.selected(),
+            PerformancePageState::default().mode_input.state.selected()
+        );
+    }
+}

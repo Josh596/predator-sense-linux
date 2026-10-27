@@ -25,3 +25,16 @@ impl Default for PerformancePageState {
         Self::new(PerfMode::default())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn new_selects_matching_mode() {
+        for (index, mode) in PerfMode::iter().enumerate() {
+            let state = PerformancePageState::new(mode);
+            assert_eq!(state.mode_input.state.selected(), Some(index));
+        }
+    }
+}

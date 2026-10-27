@@ -151,3 +151,132 @@ impl ModeButtonState {
         inputs
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use LightingPageInput::{Brightness, Color, Effect, EffectDirection, Speed, Target};
+
+    // KeyboardState
+
+    fn keyboard_with(effect: LightingEffect) -> KeyboardState {
+        let mut state = KeyboardState::default();
+        state.effect.select_value(effect);
+        state
+    }
+
+    #[test]
+    fn keyboard_field_mut_target_is_none() {
+        assert!(KeyboardState::default().field_mut(Target).is_none());
+    }
+
+    #[test]
+    fn keyboard_field_mut_has_every_other_input() {
+        let mut state = KeyboardState::default();
+        for input in [Effect, EffectDirection, Speed, Brightness, Color] {
+            assert!(state.field_mut(input).is_some());
+        }
+    }
+
+    #[test]
+    fn keyboard_field_mut_speed_and_brightness_are_not_swapped() {
+        let mut state = KeyboardState::default();
+        state.field_mut(Speed).unwrap().increment();
+        assert_eq!((state.speed.value, state.brightness.value), (1, 0));
+        state.field_mut(Brightness).unwrap().increment();
+        assert_eq!((state.speed.value, state.brightness.value), (1, 1));
+    }
+
+    #[test]
+    fn keyboard_visible_inputs_static_hides_speed_and_direction() {
+        let state = keyboard_with(LightingEffect::Static);
+        assert_eq!(state.visible_inputs(), vec![Effect, Brightness, Color]);
+    }
+
+    #[test]
+    fn keyboard_visible_inputs_breathing_shows_speed() {
+        let state = keyboard_with(LightingEffect::Breathing);
+        assert_eq!(state.visible_inputs(), vec![Effect, Speed, Brightness, Color]);
+    }
+
+    #[test]
+    fn keyboard_visible_inputs_wave_shows_speed_and_direction() {
+        let state = keyboard_with(LightingEffect::Wave);
+        assert_eq!(
+            state.visible_inputs(),
+            vec![Effect, Speed, EffectDirection, Brightness, Color]
+        );
+    }
+
+    // LogoState
+
+    fn logo_with(effect: LightingEffect) -> LogoState {
+        let mut state = LogoState::default();
+        state.effect.select_value(effect);
+        state
+    }
+
+    #[test]
+    fn logo_field_mut_target_and_direction_are_none() {
+        let mut state = LogoState::default();
+        assert!(state.field_mut(Target).is_none());
+        assert!(state.field_mut(EffectDirection).is_none());
+    }
+
+    #[test]
+    fn logo_field_mut_speed_and_brightness_are_not_swapped() {
+        let mut state = LogoState::default();
+        state.field_mut(Speed).unwrap().increment();
+        assert_eq!((state.speed.value, state.brightness.value), (1, 0));
+        state.field_mut(Brightness).unwrap().increment();
+        assert_eq!((state.speed.value, state.brightness.value), (1, 1));
+    }
+
+    #[test]
+    fn logo_visible_inputs_static_hides_speed() {
+        let state = logo_with(LightingEffect::Static);
+        assert_eq!(state.visible_inputs(), vec![Effect, Brightness, Color]);
+    }
+
+    #[test]
+    fn logo_visible_inputs_breathing_shows_speed() {
+        let state = logo_with(LightingEffect::Breathing);
+        assert_eq!(state.visible_inputs(), vec![Effect, Speed, Brightness, Color]);
+    }
+
+    // ModeButtonState
+
+    fn mode_button_with(effect: LightingEffect) -> ModeButtonState {
+        let mut state = ModeButtonState::default();
+        state.effect.select_value(effect);
+        state
+    }
+
+    #[test]
+    fn mode_button_field_mut_target_and_direction_are_none() {
+        let mut state = ModeButtonState::default();
+        assert!(state.field_mut(Target).is_none());
+        assert!(state.field_mut(EffectDirection).is_none());
+    }
+
+    #[test]
+    fn mode_button_field_mut_speed_and_brightness_are_not_swapped() {
+        let mut state = ModeButtonState::default();
+        state.field_mut(Speed).unwrap().increment();
+        assert_eq!((state.speed.value, state.brightness.value), (1, 0));
+        state.field_mut(Brightness).unwrap().increment();
+        assert_eq!((state.speed.value, state.brightness.value), (1, 1));
+    }
+
+    #[test]
+    fn mode_button_visible_inputs_static_hides_speed() {
+        let state = mode_button_with(LightingEffect::Static);
+        assert_eq!(state.visible_inputs(), vec![Effect, Brightness, Color]);
+    }
+
+    #[test]
+    fn mode_button_visible_inputs_breathing_shows_speed() {
+        let state = mode_button_with(LightingEffect::Breathing);
+        assert_eq!(state.visible_inputs(), vec![Effect, Speed, Brightness, Color]);
+    }
+}

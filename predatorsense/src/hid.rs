@@ -37,3 +37,18 @@ impl HidDevice {
         self.inner.get_feature_report(&mut buf).map_err(Error::Hid)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Talks to the real hidapi, but needs no hardware: no device has id 0000:0000.
+    #[test]
+    fn open_missing_device_is_not_found() {
+        let err = HidDevice::open_by_vid_pid(0x0000, 0x0000).unwrap_err();
+        assert!(
+            matches!(err, Error::NotFound { vid: 0, pid: 0 }),
+            "got {err:?}"
+        );
+    }
+}

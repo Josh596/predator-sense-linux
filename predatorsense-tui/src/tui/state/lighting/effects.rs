@@ -102,3 +102,29 @@ impl LightingEffect {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn capabilities_match_each_effect() {
+        // (effect, has_speed, has_direction)
+        let expected = [
+            (LightingEffect::Off, false, false),
+            (LightingEffect::Static, false, false),
+            (LightingEffect::Breathing, true, false),
+            (LightingEffect::Neon, true, false),
+            (LightingEffect::Wave, true, true),
+            (LightingEffect::Zoom, true, false),
+            (LightingEffect::Snake, true, false),
+            (LightingEffect::Disco, true, false),
+            (LightingEffect::Ripple, true, true),
+        ];
+        for (effect, has_speed, has_direction) in expected {
+            let caps = effect.capabilities();
+            assert_eq!(caps.has_speed, has_speed, "{effect} has_speed");
+            assert_eq!(caps.has_direction, has_direction, "{effect} has_direction");
+        }
+    }
+}

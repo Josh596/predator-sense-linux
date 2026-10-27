@@ -3,7 +3,7 @@ use strum::{EnumCount, EnumIter, FromRepr};
 
 use crate::tui::state::fields::{BooleanField, Field, NumericField};
 
-#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount)]
+#[derive(Default, EnumIter, FromRepr, PartialEq, Eq, Clone, Copy, EnumCount, Debug)]
 pub enum BatteryPageInput {
     #[default]
     EnableChargingLimit,
@@ -90,5 +90,99 @@ impl Default for BatteryPageState {
                 ..Default::default()
             },
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn prev_moves_to_previous_input() {
+        assert_eq!(
+            BatteryPageInput::LowerChargingLimit.prev(),
+            BatteryPageInput::UpperChargingLimit
+        );
+    }
+
+    #[test]
+    fn prev_clamps_at_first_input() {
+        assert_eq!(
+            BatteryPageInput::EnableChargingLimit.prev(),
+            BatteryPageInput::EnableChargingLimit
+        );
+    }
+
+    #[test]
+    fn next_moves_to_next_input() {
+        assert_eq!(
+            BatteryPageInput::EnableChargingLimit.next(),
+            BatteryPageInput::UpperChargingLimit
+        );
+    }
+
+    #[test]
+    fn next_clamps_at_last_input() {
+        assert_eq!(
+            BatteryPageInput::LowerChargingLimit.next(),
+            BatteryPageInput::LowerChargingLimit
+        );
+    }
+
+    #[test]
+    fn new_copies_limit_values() {
+        let state = BatteryPageState::new(ChargingLimit {
+            enabled: true,
+            upper: 80,
+            lower: 60,
+        });
+        assert!(state.enable_charging_limit.value);
+        assert_eq!(state.upper_charging_limit.value, 80);
+        assert_eq!(state.lower_charging_limit.value, 60);
+    }
+
+    #[test]
+    fn default_is_disabled_with_full_range() {
+        let state = BatteryPageState::default();
+        assert!(!state.enable_charging_limit.value);
+        assert_eq!(state.upper_charging_limit.value, 100);
+        assert_eq!(state.lower_charging_limit.value, 0);
+    }
+
+    fn state_at(active_input: BatteryPageInput) -> BatteryPageState {
+        let mut state = BatteryPageState::new(ChargingLimit {
+            enabled: false,
+            upper: 80,
+            lower: 60,
+        });
+        state.active_input = active_input;
+        state
+    }
+
+    #[test]
+    fn active_input_enable_returns_toggle_field() {
+        let mut state = state_at(BatteryPageInput::EnableChargingLimit);
+        state.get_active_input_mut().toggle();
+        assert!(state.enable_charging_limit.value);
+        assert_eq!(state.upper_charging_limit.value, 80);
+        assert_eq!(state.lower_charging_limit.value, 60);
+    }
+
+    #[test]
+    fn active_input_upper_returns_upper_field() {
+        let mut state = state_at(BatteryPageInput::UpperChargingLimit);
+        state.get_active_input_mut().increment();
+        assert!(!state.enable_charging_limit.value);
+        assert_eq!(state.upper_charging_limit.value, 81);
+        assert_eq!(state.lower_charging_limit.value, 60);
+    }
+
+    #[test]
+    fn active_input_lower_returns_lower_field() {
+        let mut state = state_at(BatteryPageInput::LowerChargingLimit);
+        state.get_active_input_mut().increment();
+        assert!(!state.enable_charging_limit.value);
+        assert_eq!(state.upper_charging_limit.value, 80);
+        assert_eq!(state.lower_charging_limit.value, 61);
     }
 }

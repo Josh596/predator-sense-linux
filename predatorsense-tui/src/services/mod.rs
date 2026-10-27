@@ -136,11 +136,11 @@ pub fn execute(
 
     // Check perf
     if old_state.perf != new_state.perf {
-        new_state.perf.apply(config.system()?);
+        new_state.perf.apply(config.system()?)?;
     }
 
     if old_state.battery != new_state.battery {
-        new_state.battery.apply(config.system()?);
+        new_state.battery.apply(config.system()?)?;
     }
 
     for (old_command, new_command) in old_state.lighting.iter().zip(&new_state.lighting) {
@@ -150,4 +150,185 @@ pub fn execute(
     }
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // get_*_from_state
+
+    #[test]
+    fn effect_maps_every_state_effect() {
+        let expected = [
+            (LightingEffect::Off, Effect::Off),
+            (LightingEffect::Static, Effect::Static),
+            (LightingEffect::Breathing, Effect::Breathing),
+            (LightingEffect::Neon, Effect::Neon),
+            (LightingEffect::Wave, Effect::Wave),
+            (LightingEffect::Zoom, Effect::Zoom),
+            (LightingEffect::Snake, Effect::Snake),
+            (LightingEffect::Disco, Effect::Disco),
+            (LightingEffect::Ripple, Effect::Ripple),
+        ];
+        for (state_effect, effect) in expected {
+            assert_eq!(
+                get_effect_from_state(&state_effect),
+                effect,
+                "{state_effect}"
+            );
+        }
+    }
+
+    #[test]
+    fn color_non_rgb_is_black() {
+        assert_eq!(get_color_from_state(&Color::Red), Rgb { r: 0, g: 0, b: 0 });
+    }
+
+    #[test]
+    fn direction_maps_both_directions() {
+        assert_eq!(
+            get_direction_from_state(EffectDirection::LeftToRight),
+            Direction::Right
+        );
+        assert_eq!(
+            get_direction_from_state(EffectDirection::RightToLeft),
+            Direction::Left
+        );
+    }
+
+    // lighting_commands
+
+    #[test]
+    fn lighting_commands_cover_each_target_once() {
+        let commands = lighting_commands(&LightingPageState::default());
+        let targets: Vec<Target> = commands.iter().map(|c| c.target).collect();
+        assert_eq!(
+            targets,
+            vec![
+                Target::Keyboard,
+                Target::BackLogo,
+                Target::PerformanceModeButton
+            ]
+        );
+    }
+
+    #[test]
+    fn lighting_commands_use_expected_zones() {
+        let commands = lighting_commands(&LightingPageState::default());
+        let zones: Vec<Zone> = commands.iter().map(|c| c.zone).collect();
+        assert_eq!(zones, vec![Zone::All, Zone::None, Zone::None]);
+    }
+
+    #[test]
+    fn lighting_commands_copy_keyboard_values() {
+        let mut state = LightingPageState::default();
+        state.keyboard.effect.select_value(LightingEffect::Wave);
+        state
+            .keyboard
+            .direction
+            .select_value(EffectDirection::RightToLeft);
+        state.keyboard.brightness.set_value(40);
+        state.keyboard.speed.set_value(5);
+        state.keyboard.color.color = Color::Rgb(1, 2, 3);
+
+        let keyboard = lighting_commands(&state)[0];
+
+        assert_eq!(keyboard.effect, Effect::Wave);
+        assert_eq!(keyboard.direction, Direction::Left);
+        assert_eq!(keyboard.brightness, 40);
+        assert_eq!(keyboard.speed, Speed::new(5));
+        assert_eq!(keyboard.color, Rgb { r: 1, g: 2, b: 3 });
+    }
+
+    // Applied::desired
+
+    #[test]
+    fn desired_maps_selected_perf_index() {
+        let mut state = ApplicationState::default();
+        state.perf_page_state.mode_input.state.select(Some(3));
+        assert_eq!(Applied::desired(&state).perf, PerfMode::Quiet);
+    }
+
+    #[test]
+    fn desired_out_of_range_perf_index_falls_back_to_default() {
+        let mut state = ApplicationState::default();
+        state.perf_page_state.mode_input.state.select(Some(10));
+        assert_eq!(Applied::desired(&state).perf, PerfMode::default());
+    }
+
+    #[test]
+    fn desired_no_perf_selection_falls_back_to_default() {
+        let mut state = ApplicationState::default();
+        state.perf_page_state.mode_input.state.select(None);
+        assert_eq!(Applied::desired(&state).perf, PerfMode::default());
+    }
+
+    #[test]
+    fn desired_copies_battery_fields() {
+        let mut state = ApplicationState::default();
+        state.battery_page_state.enable_charging_limit.value = true;
+        state.battery_page_state.upper_charging_limit.value = 80;
+        state.battery_page_state.lower_charging_limit.value = 60;
+
+        assert_eq!(
+            Applied::desired(&state).battery,
+            ChargingLimit {
+                enabled: true,
+                upper: 80,
+                lower: 60
+            }
+        );
+    }
+
+    // execute (offline config: any attempt to touch hardware is an error)
+
+    fn applied() -> Applied {
+        Applied::desired(&ApplicationState::default())
+    }
+
+    #[test]
+    fn execute_unchanged_state_touches_no_device() {
+        let result = execute(Some(applied()), applied(), &Config::offline());
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn execute_without_old_state_applies_everything() {
+        let result = execute(None, applied(), &Config::offline());
+        assert!(matches!(result, Err(Error::Unavailable { .. })));
+    }
+
+    #[test]
+    fn execute_changed_lighting_reports_device_error() {
+        let mut new = applied();
+        new.lighting[0].brightness = 1;
+        let result = execute(Some(applied()), new, &Config::offline());
+        assert!(matches!(
+            result,
+            Err(Error::Unavailable { role: "rgb", .. })
+        ));
+    }
+
+    #[test]
+    fn execute_changed_perf_reports_device_error() {
+        let mut new = applied();
+        new.perf = PerfMode::Turbo;
+        let result = execute(Some(applied()), new, &Config::offline());
+        assert!(
+            matches!(result, Err(Error::Unavailable { .. })),
+            "got {result:?}"
+        );
+    }
+
+    #[test]
+    fn execute_changed_battery_reports_device_error() {
+        let mut new = applied();
+        new.battery.enabled = !new.battery.enabled;
+        let result = execute(Some(applied()), new, &Config::offline());
+        assert!(
+            matches!(result, Err(Error::Unavailable { .. })),
+            "got {result:?}"
+        );
+    }
 }

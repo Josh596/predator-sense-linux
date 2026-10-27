@@ -10,15 +10,7 @@ pub struct ChargingLimit {
 }
 
 impl ChargingLimit {
-    pub fn disabled() -> Self {
-        Self {
-            enabled: false,
-            upper: 0,
-            lower: 0,
-        }
-    }
-
-    pub fn enabled(upper: u8, lower: u8) -> Result<Self> {
+    pub fn new(enabled: bool, upper: u8, lower: u8) -> Result<Self> {
         if upper > 100 || lower > 100 {
             return Err(Error::InvalidLimit("must be 0-100"));
         }
@@ -27,42 +19,10 @@ impl ChargingLimit {
         }
 
         Ok(Self {
-            enabled: true,
+            enabled,
             upper,
             lower,
         })
-    }
-
-    pub fn set_enabled(&mut self, enabled: bool) {
-        self.enabled = enabled
-    }
-
-    pub fn set_upper(&mut self, upper: u8) -> Result<()> {
-        if upper > 100 {
-            return Err(Error::InvalidLimit(
-                "upper limit cannot be greater than 100",
-            ));
-        }
-        if upper < self.lower {
-            return Err(Error::InvalidLimit("upper must be above lower"));
-        }
-        self.upper = upper;
-
-        Ok(())
-    }
-
-    pub fn set_lwoer(&mut self, lower: u8) -> Result<()> {
-        if lower > 100 {
-            return Err(Error::InvalidLimit(
-                "lower limit cannot be greater than 100",
-            ));
-        }
-        if lower > self.upper {
-            return Err(Error::InvalidLimit("lower must be below upper"));
-        }
-        self.lower = lower;
-
-        Ok(())
     }
 
     pub fn apply(&self, device: &HidDevice) -> Result<()> {
@@ -104,5 +64,52 @@ impl ChargingLimit {
             upper,
             lower,
         })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn new_with_valid_limits_keeps_values() {
+        let limit = ChargingLimit::new(true, 80, 60).unwrap();
+        assert_eq!(
+            limit,
+            ChargingLimit {
+                enabled: true,
+                upper: 80,
+                lower: 60
+            }
+        );
+    }
+
+    #[test]
+    fn new_accepts_full_range_edges() {
+        assert!(ChargingLimit::new(true, 100, 0).is_ok());
+    }
+
+    #[test]
+    fn new_rejects_upper_above_100() {
+        let result = ChargingLimit::new(true, 101, 50);
+        assert!(matches!(result, Err(Error::InvalidLimit(_))));
+    }
+
+    #[test]
+    fn new_rejects_lower_above_100() {
+        let result = ChargingLimit::new(true, 100, 101);
+        assert!(matches!(result, Err(Error::InvalidLimit(_))));
+    }
+
+    #[test]
+    fn new_rejects_lower_equal_to_upper() {
+        let result = ChargingLimit::new(true, 60, 60);
+        assert!(matches!(result, Err(Error::InvalidLimit(_))));
+    }
+
+    #[test]
+    fn new_rejects_lower_above_upper() {
+        let result = ChargingLimit::new(true, 60, 80);
+        assert!(matches!(result, Err(Error::InvalidLimit(_))));
     }
 }

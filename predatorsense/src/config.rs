@@ -46,3 +46,26 @@ impl Config {
         })
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::error::Error;
+
+    #[test]
+    fn offline_rgb_is_unavailable() {
+        let config = Config::offline();
+        let err = config.rgb().unwrap_err();
+        assert!(matches!(err, Error::Unavailable { role: "rgb", .. }));
+    }
+
+    #[test]
+    fn offline_system_is_unavailable() {
+        let config = Config::offline();
+        let err = config.system().unwrap_err();
+        assert!(
+            matches!(err, Error::Unavailable { role: "system", .. }),
+            "got {err:?}"
+        );
+    }
+}

@@ -150,3 +150,68 @@ impl LightingCommand {
         device.set_feature(&buf)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Speed
+
+    #[test]
+    fn speed_is_clamped_to_max() {
+        let speed = Speed::new(10);
+        assert_eq!(speed.value(), 9);
+    }
+
+    #[test]
+    fn speed_within_range_is_kept() {
+        assert_eq!(Speed::new(5).value(), 5);
+    }
+
+    // Zone
+
+    #[test]
+    fn zone_values_match_protocol() {
+        assert_eq!(Zone::All.value(), 0x0f);
+        assert_eq!(Zone::One.value(), 0x01);
+        assert_eq!(Zone::Two.value(), 0x02);
+        assert_eq!(Zone::Three.value(), 0x04);
+        assert_eq!(Zone::Four.value(), 0x08);
+        assert_eq!(Zone::None.value(), 0x00);
+    }
+
+    // Direction
+
+    #[test]
+    fn direction_values_match_protocol() {
+        assert_eq!(Direction::None.value(), 0x00);
+        assert_eq!(Direction::Right.value(), 0x01);
+        assert_eq!(Direction::Left.value(), 0x02);
+    }
+
+    // Effect
+
+    #[test]
+    fn effect_values_match_protocol() {
+        assert_eq!(Effect::Off.value(), 0x01);
+        assert_eq!(Effect::Static.value(), 0x02);
+        assert_eq!(Effect::Breathing.value(), 0x04);
+        assert_eq!(Effect::Neon.value(), 0x05);
+        assert_eq!(Effect::PowerProfile.value(), 0x06);
+        assert_eq!(Effect::Wave.value(), 0x07);
+        assert_eq!(Effect::Ripple.value(), 0x08);
+        assert_eq!(Effect::Zoom.value(), 0x09);
+        assert_eq!(Effect::Snake.value(), 0x0a);
+        assert_eq!(Effect::Disco.value(), 0x0b);
+        assert_eq!(Effect::Shifting.value(), 0xff);
+    }
+
+    // Target
+
+    #[test]
+    fn target_values_match_protocol() {
+        assert_eq!(Target::Keyboard.value(), 0x21);
+        assert_eq!(Target::BackLogo.value(), 0x83);
+        assert_eq!(Target::PerformanceModeButton.value(), 0x65);
+    }
+}

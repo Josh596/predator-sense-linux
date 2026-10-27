@@ -29,3 +29,26 @@ impl PageEventHandler for PerformancePageEventHandler {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn press(state: &mut ApplicationState, code: KeyCode) {
+        PerformancePageEventHandler.handle_page_event(KeyEvent::from(code), state);
+    }
+
+    #[test]
+    fn down_selects_next_mode() {
+        let mut state = ApplicationState::default(); // Normal, index 2
+        press(&mut state, KeyCode::Down);
+        assert_eq!(state.perf_page_state.mode_input.state.selected(), Some(3));
+    }
+
+    #[test]
+    fn up_selects_previous_mode() {
+        let mut state = ApplicationState::default();
+        press(&mut state, KeyCode::Up);
+        assert_eq!(state.perf_page_state.mode_input.state.selected(), Some(1));
+    }
+}

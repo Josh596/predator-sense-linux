@@ -66,7 +66,7 @@ impl EventHandler {
                 // Handle quit event
                 state.running_state = RunningState::Done;
             }
-            KeyCode::Char(c) if c.is_ascii_digit() => {
+            KeyCode::Char(c @ '1'..='9') if c.is_ascii_digit() => {
                 let digit = c.to_digit(10).expect("Unexpected non-digit character");
                 self.set_active_page((digit as usize).saturating_sub(1), state);
             }
@@ -87,4 +87,121 @@ trait PageEventHandler {
         false
     }
     fn handle_modal_event(&self, _key: KeyEvent, _state: &mut ApplicationState) {}
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::tui::state::color_picker::ColorPickerState;
+    use ratatui::crossterm::event::{Event, KeyCode, KeyEvent};
+
+    fn key(code: KeyCode) -> KeyEvent {
+        KeyEvent::from(code)
+    }
+
+    // handle_key
+
+    #[test]
+    fn handle_key_q_quits() {
+        let mut state = ApplicationState::default();
+        EventHandler::default().handle_key(key(KeyCode::Char('q')), &mut state);
+        assert_eq!(state.running_state, RunningState::Done);
+    }
+
+    #[test]
+    fn handle_key_digits_switch_page() {
+        let handler = EventHandler::default();
+        let mut state = ApplicationState::default();
+        for (digit, page) in [
+            ('1', Page::Performance),
+            ('2', Page::Battery),
+            ('3', Page::Lighting),
+        ] {
+            handler.handle_key(key(KeyCode::Char(digit)), &mut state);
+            assert_eq!(state.active_page, page, "pressed {digit}");
+        }
+    }
+
+    #[test]
+    fn handle_key_zero_is_ignored() {
+        let mut state = ApplicationState::default();
+        state.active_page = Page::Lighting;
+        EventHandler::default().handle_key(key(KeyCode::Char('0')), &mut state);
+        assert_eq!(state.active_page, Page::Lighting);
+    }
+
+    #[test]
+    fn handle_key_digit_past_last_page_is_ignored() {
+        let mut state = ApplicationState::default();
+        state.active_page = Page::Lighting;
+        EventHandler::default().handle_key(key(KeyCode::Char('9')), &mut state);
+        assert_eq!(state.active_page, Page::Lighting);
+    }
+
+    // set_active_page
+
+    #[test]
+    fn set_active_page_out_of_range_is_ignored() {
+        let mut state = ApplicationState::default();
+        state.active_page = Page::Battery;
+        EventHandler::default().set_active_page(99, &mut state);
+        assert_eq!(state.active_page, Page::Battery);
+    }
+
+    // get_active_page_event_handler
+    // Only the lighting handler has a modal, so `modal_open` tells them apart.
+
+    #[test]
+    fn active_handler_follows_active_page() {
+        let handler = EventHandler::default();
+        let mut state = ApplicationState::default();
+        state.lighting_page_state.color_picker = Some(ColorPickerState::default());
+
+        for (page, has_modal) in [
+            (Page::Performance, false),
+            (Page::Battery, false),
+            (Page::Lighting, true),
+        ] {
+            state.active_page = page;
+            assert_eq!(
+                handler
+                    .get_active_page_event_handler(&state)
+                    .modal_open(&state),
+                has_modal,
+                "{page}"
+            );
+        }
+    }
+
+    // handle_event
+
+    #[test]
+    fn handle_event_routes_key_to_active_page() {
+        let mut state = ApplicationState::default();
+        state.active_page = Page::Battery;
+        EventHandler::default().handle_event(
+            Event::Key(key(KeyCode::Down)),
+            &mut state,
+            &Config::offline(),
+        );
+        assert_eq!(
+            state.battery_page_state.active_input,
+            crate::tui::state::battery::BatteryPageInput::UpperChargingLimit
+        );
+    }
+
+    #[test]
+    fn handle_event_open_modal_receives_keys_instead_of_app() {
+        let mut state = ApplicationState::default();
+        state.active_page = Page::Lighting;
+        state.lighting_page_state.color_picker = Some(ColorPickerState::default());
+
+        EventHandler::default().handle_event(
+            Event::Key(key(KeyCode::Char('q'))),
+            &mut state,
+            &Config::offline(),
+        );
+
+        assert_eq!(state.running_state, RunningState::Running);
+    }
 }
