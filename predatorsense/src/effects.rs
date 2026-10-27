@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 
+use crate::commands::lighting::{Direction, Effect};
 
 #[derive(
     Default,
@@ -103,6 +104,31 @@ impl LightingEffect {
     }
 }
 
+impl From<LightingEffect> for Effect {
+    fn from(effect: LightingEffect) -> Self {
+        match effect {
+            LightingEffect::Off => Effect::Off,
+            LightingEffect::Static => Effect::Static,
+            LightingEffect::Breathing => Effect::Breathing,
+            LightingEffect::Neon => Effect::Neon,
+            LightingEffect::Wave => Effect::Wave,
+            LightingEffect::Ripple => Effect::Ripple,
+            LightingEffect::Zoom => Effect::Zoom,
+            LightingEffect::Snake => Effect::Snake,
+            LightingEffect::Disco => Effect::Disco,
+        }
+    }
+}
+
+impl From<EffectDirection> for Direction {
+    fn from(direction: EffectDirection) -> Self {
+        match direction {
+            EffectDirection::LeftToRight => Direction::Right,
+            EffectDirection::RightToLeft => Direction::Left,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -126,5 +152,29 @@ mod tests {
             assert_eq!(caps.has_speed, has_speed, "{effect} has_speed");
             assert_eq!(caps.has_direction, has_direction, "{effect} has_direction");
         }
+    }
+
+    #[test]
+    fn effect_maps_every_lighting_effect() {
+        let expected = [
+            (LightingEffect::Off, Effect::Off),
+            (LightingEffect::Static, Effect::Static),
+            (LightingEffect::Breathing, Effect::Breathing),
+            (LightingEffect::Neon, Effect::Neon),
+            (LightingEffect::Wave, Effect::Wave),
+            (LightingEffect::Zoom, Effect::Zoom),
+            (LightingEffect::Snake, Effect::Snake),
+            (LightingEffect::Disco, Effect::Disco),
+            (LightingEffect::Ripple, Effect::Ripple),
+        ];
+        for (lighting_effect, effect) in expected {
+            assert_eq!(Effect::from(lighting_effect), effect, "{lighting_effect}");
+        }
+    }
+
+    #[test]
+    fn direction_maps_both_directions() {
+        assert_eq!(Direction::from(EffectDirection::LeftToRight), Direction::Right);
+        assert_eq!(Direction::from(EffectDirection::RightToLeft), Direction::Left);
     }
 }

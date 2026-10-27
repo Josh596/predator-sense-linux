@@ -1,12 +1,11 @@
 use ratatui::style::Color;
 use strum::IntoEnumIterator;
 
+use predatorsense::effects::{EffectDirection, LightingEffect};
+
 use crate::tui::state::{
     fields::{ColorField, Field, OptionField, SliderField},
-    lighting::{
-        LightingPageInput,
-        effects::{EffectDirection, LightingEffect},
-    },
+    lighting::LightingPageInput,
 };
 
 const PLACEHOLDER_COLOR: Color = Color::Rgb(255, 255, 255);

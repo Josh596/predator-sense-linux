@@ -1,55 +1,10 @@
-use ratatui::style::Color;
-
-use crate::tui::state::{
-    ApplicationState,
-    lighting::{
-        LightingPageState,
-        effects::{EffectDirection, LightingEffect},
-    },
-};
+use crate::tui::state::{ApplicationState, lighting::LightingPageState};
 use predatorsense::{
-    commands::{
-        battery::ChargingLimit,
-        lighting::{Direction, Effect, LightingCommand, Rgb, Speed, Target, Zone},
-        performance::PerfMode,
-    },
+    commands::{battery::ChargingLimit, lighting::LightingCommand, performance::PerfMode},
     config::Config,
     error::Error,
+    profile::LightingProfile,
 };
-
-fn get_effect_from_state(effect: &LightingEffect) -> Effect {
-    match effect {
-        LightingEffect::Off => Effect::Off,
-        LightingEffect::Static => Effect::Static,
-        LightingEffect::Breathing => Effect::Breathing,
-        LightingEffect::Neon => Effect::Neon,
-        // LightingEffect::PowerProfile => Effect::PowerProfile,
-        LightingEffect::Wave => Effect::Wave,
-        LightingEffect::Ripple => Effect::Ripple,
-        LightingEffect::Zoom => Effect::Zoom,
-        LightingEffect::Snake => Effect::Snake,
-        LightingEffect::Disco => Effect::Disco,
-        // LightingEffect::Shifting => Effect::Shifting,
-    }
-}
-
-fn get_color_from_state(color: &Color) -> Rgb {
-    match color {
-        Color::Rgb(r, g, b) => Rgb {
-            r: *r as u8,
-            g: *g as u8,
-            b: *b as u8,
-        },
-        _ => Rgb { r: 0, g: 0, b: 0 },
-    }
-}
-
-fn get_direction_from_state(direction: EffectDirection) -> Direction {
-    match direction {
-        EffectDirection::LeftToRight => Direction::Right,
-        EffectDirection::RightToLeft => Direction::Left,
-    }
-}
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct Applied {
@@ -82,35 +37,7 @@ impl Applied {
 }
 
 fn lighting_commands(state: &LightingPageState) -> Vec<LightingCommand> {
-    vec![
-        LightingCommand {
-            target: Target::Keyboard,
-            effect: get_effect_from_state(&state.keyboard.effect.value()),
-            brightness: state.keyboard.brightness.value as u8,
-            speed: Speed::new(state.keyboard.speed.value as u8),
-            direction: get_direction_from_state(state.keyboard.direction.value()),
-            color: get_color_from_state(&state.keyboard.color.color),
-            zone: Zone::All,
-        },
-        LightingCommand {
-            target: Target::BackLogo,
-            effect: get_effect_from_state(&state.logo.effect.value()),
-            brightness: state.logo.brightness.value as u8,
-            speed: Speed::new(state.logo.speed.value as u8),
-            direction: Direction::None,
-            color: get_color_from_state(&state.logo.color.color),
-            zone: Zone::None,
-        },
-        LightingCommand {
-            target: Target::PerformanceModeButton,
-            effect: get_effect_from_state(&state.mode_button.effect.value()),
-            brightness: state.mode_button.brightness.value as u8,
-            speed: Speed::new(state.mode_button.speed.value as u8),
-            direction: Direction::None,
-            color: get_color_from_state(&state.mode_button.color.color),
-            zone: Zone::None,
-        },
-    ]
+    LightingProfile::from(state).commands()
 }
 
 // i need a function that gets feature report from the hid devices, returns an Applied and then to convert that into an ApplicationState object.
@@ -155,47 +82,11 @@ pub fn execute(
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    // get_*_from_state
-
-    #[test]
-    fn effect_maps_every_state_effect() {
-        let expected = [
-            (LightingEffect::Off, Effect::Off),
-            (LightingEffect::Static, Effect::Static),
-            (LightingEffect::Breathing, Effect::Breathing),
-            (LightingEffect::Neon, Effect::Neon),
-            (LightingEffect::Wave, Effect::Wave),
-            (LightingEffect::Zoom, Effect::Zoom),
-            (LightingEffect::Snake, Effect::Snake),
-            (LightingEffect::Disco, Effect::Disco),
-            (LightingEffect::Ripple, Effect::Ripple),
-        ];
-        for (state_effect, effect) in expected {
-            assert_eq!(
-                get_effect_from_state(&state_effect),
-                effect,
-                "{state_effect}"
-            );
-        }
-    }
-
-    #[test]
-    fn color_non_rgb_is_black() {
-        assert_eq!(get_color_from_state(&Color::Red), Rgb { r: 0, g: 0, b: 0 });
-    }
-
-    #[test]
-    fn direction_maps_both_directions() {
-        assert_eq!(
-            get_direction_from_state(EffectDirection::LeftToRight),
-            Direction::Right
-        );
-        assert_eq!(
-            get_direction_from_state(EffectDirection::RightToLeft),
-            Direction::Left
-        );
-    }
+    use predatorsense::{
+        commands::lighting::{Direction, Effect, Rgb, Speed, Target, Zone},
+        effects::{EffectDirection, LightingEffect},
+    };
+    use ratatui::style::Color;
 
     // lighting_commands
 

@@ -9,5 +9,7 @@ hidapi = "2.6.6"
 thiserror = "2.0.18"
 strum = "0.28.0"
 strum_macros = "0.28"
+serde = { version = "1.0.229", features = ["derive"] }
+toml = "1.1.6"
 
 

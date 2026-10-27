@@ -1,7 +1,6 @@
 use crate::error::{Error, Result};
 use crate::hid::HidDevice;
-use strum::IntoStaticStr;
-use strum_macros::{EnumIter, FromRepr, VariantNames};
+use strum_macros::{EnumIter, FromRepr, IntoStaticStr, VariantNames};
 
 #[derive(
     Debug, Default, Eq, PartialEq, Clone, Copy, EnumIter, VariantNames, FromRepr, IntoStaticStr,

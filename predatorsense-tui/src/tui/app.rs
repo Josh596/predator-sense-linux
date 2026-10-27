@@ -4,18 +4,19 @@ use std::time::Duration;
 use predatorsense::commands::battery::ChargingLimit;
 use predatorsense::commands::performance::PerfMode;
 use predatorsense::error::Error;
+use predatorsense::store;
 use ratatui::crossterm::event::{self};
 
 use ratatui::DefaultTerminal;
 
+use crate::services;
 use crate::services::Applied;
 use crate::tui::event::EventHandler;
 use crate::tui::state::battery::BatteryPageState;
 use crate::tui::state::lighting::LightingPageState;
-use crate::tui::state::lighting::profile::LightingProfile;
+use predatorsense::profile::LightingProfile;
 use crate::tui::state::performance::PerformancePageState;
 use crate::tui::state::{ApplicationState, Page, RunningState};
-use crate::{services, store};
 use predatorsense::config::Config;
 
 use crate::tui::view::View;
@@ -128,8 +129,10 @@ mod tests {
 
     impl TempDir {
         fn new(name: &str) -> Self {
-            let dir = std::env::temp_dir()
-                .join(format!("predatorsense-app-test-{}-{name}", std::process::id()));
+            let dir = std::env::temp_dir().join(format!(
+                "predatorsense-app-test-{}-{name}",
+                std::process::id()
+            ));
             let _ = fs::remove_dir_all(&dir);
             fs::create_dir_all(&dir).unwrap();
             Self(dir)
@@ -184,7 +187,11 @@ mod tests {
     fn persist_changed_profile_updates_last_saved() {
         let dir = TempDir::new("last-saved");
         let mut app = offline_app(dir.0.join("lighting.toml"));
-        app.state.lighting_page_state.keyboard.brightness.set_value(40);
+        app.state
+            .lighting_page_state
+            .keyboard
+            .brightness
+            .set_value(40);
 
         app.persist_lighting();
 
@@ -202,7 +209,11 @@ mod tests {
         fs::write(&blocker, "").unwrap();
         let mut app = offline_app(blocker.join("lighting.toml"));
         let before = LightingProfile::from(&app.state.lighting_page_state);
-        app.state.lighting_page_state.keyboard.brightness.set_value(40);
+        app.state
+            .lighting_page_state
+            .keyboard
+            .brightness
+            .set_value(40);
 
         app.persist_lighting();
 

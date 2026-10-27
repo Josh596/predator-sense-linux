@@ -1,7 +1,7 @@
 use crate::tui::{app::App, view::View};
+use predatorsense::store;
 
 mod services;
-mod store;
 mod tui;
 
 // use hidapi::HidApi;

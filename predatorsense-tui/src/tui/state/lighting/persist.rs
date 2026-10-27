@@ -1,140 +1,74 @@
-use ratatui::style::Color;
-use serde::{Deserialize, Serialize};
-
-use crate::tui::state::{
-    fields::SliderField,
-    lighting::{
-        LightingPageState,
-        effects::{EffectDirection, LightingEffect},
-    },
+use predatorsense::profile::{
+    DEFAULT_COLOR, KeyboardProfile, LightingProfile, LogoProfile, ModeButtonProfile,
 };
+use ratatui::style::Color;
 
-const DEFAULT_COLOR: (u8, u8, u8) = (0, 255, 0);
-const DEFAULT_DIRECTION: EffectDirection = EffectDirection::LeftToRight;
-const DEFAULT_BRIGHTNESS: u8 = 100;
-const DEFAULT_SPEED: u8 = 1;
-const DEFAULT_EFFECT: LightingEffect = LightingEffect::Off;
+use crate::tui::state::{fields::SliderField, lighting::LightingPageState};
 
-/// Every parameter the keyboard exposes.
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-#[serde(default)]
-struct KeyboardProfile {
-    brightness: u8,
-    speed: u8,
-    effect: LightingEffect,
-    direction: EffectDirection,
-    color: (u8, u8, u8),
-}
-
-impl Default for KeyboardProfile {
-    fn default() -> Self {
-        Self {
-            brightness: DEFAULT_BRIGHTNESS,
-            speed: DEFAULT_SPEED,
-            effect: DEFAULT_EFFECT,
-            direction: DEFAULT_DIRECTION,
-            color: DEFAULT_COLOR,
-        }
-    }
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-#[serde(default)]
-struct LogoProfile {
-    brightness: u8,
-    speed: u8,
-    effect: LightingEffect,
-    color: (u8, u8, u8),
-}
-
-impl Default for LogoProfile {
-    fn default() -> Self {
-        Self {
-            brightness: DEFAULT_BRIGHTNESS,
-            speed: DEFAULT_SPEED,
-            effect: DEFAULT_EFFECT,
-            color: DEFAULT_COLOR,
-        }
-    }
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-#[serde(default)]
-struct ModeButtonProfile {
-    brightness: u8,
-    color: (u8, u8, u8),
-}
-
-impl Default for ModeButtonProfile {
-    fn default() -> Self {
-        Self {
-            brightness: DEFAULT_BRIGHTNESS,
-            color: DEFAULT_COLOR,
-        }
-    }
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize, Default)]
-#[serde(default)]
-pub struct LightingProfile {
-    keyboard: KeyboardProfile,
-    logo: LogoProfile,
-    mode_button: ModeButtonProfile,
-}
-
-impl LightingProfile {
-    pub fn apply_to(&self, state: &mut LightingPageState) {
+impl LightingPageState {
+    pub fn apply_profile(&mut self, profile: &LightingProfile) {
         restore_slider(
-            &mut state.keyboard.brightness,
-            self.keyboard.brightness,
+            &mut self.keyboard.brightness,
+            profile.keyboard.brightness,
             "keyboard.brightness",
         );
         restore_slider(
-            &mut state.keyboard.speed,
-            self.keyboard.speed,
+            &mut self.keyboard.speed,
+            profile.keyboard.speed,
             "keyboard.speed",
         );
-        if !state.keyboard.effect.select_value(self.keyboard.effect) {
+        if !self.keyboard.effect.select_value(profile.keyboard.effect) {
             log::warn!(
                 "keyboard: effect {} not available, keeping default",
-                self.keyboard.effect
+                profile.keyboard.effect
             );
         }
-        if !state
+        if !self
             .keyboard
             .direction
-            .select_value(self.keyboard.direction)
+            .select_value(profile.keyboard.direction)
         {
             log::warn!(
                 "keyboard: direction {} not available, keeping default",
-                self.keyboard.direction
+                profile.keyboard.direction
             );
         }
 
-        state.keyboard.color.color = to_color(self.keyboard.color);
+        self.keyboard.color.color = to_color(profile.keyboard.color);
 
         // Logo
         restore_slider(
-            &mut state.logo.brightness,
-            self.logo.brightness,
+            &mut self.logo.brightness,
+            profile.logo.brightness,
             "logo.brightness",
         );
-        restore_slider(&mut state.logo.speed, self.logo.speed, "logo.speed");
-        if !state.logo.effect.select_value(self.logo.effect) {
+        restore_slider(&mut self.logo.speed, profile.logo.speed, "logo.speed");
+        if !self.logo.effect.select_value(profile.logo.effect) {
             log::warn!(
                 "logo: effect {} not available, keeping default",
-                self.logo.effect
+                profile.logo.effect
             );
         }
-        state.logo.color.color = to_color(self.logo.color);
+        self.logo.color.color = to_color(profile.logo.color);
 
         // Mode
         restore_slider(
-            &mut state.mode_button.brightness,
-            self.mode_button.brightness,
+            &mut self.mode_button.brightness,
+            profile.mode_button.brightness,
             "mode_button.brightness",
         );
-        state.mode_button.color.color = to_color(self.mode_button.color);
+        restore_slider(
+            &mut self.mode_button.speed,
+            profile.mode_button.speed,
+            "mode_button.speed",
+        );
+        if !self.mode_button.effect.select_value(profile.mode_button.effect) {
+            log::warn!(
+                "mode_button: effect {} not available, keeping default",
+                profile.mode_button.effect
+            );
+        }
+        self.mode_button.color.color = to_color(profile.mode_button.color);
     }
 }
 
@@ -156,6 +90,8 @@ impl From<&LightingPageState> for LightingProfile {
             },
             mode_button: ModeButtonProfile {
                 brightness: state.mode_button.brightness.value as u8,
+                speed: state.mode_button.speed.value as u8,
+                effect: state.mode_button.effect.value(),
                 color: rgb_from(state.mode_button.color.color),
             },
         }
@@ -189,6 +125,7 @@ fn restore_slider(field: &mut SliderField, value: u8, what: &str) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use predatorsense::effects::{EffectDirection, LightingEffect};
 
     fn custom_profile() -> LightingProfile {
         LightingProfile {
@@ -207,17 +144,19 @@ mod tests {
             },
             mode_button: ModeButtonProfile {
                 brightness: 60,
+                speed: 2,
+                effect: LightingEffect::Neon,
                 color: (7, 8, 9),
             },
         }
     }
 
-    // apply_to
+    // apply_profile
 
     #[test]
-    fn apply_to_copies_every_value_into_state() {
+    fn apply_profile_copies_every_value_into_state() {
         let mut state = LightingPageState::default();
-        custom_profile().apply_to(&mut state);
+        state.apply_profile(&custom_profile());
 
         assert_eq!(state.keyboard.brightness.value, 40);
         assert_eq!(state.keyboard.speed.value, 5);
@@ -231,29 +170,31 @@ mod tests {
         assert_eq!(state.logo.color.color, Color::Rgb(4, 5, 6));
 
         assert_eq!(state.mode_button.brightness.value, 60);
+        assert_eq!(state.mode_button.speed.value, 2);
+        assert_eq!(state.mode_button.effect.value(), LightingEffect::Neon);
         assert_eq!(state.mode_button.color.color, Color::Rgb(7, 8, 9));
     }
 
     #[test]
-    fn apply_to_clamps_out_of_range_values() {
+    fn apply_profile_clamps_out_of_range_values() {
         let mut profile = custom_profile();
         profile.keyboard.speed = 20;
         profile.logo.brightness = 200;
 
         let mut state = LightingPageState::default();
-        profile.apply_to(&mut state);
+        state.apply_profile(&profile);
 
         assert_eq!(state.keyboard.speed.value, 9);
         assert_eq!(state.logo.brightness.value, 100);
     }
 
     #[test]
-    fn apply_to_keeps_default_when_effect_not_available() {
+    fn apply_profile_keeps_default_when_effect_not_available() {
         let mut profile = custom_profile();
         profile.logo.effect = LightingEffect::Wave; // logo has no Wave
 
         let mut state = LightingPageState::default();
-        profile.apply_to(&mut state);
+        state.apply_profile(&profile);
 
         assert_eq!(state.logo.effect.value(), LightingEffect::Off);
     }
@@ -281,23 +222,6 @@ mod tests {
         let profile = custom_profile();
         let state = LightingPageState::new(&profile);
         assert_eq!(LightingProfile::from(&state), profile);
-    }
-
-    #[test]
-    fn toml_round_trip_keeps_profile() {
-        let profile = custom_profile();
-        let text = toml::to_string(&profile).unwrap();
-        let parsed: LightingProfile = toml::from_str(&text).unwrap();
-        assert_eq!(parsed, profile);
-    }
-
-    #[test]
-    fn partial_toml_fills_missing_fields_with_defaults() {
-        let parsed: LightingProfile = toml::from_str("[keyboard]\nbrightness = 40\n").unwrap();
-
-        let mut expected = LightingProfile::default();
-        expected.keyboard.brightness = 40;
-        assert_eq!(parsed, expected);
     }
 
     // Helpers

@@ -24,6 +24,12 @@ pub struct Rgb {
     pub b: u8,
 }
 
+impl From<(u8, u8, u8)> for Rgb {
+    fn from((r, g, b): (u8, u8, u8)) -> Self {
+        Rgb { r, g, b }
+    }
+}
+
 #[derive(Debug, Eq, PartialEq, Clone, Copy, Default, Display, EnumIter)]
 pub enum Zone {
     #[default]

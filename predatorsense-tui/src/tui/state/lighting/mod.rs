@@ -1,17 +1,15 @@
 use strum::IntoEnumIterator;
 use strum_macros::{Display, EnumCount, EnumIter, FromRepr, VariantNames};
 
+use predatorsense::profile::LightingProfile;
+
 use crate::tui::state::{
     color_picker::ColorPickerState,
     fields::{ColorField, Field, OptionField},
-    lighting::{
-        profile::LightingProfile,
-        targets::{KeyboardState, LogoState, ModeButtonState},
-    },
+    lighting::targets::{KeyboardState, LogoState, ModeButtonState},
 };
 
-pub mod effects;
-pub mod profile;
+mod persist;
 pub mod targets;
 
 #[derive(
@@ -56,7 +54,7 @@ impl LightingPageState {
             color_picker: None,
         };
 
-        profile.apply_to(&mut state);
+        state.apply_profile(profile);
 
         state
     }
@@ -130,7 +128,7 @@ impl Default for LightingPageState {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::tui::state::lighting::effects::LightingEffect;
+    use predatorsense::effects::LightingEffect;
     use ratatui::style::Color;
 
     fn state_for(target: Target) -> LightingPageState {

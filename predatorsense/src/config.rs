@@ -18,14 +18,18 @@ impl Config {
         let system_vid: u16 = 4133;
         let system_pid: u16 = 5963;
 
-        let rgb = HidDevice::open_by_vid_pid(led_vid, led_pid).ok();
-        let system = HidDevice::open_by_vid_pid(system_vid, system_pid).ok();
+        let rgb = HidDevice::open_by_vid_pid(led_vid, led_pid)
+            .inspect_err(|e| {
+                log::warn!("could not open rgb device {led_vid:04x}:{led_pid:04x}: {e}")
+            })
+            .ok();
+        let system = HidDevice::open_by_vid_pid(system_vid, system_pid)
+            .inspect_err(|e| {
+                log::warn!("could not open system device {system_vid:04x}:{system_pid:04x}: {e}")
+            })
+            .ok();
 
-        let new_rgb = rgb.unwrap();
-        Self {
-            rgb: Some(new_rgb),
-            system,
-        }
+        Self { rgb, system }
     }
     pub fn offline() -> Self {
         Self {

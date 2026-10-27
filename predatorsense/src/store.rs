@@ -4,7 +4,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::tui::state::lighting::profile::LightingProfile;
+use crate::profile::LightingProfile;
 
 const PROFILE_FILE: &str = "lighting.toml";
 
