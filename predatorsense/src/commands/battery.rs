@@ -9,14 +9,13 @@ pub struct ChargingLimit {
     pub lower: u8,
 }
 
+/// Used when the device has no limit stored: no upper cap, no lower bound.
+const DEFAULT_UPPER: u8 = 100;
+const DEFAULT_LOWER: u8 = 0;
+
 impl ChargingLimit {
     pub fn new(enabled: bool, upper: u8, lower: u8) -> Result<Self> {
-        if upper > 100 || lower > 100 {
-            return Err(Error::InvalidLimit("must be 0-100"));
-        }
-        if lower >= upper {
-            return Err(Error::InvalidLimit("lower must be below upper"));
-        }
+        validate(upper, lower)?;
 
         Ok(Self {
             enabled,
@@ -26,6 +25,12 @@ impl ChargingLimit {
     }
 
     pub fn apply(&self, device: &HidDevice) -> Result<()> {
+        // Last check before the firmware: the struct's fields are public, so
+        // a limit can be built without going through `new`.
+        if self.enabled {
+            validate(self.upper, self.lower)?;
+        }
+
         let mut buf = [0u8; 65];
         buf[0] = 0xa0;
         buf[1] = 0x00;
@@ -55,16 +60,31 @@ impl ChargingLimit {
 
         device.get_feature_report(&mut buffer)?;
 
-        let enabled = buffer[7] == 1;
-        let upper = buffer[8];
-        let lower = buffer[9];
-
-        Ok(Self {
-            enabled,
-            upper,
-            lower,
-        })
+        Ok(Self::parse(&buffer))
     }
+
+    /// Reads a charge-limit reply. With the limit disabled the firmware
+    /// stores no values and reports 0xff for both, so anything outside 0–100
+    /// means "unset" and falls back to the defaults.
+    fn parse(buffer: &[u8; 65]) -> Self {
+        let in_range = |value: u8, default: u8| if value <= 100 { value } else { default };
+
+        Self {
+            enabled: buffer[7] == 1,
+            upper: in_range(buffer[8], DEFAULT_UPPER),
+            lower: in_range(buffer[9], DEFAULT_LOWER),
+        }
+    }
+}
+
+fn validate(upper: u8, lower: u8) -> Result<()> {
+    if upper > 100 || lower > 100 {
+        return Err(Error::InvalidLimit("must be 0-100"));
+    }
+    if lower >= upper {
+        return Err(Error::InvalidLimit("lower must be below upper"));
+    }
+    Ok(())
 }
 
 #[cfg(test)]
@@ -111,5 +131,49 @@ mod tests {
     fn new_rejects_lower_above_upper() {
         let result = ChargingLimit::new(true, 60, 80);
         assert!(matches!(result, Err(Error::InvalidLimit(_))));
+    }
+
+    // parse
+
+    /// A reply with the given bytes 7..=9 and the firmware's 0xff padding after.
+    fn reply(enabled: u8, upper: u8, lower: u8) -> [u8; 65] {
+        let mut buffer = [0xff; 65];
+        buffer[..7].copy_from_slice(&[0xa0, 0x00, 0xe0, 0x03, 0x0b, 0x00, 0x03]);
+        buffer[7] = enabled;
+        buffer[8] = upper;
+        buffer[9] = lower;
+        buffer
+    }
+
+    #[test]
+    fn parse_reads_enabled_limit() {
+        assert_eq!(
+            ChargingLimit::parse(&reply(1, 80, 60)),
+            ChargingLimit {
+                enabled: true,
+                upper: 80,
+                lower: 60
+            }
+        );
+    }
+
+    /// Captured from the device with the limit disabled.
+    #[test]
+    fn parse_disabled_reply_uses_defaults() {
+        assert_eq!(
+            ChargingLimit::parse(&reply(0, 0xff, 0xff)),
+            ChargingLimit {
+                enabled: false,
+                upper: DEFAULT_UPPER,
+                lower: DEFAULT_LOWER
+            }
+        );
+    }
+
+    #[test]
+    fn parse_replaces_each_out_of_range_value_on_its_own() {
+        let limit = ChargingLimit::parse(&reply(1, 80, 101));
+        assert_eq!(limit.upper, 80);
+        assert_eq!(limit.lower, DEFAULT_LOWER);
     }
 }
