@@ -1,0 +1,24 @@
+# Restore the saved lighting profile of user %i at boot and after resume.
+#
+# Enable per user:  systemctl enable predatorsense-apply@<user>.service
+# Runs as that user, so it reads ~<user>/.local/state/predatorsense/lighting.toml.
+# The user needs access to the device via the udev rule (plugdev group).
+
+[Unit]
+Description=Restore Predator lighting for %i
+# Wait until the RGB controller exists (dev-predatorsense-rgb.device comes
+# from TAG+="systemd" in 70-predatorsense.rules).
+Requires=dev-predatorsense-rgb.device
+After=dev-predatorsense-rgb.device
+# The sleep targets are reached on the way back from sleep, so ordering after
+# them and being wanted by them runs this again on resume.
+After=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+
+[Service]
+Type=oneshot
+User=%i
+ExecStart=/usr/local/bin/predatorsense apply
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target

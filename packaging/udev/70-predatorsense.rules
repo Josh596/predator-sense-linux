@@ -1,0 +1,19 @@
+# predatorsense: let desktop users talk to the Acer Predator HID controllers
+# without root.
+#
+# Both controllers sit on the I2C bus (0018), so they are matched by the parent
+# HID device name rather than ATTRS{idVendor}, which only exists for USB.
+# The trailing .* covers the instance number, which can change between boots.
+#
+#   uaccess  - the user logged in at the seat gets an ACL (TUI use)
+#   plugdev  - members get access without a session (the boot-time service)
+#
+# Must sort before 73-seat-late.rules for uaccess to apply.
+
+# RGB lighting controller (ENEK5130)
+# TAG+="systemd" plus the stable symlink gives systemd a dev-predatorsense-rgb.device
+# unit, which predatorsense-apply@.service waits for at boot.
+SUBSYSTEM=="hidraw", KERNELS=="0018:0CF2:5130.*", TAG+="uaccess", MODE="0660", GROUP="plugdev", TAG+="systemd", SYMLINK+="predatorsense/rgb"
+
+# System controller: performance mode and battery charge limit
+SUBSYSTEM=="hidraw", KERNELS=="0018:1025:174B.*", TAG+="uaccess", MODE="0660", GROUP="plugdev"
