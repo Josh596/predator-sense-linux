@@ -8,19 +8,24 @@ use crate::profile::LightingProfile;
 
 const PROFILE_FILE: &str = "lighting.toml";
 
-/// `$XDG_STATE_HOME/predatorsense/lighting.toml`, falling back to
-/// `~/.local/state/predatorsense/lighting.toml`.
+/// `$XDG_STATE_HOME/predatorsense`, falling back to
+/// `~/.local/state/predatorsense`.
 ///
 /// A relative `XDG_STATE_HOME` is ignored per the XDG spec — otherwise the
-/// profile would follow the shell's working directory around.
-pub fn default_path() -> Result<PathBuf, Box<dyn std::error::Error>> {
+/// state would follow the shell's working directory around.
+pub fn state_dir() -> Result<PathBuf, Box<dyn std::error::Error>> {
     let base = std::env::var_os("XDG_STATE_HOME")
         .map(PathBuf::from)
         .filter(|p| p.is_absolute())
         .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/state")))
         .ok_or("neither XDG_STATE_HOME nor HOME is set")?;
 
-    Ok(base.join("predatorsense").join(PROFILE_FILE))
+    Ok(base.join("predatorsense"))
+}
+
+/// `lighting.toml` inside [`state_dir`].
+pub fn default_path() -> Result<PathBuf, Box<dyn std::error::Error>> {
+    Ok(state_dir()?.join(PROFILE_FILE))
 }
 
 pub fn load(path: &Path) -> Result<LightingProfile, Box<dyn std::error::Error>> {

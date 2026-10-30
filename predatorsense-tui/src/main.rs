@@ -1,14 +1,14 @@
 use crate::tui::{app::App, view::View};
 use predatorsense::store;
 
+mod logging;
 mod services;
 mod tui;
 
 // use hidapi::HidApi;
-use log4rs;
 
 fn main() {
-    if let Err(e) = log4rs::init_file("log4rs.yaml", Default::default()) {
+    if let Err(e) = logging::init() {
         eprintln!("could not initialise logging: {e}");
     }
     log::info!("Logging init");
