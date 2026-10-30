@@ -4,7 +4,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::profile::LightingProfile;
+use crate::{error, profile::LightingProfile};
 
 const PROFILE_FILE: &str = "lighting.toml";
 
@@ -13,54 +13,69 @@ const PROFILE_FILE: &str = "lighting.toml";
 ///
 /// A relative `XDG_STATE_HOME` is ignored per the XDG spec — otherwise the
 /// state would follow the shell's working directory around.
-pub fn state_dir() -> Result<PathBuf, Box<dyn std::error::Error>> {
+pub fn state_dir() -> Result<PathBuf, error::Error> {
     let base = std::env::var_os("XDG_STATE_HOME")
         .map(PathBuf::from)
         .filter(|p| p.is_absolute())
         .or_else(|| std::env::var_os("HOME").map(|h| PathBuf::from(h).join(".local/state")))
-        .ok_or("neither XDG_STATE_HOME nor HOME is set")?;
+        .ok_or(error::Error::NoStateDir)?;
 
     Ok(base.join("predatorsense"))
 }
 
 /// `lighting.toml` inside [`state_dir`].
-pub fn default_path() -> Result<PathBuf, Box<dyn std::error::Error>> {
+pub fn default_path() -> Result<PathBuf, error::Error> {
     Ok(state_dir()?.join(PROFILE_FILE))
 }
 
-pub fn load(path: &Path) -> Result<LightingProfile, Box<dyn std::error::Error>> {
+pub fn load(path: &Path) -> Result<LightingProfile, error::Error> {
     // Load the file first
-    let mut f = File::open(path)?;
-    let mut content = String::new();
-
-    f.read_to_string(&mut content)?;
-
+    let content = fs::read_to_string(path).map_err(|source| error::Error::ProfileRead {
+        path: path.to_path_buf(),
+        source,
+    })?;
     // then use toml to deserialize
-    let profile: LightingProfile = toml::from_str(&content)?;
+    let profile: LightingProfile =
+        toml::from_str(&content).map_err(|e| error::Error::ProfileParse {
+            path: path.to_path_buf(),
+            source: e,
+        })?;
 
     Ok(profile)
 }
 
-pub fn save(profile: &LightingProfile, path: &Path) -> Result<(), Box<dyn std::error::Error>> {
+pub fn save(profile: &LightingProfile, path: &Path) -> Result<(), error::Error> {
     let content = toml::to_string(profile)?;
 
     if let Some(parent) = path.parent() {
-        fs::create_dir_all(parent)?;
+        fs::create_dir_all(parent).map_err(|e| error::Error::ProfileWrite {
+            path: path.to_path_buf(),
+            source: e,
+        })?;
     }
 
     // Write to a sibling temp file, flush it to disk, then rename over the
     // target. rename(2) is atomic, so a crash leaves either the previous
     // profile or the new one — never a truncated file.
-    let tmp = path.with_extension("toml.tmp");
-
-    let mut file = File::create(&tmp)?;
-    file.write_all(content.as_bytes())?;
-    file.sync_all()?;
-    drop(file);
-
-    fs::rename(&tmp, path)?;
+    write_atomically(path, content.as_bytes()).map_err(|e| error::Error::ProfileWrite {
+        path: path.to_path_buf(),
+        source: e,
+    })?;
 
     Ok(())
+}
+
+/// Write to a sibling temp file, flush it, then rename over the target. ...
+fn write_atomically(path: &Path, bytes: &[u8]) -> std::io::Result<()> {
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+    let tmp = path.with_extension("toml.tmp");
+    let mut file = File::create(&tmp)?;
+    file.write_all(bytes)?;
+    file.sync_all()?;
+    drop(file);
+    fs::rename(&tmp, path)
 }
 
 #[cfg(test)]

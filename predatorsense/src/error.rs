@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -19,6 +21,30 @@ pub enum Error {
 
     #[error("unknown performance mode byte: {0:#04x}")]
     UnknownPerfMode(u8),
+
+    #[error("neither XDG_STATE_HOME nor HOME is set")]
+    NoStateDir,
+
+    #[error("could not read {path}: {source}")]
+    ProfileRead {
+        path: PathBuf,
+        source: std::io::Error,
+    },
+
+    #[error("could not write {path}: {source}")]
+    ProfileWrite {
+        path: PathBuf,
+        source: std::io::Error,
+    },
+
+    #[error("invalid profile {path}: {source}")]
+    ProfileParse {
+        path: PathBuf,
+        source: toml::de::Error,
+    },
+
+    #[error(transparent)]
+    ProfileSerialize(#[from] toml::ser::Error),
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
